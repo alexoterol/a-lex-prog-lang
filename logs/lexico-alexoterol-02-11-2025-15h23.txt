@@ -1,0 +1,49 @@
+LEXICO | usuario=alexoterol | fecha-hora=02-11-2025-15h23
+
+----------------------------------------------------------
+  1:0          NEWLINE  
+
+  2:5              LET  let
+  2:9       IDENTIFIER  maxCount
+  2:18          ASSIGN  =
+  2:20     INT_LITERAL  10
+  2:22         NEWLINE  
+
+  3:27             VAR  var
+  3:31      IDENTIFIER  name
+  3:35           COLON  :
+  3:37     TYPE_STRING  String
+  3:44          ASSIGN  =
+  3:46    STRING_LITERAL  "Ana"
+  3:51         NEWLINE  
+
+  4:56             VAR  var
+  4:60      IDENTIFIER  score
+  4:65           COLON  :
+  4:67        TYPE_INT  Int
+  4:71          ASSIGN  =
+  4:73     INT_LITERAL  0
+  4:74         NEWLINE  
+
+  5:79             VAR  var
+  5:83      IDENTIFIER  optionalName
+  5:95           COLON  :
+  5:97     TYPE_STRING  String
+  5:103       QUESTION  ?
+  5:105         ASSIGN  =
+  5:107            NIL  nil
+  5:110        NEWLINE  
+
+  6:115            VAR  var
+  6:119     IDENTIFIER  x
+  6:121         ASSIGN  =
+  6:123    INT_LITERAL  0
+  6:124          COMMA  ,
+  6:126     IDENTIFIER  y
+  6:128         ASSIGN  =
+  6:130    INT_LITERAL  1
+  6:131          COMMA  ,
+  6:133     IDENTIFIER  z
+  6:135         ASSIGN  =
+  6:137    INT_LITERAL  2
+  6:138        NEWLINE  
