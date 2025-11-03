@@ -248,19 +248,10 @@ def t_STRING(t):
 # =========================
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    # IMPORTANTE:
-    # En el tercer log decidiste ignorar IDENTIFIER para enfocarte en operadores.
-    # Eso significa que NO vas a devolver el token.
-    #
-    # Peeero: eso también dejaría fuera las palabras reservadas como 'let', 'if', etc.
-    # Si quieres que NO salgan ni identificadores ni keywords en el log, dejamos `pass`.
-    #
-    # Si luego quieres volver a reconocerlos, reemplaza 'pass' por:
-    #   if t.value in reserved:
-    #       t.type = reserved[t.value]
-    #   return t
-    #
-    pass  # <-- skipping identifiers y keywords a propósito para este log
+    # ¿es palabra reservada?
+    if t.value in reserved:
+        t.type = reserved[t.value]  # ej. 'let' -> 'LET', 'if' -> 'IF'
+    return t
 
 
 # =========================
@@ -389,9 +380,9 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
 
 
 if __name__ == "__main__":
-    GITHUB_USER = "aledicaz"
-    ARCHIVO_SWIFT = "Examples/alexandre.swift"
+    GITHUB_USER = "todos"
+    ARCHIVO_SWIFT = "Examples/pruebaGlobal.swift"
 
     analizar_archivo_swift(ARCHIVO_SWIFT, GITHUB_USER)
 
-# <<< FIN APORTE Alexandre Icaza
+# <<< FIN APORTE Grupal
