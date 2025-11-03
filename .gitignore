@@ -1,0 +1,5 @@
+venv/
+requirements.txt
+__pycache__/
+Lexer/__pycache__/
+Lexer/variables.py
