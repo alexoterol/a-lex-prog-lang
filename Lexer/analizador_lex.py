@@ -2,7 +2,7 @@ import ply.lex as lex
 from datetime import datetime
 import os
 
-# <<< INICIO APORTE Alexandre Icaza
+# <<< INICIO APORTE Grupal
 
 # Palabras reservadas de Swift (keywords y tipos básicos)
 reserved = {
@@ -68,7 +68,7 @@ tokens = (
     'TIMES',
     'DIVIDE',
     'MODULO',
-    
+
     # Operadores de comparación
     'EQ',  # ==
     'NE',  # !=
@@ -76,7 +76,7 @@ tokens = (
     'LT',  # <
     'GE',  # >=
     'LE',  # <=
-    
+
     # Operadores de asignación
     'ASSIGN',        # =
     'PLUS_ASSIGN',   # +=
@@ -95,6 +95,9 @@ tokens = (
     'COLON',         # :
     'NIL_COALESCE',  # ??
 
+    # Operador de tipo de retorno
+    'ARROW',
+
     # Operadores de rango
     'CLOSED_RANGE',     # ...
     'HALF_OPEN_RANGE',  # ..<
@@ -107,7 +110,10 @@ tokens = (
     'RPAREN',
     'LBRACE',
     'RBRACE',
+    'LBRACKET',
+    'RBRACKET',
     'COMMA',
+    'SEMI_COLON',
 
     'INT_LITERAL',
     'FLOAT_LITERAL',
@@ -125,11 +131,15 @@ states = (
 # Tokens simples (símbolos)
 # =========================
 
-t_LPAREN = r'\('
-t_RPAREN = r'\)'
-t_LBRACE = r'\{'
-t_RBRACE = r'\}'
-t_COMMA  = r','
+t_ARROW      = r'->'
+t_LPAREN     = r'\('
+t_RPAREN     = r'\)'
+t_LBRACE     = r'\{'
+t_RBRACE     = r'\}'
+t_LBRACKET   = r'\['
+t_RBRACKET   = r'\]'
+t_COMMA      = r','
+t_SEMI_COLON = r';'
 
 # Operadores de rango (orden importa: los más largos primero)
 t_CLOSED_RANGE    = r'\.\.\.'
@@ -248,9 +258,7 @@ def t_STRING(t):
 # =========================
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    # ¿es palabra reservada?
-    if t.value in reserved:
-        t.type = reserved[t.value]  # ej. 'let' -> 'LET', 'if' -> 'IF'
+    t.type = reserved.get(t.value, 'IDENTIFIER')
     return t
 
 
@@ -348,7 +356,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     print("=" * 70)
     print(f"Archivo: {ruta_archivo}")
     print(f"Usuario: {github_user}\n")
-    
+
     # Leer archivo Swift
     try:
         with open(ruta_archivo, "r", encoding="utf-8") as f:
@@ -360,21 +368,21 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     except Exception as e:
         print(f"Error al leer el archivo: {e}")
         return
-    
+
     # Generar el log en texto
     log_text = tokenize_and_dump(codigo_swift, github_user=github_user)
-    
+
     # Crear carpeta logs/ si no existe
     os.makedirs("logs", exist_ok=True)
-    
+
     # Nombre del archivo de log con timestamp
     timestamp = datetime.now().strftime("%d-%m-%Y-%Hh%M")
     filename = f"logs/lexico-{github_user}-{timestamp}.txt"
-    
+
     # Guardar el log a disco
     with open(filename, "w", encoding="utf-8") as f:
         f.write(log_text)
-    
+
     print(f"✅ Log guardado correctamente en: {filename}")
     print(f"   Total de tokens: {len(tokenize_code(codigo_swift))}")
 
