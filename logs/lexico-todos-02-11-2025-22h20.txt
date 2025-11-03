@@ -1,0 +1,1268 @@
+======================================================================
+LEXICO | usuario=todos | fecha-hora=02-11-2025-22h20
+======================================================================
+Total de tokens reconocidos: 974
+
+ LÍNEA    POS                  TIPO  VALOR
+----------------------------------------------------------------------
+     1     91               NEWLINE  
+
+
+     3    167               NEWLINE  
+
+     4    223               NEWLINE  
+
+     5    244               NEWLINE  
+
+
+     7    288               NEWLINE  
+
+     8    306               NEWLINE  
+
+     9    341               NEWLINE  
+
+    10    377               NEWLINE  
+
+    11    453               NEWLINE  
+
+
+    13    455                IMPORT  import
+    13    462            IDENTIFIER  Foundation
+    13    472               NEWLINE  
+
+
+    18    609               NEWLINE  
+
+    19    610                 TIMES  *
+    19    611                DIVIDE  /
+    19    612               NEWLINE  
+
+
+    23    693               NEWLINE  
+
+
+
+    26    728               NEWLINE  
+
+    27    778               NEWLINE  
+
+    28    811               NEWLINE  
+
+
+    30    813                   LET  let
+    30    817            IDENTIFIER  constanteInmutable
+    30    836                ASSIGN  =
+    30    838           INT_LITERAL  10
+    30    856               NEWLINE  
+
+    31    857                   VAR  var
+    31    861            IDENTIFIER  contador
+    31    870                ASSIGN  =
+    31    872           INT_LITERAL  0
+    31    900               NEWLINE  
+
+    32    901                   VAR  var
+    32    905            IDENTIFIER  nombreUsuario
+    32    918                 COLON  :
+    32    920           TYPE_STRING  String
+    32    927                ASSIGN  =
+    32    929                STRING  Ana
+    32    969               NEWLINE  
+
+    33    970                   VAR  var
+    33    974            IDENTIFIER  edad
+    33    979                ASSIGN  =
+    33    981           INT_LITERAL  21
+    33   1022               NEWLINE  
+
+    34   1023                   VAR  var
+    34   1027            IDENTIFIER  opcionalNombre
+    34   1041                 COLON  :
+    34   1043           TYPE_STRING  String
+    34   1049              QUESTION  ?
+    34   1051                ASSIGN  =
+    34   1053                   NIL  nil
+    34   1073               NEWLINE  
+
+    35   1074                   VAR  var
+    35   1078            IDENTIFIER  isActive
+    35   1086                 COLON  :
+    35   1088             TYPE_BOOL  Bool
+    35   1093                ASSIGN  =
+    35   1095                  TRUE  true
+    35   1118               NEWLINE  
+
+    36   1119                   VAR  var
+    36   1123            IDENTIFIER  isBlocked
+    36   1132                 COLON  :
+    36   1134             TYPE_BOOL  Bool
+    36   1139                ASSIGN  =
+    36   1141                 FALSE  false
+    36   1164               NEWLINE  
+
+
+    38   1214               NEWLINE  
+
+    39   1215            IDENTIFIER  contador
+    39   1224                ASSIGN  =
+    39   1226            IDENTIFIER  contador
+    39   1235                  PLUS  +
+    39   1237           INT_LITERAL  1
+    39   1248               NEWLINE  
+
+    40   1249            IDENTIFIER  contador
+    40   1258           PLUS_ASSIGN  +=
+    40   1261           INT_LITERAL  1
+    40   1283               NEWLINE  
+
+    41   1284            IDENTIFIER  contador
+    41   1293          MINUS_ASSIGN  -=
+    41   1296           INT_LITERAL  2
+    41   1318               NEWLINE  
+
+    42   1319            IDENTIFIER  contador
+    42   1328          TIMES_ASSIGN  *=
+    42   1331           INT_LITERAL  3
+    42   1353               NEWLINE  
+
+    43   1354            IDENTIFIER  contador
+    43   1363            DIV_ASSIGN  /=
+    43   1366           INT_LITERAL  2
+    43   1388               NEWLINE  
+
+    44   1389            IDENTIFIER  contador
+    44   1398            MOD_ASSIGN  %=
+    44   1401           INT_LITERAL  4
+    44   1423               NEWLINE  
+
+
+    46   1425                   VAR  var
+    46   1429            IDENTIFIER  a
+    46   1431                ASSIGN  =
+    46   1433           INT_LITERAL  5
+    46   1434               NEWLINE  
+
+    47   1435                   VAR  var
+    47   1439            IDENTIFIER  b
+    47   1441                ASSIGN  =
+    47   1443           INT_LITERAL  9
+    47   1444               NEWLINE  
+
+    48   1445                   VAR  var
+    48   1449            IDENTIFIER  suma
+    48   1454                ASSIGN  =
+    48   1456            IDENTIFIER  a
+    48   1458                  PLUS  +
+    48   1460            IDENTIFIER  b
+    48   1478               NEWLINE  
+
+    49   1479                   VAR  var
+    49   1483            IDENTIFIER  resta
+    49   1489                ASSIGN  =
+    49   1491            IDENTIFIER  a
+    49   1493                 MINUS  -
+    49   1495            IDENTIFIER  b
+    49   1512               NEWLINE  
+
+    50   1513                   VAR  var
+    50   1517            IDENTIFIER  producto
+    50   1526                ASSIGN  =
+    50   1528            IDENTIFIER  a
+    50   1530                 TIMES  *
+    50   1532            IDENTIFIER  b
+    50   1546               NEWLINE  
+
+    51   1547                   VAR  var
+    51   1551            IDENTIFIER  division
+    51   1560                ASSIGN  =
+    51   1562            IDENTIFIER  b
+    51   1564                DIVIDE  /
+    51   1566            IDENTIFIER  a
+    51   1580               NEWLINE  
+
+    52   1581                   VAR  var
+    52   1585            IDENTIFIER  modulo
+    52   1592                ASSIGN  =
+    52   1594            IDENTIFIER  b
+    52   1596                MODULO  %
+    52   1598            IDENTIFIER  a
+    52   1614               NEWLINE  
+
+
+
+    55   1645               NEWLINE  
+
+    56   1646                   LET  let
+    56   1650            IDENTIFIER  esMayor
+    56   1658                ASSIGN  =
+    56   1660            IDENTIFIER  a
+    56   1662                    GT  >
+    56   1664            IDENTIFIER  b
+    56   1679               NEWLINE  
+
+    57   1680                   LET  let
+    57   1684            IDENTIFIER  esMenor
+    57   1692                ASSIGN  =
+    57   1694            IDENTIFIER  a
+    57   1696                    LT  <
+    57   1698            IDENTIFIER  b
+    57   1713               NEWLINE  
+
+    58   1714                   LET  let
+    58   1718            IDENTIFIER  esIgual
+    58   1726                ASSIGN  =
+    58   1728            IDENTIFIER  a
+    58   1730                    EQ  ==
+    58   1733            IDENTIFIER  b
+    58   1748               NEWLINE  
+
+    59   1749                   LET  let
+    59   1753            IDENTIFIER  esDistinto
+    59   1764                ASSIGN  =
+    59   1766            IDENTIFIER  a
+    59   1768                    NE  !=
+    59   1771            IDENTIFIER  b
+    59   1783               NEWLINE  
+
+    60   1784                   LET  let
+    60   1788            IDENTIFIER  mayorOIgual
+    60   1800                ASSIGN  =
+    60   1802            IDENTIFIER  a
+    60   1804                    GE  >=
+    60   1807            IDENTIFIER  b
+    60   1818               NEWLINE  
+
+    61   1819                   LET  let
+    61   1823            IDENTIFIER  menorOIgual
+    61   1835                ASSIGN  =
+    61   1837            IDENTIFIER  a
+    61   1839                    LE  <=
+    61   1842            IDENTIFIER  b
+    61   1853               NEWLINE  
+
+
+    63   1876               NEWLINE  
+
+    64   1877                   LET  let
+    64   1881            IDENTIFIER  negado
+    64   1888                ASSIGN  =
+    64   1890                   NOT  !
+    64   1891            IDENTIFIER  isActive
+    64   1918               NEWLINE  
+
+    65   1919                   LET  let
+    65   1923            IDENTIFIER  conjuncion
+    65   1934                ASSIGN  =
+    65   1936            IDENTIFIER  isActive
+    65   1945                   AND  &&
+    65   1948                 FALSE  false
+    65   1960               NEWLINE  
+
+    66   1961                   LET  let
+    66   1965            IDENTIFIER  disyuncion
+    66   1976                ASSIGN  =
+    66   1978            IDENTIFIER  isActive
+    66   1987                    OR  ||
+    66   1990                  TRUE  true
+    66   2002               NEWLINE  
+
+
+    68   2024               NEWLINE  
+
+    69   2025                   LET  let
+    69   2029            IDENTIFIER  maxValor
+    69   2038                ASSIGN  =
+    69   2040            IDENTIFIER  a
+    69   2042                    GT  >
+    69   2044            IDENTIFIER  b
+    69   2046              QUESTION  ?
+    69   2048            IDENTIFIER  a
+    69   2050                 COLON  :
+    69   2052            IDENTIFIER  b
+    69   2067               NEWLINE  
+
+
+    71   2086               NEWLINE  
+
+    72   2087                   LET  let
+    72   2091            IDENTIFIER  username
+    72   2099                 COLON  :
+    72   2101           TYPE_STRING  String
+    72   2107              QUESTION  ?
+    72   2109                ASSIGN  =
+    72   2111                   NIL  nil
+    72   2114               NEWLINE  
+
+    73   2115                   LET  let
+    73   2119            IDENTIFIER  usernameFinal
+    73   2133                ASSIGN  =
+    73   2135            IDENTIFIER  username
+    73   2144          NIL_COALESCE  ??
+    73   2147                STRING  Anonimo
+    73   2163               NEWLINE  
+
+
+    75   2195               NEWLINE  
+
+    76   2196                   LET  let
+    76   2200            IDENTIFIER  rangoCerrado
+    76   2213                ASSIGN  =
+    76   2215           INT_LITERAL  1
+    76   2216          CLOSED_RANGE  ...
+    76   2219           INT_LITERAL  5
+    76   2230               NEWLINE  
+
+    77   2231                   LET  let
+    77   2235            IDENTIFIER  rangoSemiAbierto
+    77   2252                ASSIGN  =
+    77   2254           INT_LITERAL  0
+    77   2255       HALF_OPEN_RANGE  ..<
+    77   2258           INT_LITERAL  10
+    77   2268               NEWLINE  
+
+
+
+    80   2303               NEWLINE  
+
+    81   2340               NEWLINE  
+
+    82   2373               NEWLINE  
+
+
+    84   2375                    IF  if
+    84   2378            IDENTIFIER  a
+    84   2380                    GT  >
+    84   2382            IDENTIFIER  b
+    84   2384                   AND  &&
+    84   2387            IDENTIFIER  isActive
+    84   2396                LBRACE  {
+    84   2397               NEWLINE  
+
+    85   2402            IDENTIFIER  print
+    85   2407                LPAREN  (
+    85   2408                STRING  a es mayor que b y activo
+    85   2435                RPAREN  )
+    85   2436               NEWLINE  
+
+    86   2437                RBRACE  }
+    86   2439                  ELSE  else
+    86   2444                LBRACE  {
+    86   2445               NEWLINE  
+
+    87   2450            IDENTIFIER  print
+    87   2455                LPAREN  (
+    87   2456                STRING  caso else ejecutado
+    87   2477                RPAREN  )
+    87   2478               NEWLINE  
+
+    88   2479                RBRACE  }
+    88   2480               NEWLINE  
+
+
+    90   2510               NEWLINE  
+
+    91   2511                  FUNC  func
+    91   2516            IDENTIFIER  validarEdad
+    91   2527                LPAREN  (
+    91   2528            IDENTIFIER  _
+    91   2530            IDENTIFIER  edad
+    91   2534                 COLON  :
+    91   2536              TYPE_INT  Int
+    91   2539              QUESTION  ?
+    91   2540                RPAREN  )
+    91   2542                 ARROW  ->
+    91   2545             TYPE_BOOL  Bool
+    91   2550                LBRACE  {
+    91   2551               NEWLINE  
+
+    92   2556                 GUARD  guard
+    92   2562                   LET  let
+    92   2566            IDENTIFIER  real
+    92   2571                ASSIGN  =
+    92   2573            IDENTIFIER  edad
+    92   2578                  ELSE  else
+    92   2583                LBRACE  {
+    92   2584               NEWLINE  
+
+    93   2593            IDENTIFIER  print
+    93   2598                LPAREN  (
+    93   2599                STRING  Edad inválida
+    93   2614                RPAREN  )
+    93   2615               NEWLINE  
+
+    94   2624                RETURN  return
+    94   2631                 FALSE  false
+    94   2636               NEWLINE  
+
+    95   2641                RBRACE  }
+    95   2642               NEWLINE  
+
+    96   2647                RETURN  return
+    96   2654            IDENTIFIER  real
+    96   2659                    GE  >=
+    96   2662           INT_LITERAL  18
+    96   2664               NEWLINE  
+
+    97   2665                RBRACE  }
+    97   2666               NEWLINE  
+
+
+    99   2702               NEWLINE  
+
+   100   2703                   VAR  var
+   100   2707            IDENTIFIER  i
+   100   2709                ASSIGN  =
+   100   2711           INT_LITERAL  0
+   100   2712               NEWLINE  
+
+   101   2713                 WHILE  while
+   101   2719            IDENTIFIER  i
+   101   2721                    LT  <
+   101   2723           INT_LITERAL  10
+   101   2726                LBRACE  {
+   101   2727               NEWLINE  
+
+   102   2732            IDENTIFIER  i
+   102   2734           PLUS_ASSIGN  +=
+   102   2737           INT_LITERAL  1
+   102   2738               NEWLINE  
+
+
+   104   2744                    IF  if
+   104   2747            IDENTIFIER  i
+   104   2749                    EQ  ==
+   104   2752           INT_LITERAL  3
+   104   2754                LBRACE  {
+   104   2755               NEWLINE  
+
+   105   2764            IDENTIFIER  continue
+   105   2846               NEWLINE  
+
+   106   2851                RBRACE  }
+   106   2852               NEWLINE  
+
+
+   108   2858                    IF  if
+   108   2861            IDENTIFIER  i
+   108   2863                    EQ  ==
+   108   2866           INT_LITERAL  8
+   108   2868                LBRACE  {
+   108   2869               NEWLINE  
+
+   109   2878            IDENTIFIER  break
+   109   2902               NEWLINE  
+
+   110   2907                RBRACE  }
+   110   2908               NEWLINE  
+
+   111   2909                RBRACE  }
+   111   2910               NEWLINE  
+
+
+   113   2934               NEWLINE  
+
+   114   2935                   FOR  for
+   114   2939            IDENTIFIER  n
+   114   2941                    IN  in
+   114   2944           INT_LITERAL  1
+   114   2945          CLOSED_RANGE  ...
+   114   2948           INT_LITERAL  5
+   114   2950                LBRACE  {
+   114   2951               NEWLINE  
+
+   115   2956            IDENTIFIER  print
+   115   2961                LPAREN  (
+   115   2962                STRING  n:
+   115   2966                 COMMA  ,
+   115   2968            IDENTIFIER  n
+   115   2969                RPAREN  )
+   115   2970               NEWLINE  
+
+   116   2971                RBRACE  }
+   116   2972               NEWLINE  
+
+
+   118   3002               NEWLINE  
+
+   119   3003                   LET  let
+   119   3007            IDENTIFIER  dia
+   119   3011                ASSIGN  =
+   119   3013           INT_LITERAL  3
+   119   3014               NEWLINE  
+
+   120   3015                SWITCH  switch
+   120   3022            IDENTIFIER  dia
+   120   3026                LBRACE  {
+   120   3027               NEWLINE  
+
+   121   3028                  CASE  case
+   121   3033           INT_LITERAL  1
+   121   3034                 COMMA  ,
+   121   3036           INT_LITERAL  7
+   121   3037                 COLON  :
+   121   3038               NEWLINE  
+
+   122   3043            IDENTIFIER  print
+   122   3048                LPAREN  (
+   122   3049                STRING  Fin de semana
+   122   3064                RPAREN  )
+   122   3065               NEWLINE  
+
+   123   3066                  CASE  case
+   123   3071           INT_LITERAL  2
+   123   3072                 COLON  :
+   123   3073               NEWLINE  
+
+   124   3078            IDENTIFIER  print
+   124   3083                LPAREN  (
+   124   3084                STRING  Lunes falso (?)
+   124   3101                RPAREN  )
+   124   3102               NEWLINE  
+
+   125   3103               DEFAULT  default
+   125   3110                 COLON  :
+   125   3111               NEWLINE  
+
+   126   3116            IDENTIFIER  print
+   126   3121                LPAREN  (
+   126   3122                STRING  Día normal
+   126   3134                RPAREN  )
+   126   3135               NEWLINE  
+
+   127   3136                RBRACE  }
+   127   3137               NEWLINE  
+
+
+
+   130   3172               NEWLINE  
+
+   131   3238               NEWLINE  
+
+   132   3271               NEWLINE  
+
+
+   134   3315               NEWLINE  
+
+   135   3316                  FUNC  func
+   135   3321            IDENTIFIER  sumar
+   135   3326                LPAREN  (
+   135   3327            IDENTIFIER  _
+   135   3329            IDENTIFIER  x
+   135   3330                 COLON  :
+   135   3332              TYPE_INT  Int
+   135   3335                 COMMA  ,
+   135   3337            IDENTIFIER  _
+   135   3339            IDENTIFIER  y
+   135   3340                 COLON  :
+   135   3342              TYPE_INT  Int
+   135   3345                RPAREN  )
+   135   3347                 ARROW  ->
+   135   3350              TYPE_INT  Int
+   135   3354                LBRACE  {
+   135   3355               NEWLINE  
+
+   136   3360                RETURN  return
+   136   3367            IDENTIFIER  x
+   136   3369                  PLUS  +
+   136   3371            IDENTIFIER  y
+   136   3372               NEWLINE  
+
+   137   3373                RBRACE  }
+   137   3374               NEWLINE  
+
+
+   139   3406               NEWLINE  
+
+   140   3407                  FUNC  func
+   140   3412            IDENTIFIER  puedeFallar
+   140   3423                LPAREN  (
+   140   3424            IDENTIFIER  flag
+   140   3428                 COLON  :
+   140   3430             TYPE_BOOL  Bool
+   140   3434                RPAREN  )
+   140   3436                THROWS  throws
+   140   3443                 ARROW  ->
+   140   3446           TYPE_STRING  String
+   140   3453                LBRACE  {
+   140   3454               NEWLINE  
+
+   141   3459                    IF  if
+   141   3462            IDENTIFIER  flag
+   141   3467                    EQ  ==
+   141   3470                 FALSE  false
+   141   3476                LBRACE  {
+   141   3477               NEWLINE  
+
+   142   3486                 THROW  throw
+   142   3492            IDENTIFIER  NSError
+   142   3499                LPAREN  (
+   142   3500            IDENTIFIER  domain
+   142   3506                 COLON  :
+   142   3508                STRING  demo
+   142   3514                 COMMA  ,
+   142   3516            IDENTIFIER  code
+   142   3520                 COLON  :
+   142   3522           INT_LITERAL  1
+   142   3523                 COMMA  ,
+   142   3525            IDENTIFIER  userInfo
+   142   3533                 COLON  :
+   142   3535                   NIL  nil
+   142   3538                RPAREN  )
+   142   3548               NEWLINE  
+
+   143   3553                RBRACE  }
+   143   3554               NEWLINE  
+
+   144   3559                RETURN  return
+   144   3566                STRING  OK
+   144   3570               NEWLINE  
+
+   145   3571                RBRACE  }
+   145   3572               NEWLINE  
+
+
+   147   3600               NEWLINE  
+
+   148   3601                  FUNC  func
+   148   3606            IDENTIFIER  probarError
+   148   3617                LPAREN  (
+   148   3618                RPAREN  )
+   148   3620                LBRACE  {
+   148   3621               NEWLINE  
+
+   149   3626                    DO  do
+   149   3629                LBRACE  {
+   149   3630               NEWLINE  
+
+   150   3639                   LET  let
+   150   3643            IDENTIFIER  resultado
+   150   3653                ASSIGN  =
+   150   3655                   TRY  try
+   150   3659            IDENTIFIER  puedeFallar
+   150   3670                LPAREN  (
+   150   3671            IDENTIFIER  flag
+   150   3675                 COLON  :
+   150   3677                 FALSE  false
+   150   3682                RPAREN  )
+   150   3690               NEWLINE  
+
+   151   3699            IDENTIFIER  print
+   151   3704                LPAREN  (
+   151   3705            IDENTIFIER  resultado
+   151   3714                RPAREN  )
+   151   3715               NEWLINE  
+
+   152   3720                RBRACE  }
+   152   3722                 CATCH  catch
+   152   3728                LBRACE  {
+   152   3729               NEWLINE  
+
+   153   3738            IDENTIFIER  print
+   153   3743                LPAREN  (
+   153   3744                STRING  Se capturó un error en catch
+   153   3774                RPAREN  )
+   153   3775               NEWLINE  
+
+   154   3780                RBRACE  }
+   154   3781               NEWLINE  
+
+
+   156   3787                 DEFER  defer
+   156   3793                LBRACE  {
+   156   3794               NEWLINE  
+
+   157   3803            IDENTIFIER  print
+   157   3808                LPAREN  (
+   157   3809                STRING  Esto se ejecuta al final del scope (d...
+   157   3853                RPAREN  )
+   157   3854               NEWLINE  
+
+   158   3859                RBRACE  }
+   158   3860               NEWLINE  
+
+   159   3861                RBRACE  }
+   159   3862               NEWLINE  
+
+
+   161   3895               NEWLINE  
+
+   162   3896                PUBLIC  public
+   162   3903                  FUNC  func
+   162   3908            IDENTIFIER  fetchData
+   162   3917                LPAREN  (
+   162   3918                RPAREN  )
+   162   3920                 ASYNC  async
+   162   3926                THROWS  throws
+   162   3933                 ARROW  ->
+   162   3936           TYPE_STRING  String
+   162   3943                LBRACE  {
+   162   3944               NEWLINE  
+
+   163   3949                 DEFER  defer
+   163   3955                LBRACE  {
+   163   3956               NEWLINE  
+
+   164   3965            IDENTIFIER  print
+   164   3970                LPAREN  (
+   164   3971                STRING  Cerrando recurso en defer async
+   164   4004                RPAREN  )
+   164   4005               NEWLINE  
+
+   165   4010                RBRACE  }
+   165   4011               NEWLINE  
+
+
+   167   4042               NEWLINE  
+
+   168   4047                   LET  let
+   168   4051            IDENTIFIER  valor
+   168   4057                ASSIGN  =
+   168   4059                STRING  dataRemota
+   168   4071               NEWLINE  
+
+   169   4076                RETURN  return
+   169   4083            IDENTIFIER  valor
+   169   4088               NEWLINE  
+
+   170   4089                RBRACE  }
+   170   4090               NEWLINE  
+
+
+   172   4092                 ASYNC  async
+   172   4098                  FUNC  func
+   172   4103            IDENTIFIER  usarFetch
+   172   4112                LPAREN  (
+   172   4113                RPAREN  )
+   172   4115                LBRACE  {
+   172   4116               NEWLINE  
+
+   173   4121                    DO  do
+   173   4124                LBRACE  {
+   173   4125               NEWLINE  
+
+   174   4134                   LET  let
+   174   4138            IDENTIFIER  data
+   174   4143                ASSIGN  =
+   174   4145                   TRY  try
+   174   4149                 AWAIT  await
+   174   4155            IDENTIFIER  fetchData
+   174   4164                LPAREN  (
+   174   4165                RPAREN  )
+   174   4181               NEWLINE  
+
+   175   4190            IDENTIFIER  print
+   175   4195                LPAREN  (
+   175   4196            IDENTIFIER  data
+   175   4200                RPAREN  )
+   175   4201               NEWLINE  
+
+   176   4206                RBRACE  }
+   176   4208                 CATCH  catch
+   176   4214                LBRACE  {
+   176   4215               NEWLINE  
+
+   177   4224            IDENTIFIER  print
+   177   4229                LPAREN  (
+   177   4230                STRING  Error async
+   177   4243                RPAREN  )
+   177   4244               NEWLINE  
+
+   178   4249                RBRACE  }
+   178   4250               NEWLINE  
+
+   179   4251                RBRACE  }
+   179   4252               NEWLINE  
+
+
+
+   182   4287               NEWLINE  
+
+   183   4350               NEWLINE  
+
+   184   4383               NEWLINE  
+
+
+   186   4385              PROTOCOL  protocol
+   186   4394            IDENTIFIER  Logger
+   186   4401                LBRACE  {
+   186   4431               NEWLINE  
+
+   187   4436                  FUNC  func
+   187   4441            IDENTIFIER  log
+   187   4444                LPAREN  (
+   187   4445            IDENTIFIER  _
+   187   4447            IDENTIFIER  message
+   187   4454                 COLON  :
+   187   4456           TYPE_STRING  String
+   187   4462                RPAREN  )
+   187   4493               NEWLINE  
+
+   188   4494                RBRACE  }
+   188   4495               NEWLINE  
+
+
+   190   4514               NEWLINE  
+
+   191   4515                  ENUM  enum
+   191   4520            IDENTIFIER  EstadoApp
+   191   4530                LBRACE  {
+   191   4531               NEWLINE  
+
+   192   4536                  CASE  case
+   192   4541            IDENTIFIER  idle
+   192   4545               NEWLINE  
+
+   193   4550                  CASE  case
+   193   4555            IDENTIFIER  running
+   193   4562               NEWLINE  
+
+   194   4567                  CASE  case
+   194   4572            IDENTIFIER  error
+   194   4577                LPAREN  (
+   194   4578           TYPE_STRING  String
+   194   4584                RPAREN  )
+   194   4585               NEWLINE  
+
+   195   4586                RBRACE  }
+   195   4587               NEWLINE  
+
+
+   197   4643               NEWLINE  
+
+   198   4644                STRUCT  struct
+   198   4651            IDENTIFIER  ContadorStruct
+   198   4666                LBRACE  {
+   198   4667               NEWLINE  
+
+   199   4690               NEWLINE  
+
+   200   4695                STATIC  static
+   200   4702                   VAR  var
+   200   4706            IDENTIFIER  instanciaGlobal
+   200   4722                ASSIGN  =
+   200   4724           INT_LITERAL  0
+   200   4737               NEWLINE  
+
+
+   202   4783               NEWLINE  
+
+   203   4788                   VAR  var
+   203   4792            IDENTIFIER  valor
+   203   4797                 COLON  :
+   203   4799              TYPE_INT  Int
+   203   4803                ASSIGN  =
+   203   4805           INT_LITERAL  0
+   203   4807                LBRACE  {
+   203   4808               NEWLINE  
+
+   204   4817               WILLSET  willSet
+   204   4825                LBRACE  {
+   204   4855               NEWLINE  
+
+   205   4868            IDENTIFIER  print
+   205   4873                LPAREN  (
+   205   4874                STRING  willSet valor
+   205   4889                 COMMA  ,
+   205   4891            IDENTIFIER  newValue
+   205   4899                RPAREN  )
+   205   4900               NEWLINE  
+
+   206   4909                RBRACE  }
+   206   4910               NEWLINE  
+
+   207   4919                DIDSET  didSet
+   207   4926                LBRACE  {
+   207   4956               NEWLINE  
+
+   208   4969            IDENTIFIER  print
+   208   4974                LPAREN  (
+   208   4975                STRING  didSet valor
+   208   4989                 COMMA  ,
+   208   4991            IDENTIFIER  oldValue
+   208   4999                RPAREN  )
+   208   5000               NEWLINE  
+
+   209   5009                RBRACE  }
+   209   5010               NEWLINE  
+
+   210   5015                RBRACE  }
+   210   5016               NEWLINE  
+
+
+   212   5058               NEWLINE  
+
+   213   5063                   VAR  var
+   213   5067            IDENTIFIER  doble
+   213   5072                 COLON  :
+   213   5074              TYPE_INT  Int
+   213   5078                LBRACE  {
+   213   5079               NEWLINE  
+
+   214   5088                   GET  get
+   214   5092                LBRACE  {
+   214   5122               NEWLINE  
+
+   215   5135                RETURN  return
+   215   5142            IDENTIFIER  valor
+   215   5148                 TIMES  *
+   215   5150           INT_LITERAL  2
+   215   5151               NEWLINE  
+
+   216   5160                RBRACE  }
+   216   5161               NEWLINE  
+
+   217   5170                   SET  set
+   217   5174                LBRACE  {
+   217   5204               NEWLINE  
+
+   218   5217            IDENTIFIER  valor
+   218   5223                ASSIGN  =
+   218   5225            IDENTIFIER  newValue
+   218   5234                DIVIDE  /
+   218   5236           INT_LITERAL  2
+   218   5237               NEWLINE  
+
+   219   5246                RBRACE  }
+   219   5247               NEWLINE  
+
+   220   5252                RBRACE  }
+   220   5253               NEWLINE  
+
+
+   222   5276               NEWLINE  
+
+   223   5281                  INIT  init
+   223   5285                LPAREN  (
+   223   5286            IDENTIFIER  inicial
+   223   5293                 COLON  :
+   223   5295              TYPE_INT  Int
+   223   5298                RPAREN  )
+   223   5300                LBRACE  {
+   223   5320               NEWLINE  
+
+   224   5329                  SELF  self
+   224   5333                   DOT  .
+   224   5334            IDENTIFIER  valor
+   224   5340                ASSIGN  =
+   224   5342            IDENTIFIER  inicial
+   224   5364               NEWLINE  
+
+   225   5369                RBRACE  }
+   225   5370               NEWLINE  
+
+
+   227   5392               NEWLINE  
+
+   228   5397                  FUNC  func
+   228   5402            IDENTIFIER  mostrar
+   228   5409                LPAREN  (
+   228   5410                RPAREN  )
+   228   5412                 ARROW  ->
+   228   5415           TYPE_STRING  String
+   228   5422                LBRACE  {
+   228   5423               NEWLINE  
+
+   229   5432                RETURN  return
+   229   5439                STRING  Valor actual: 
+   229   5456                  PLUS  +
+   229   5458           TYPE_STRING  String
+   229   5464                LPAREN  (
+   229   5465            IDENTIFIER  valor
+   229   5470                RPAREN  )
+   229   5471               NEWLINE  
+
+   230   5476                RBRACE  }
+   230   5477               NEWLINE  
+
+   231   5478                RBRACE  }
+   231   5479               NEWLINE  
+
+
+   233   5518               NEWLINE  
+
+   234   5519                PUBLIC  public
+   234   5526                 CLASS  class
+   234   5532            IDENTIFIER  ServicioRed
+   234   5544                LBRACE  {
+   234   5570               NEWLINE  
+
+   235   5575               PRIVATE  private
+   235   5583                   VAR  var
+   235   5587            IDENTIFIER  endpoint
+   235   5595                 COLON  :
+   235   5597           TYPE_STRING  String
+   235   5617               NEWLINE  
+
+   236   5622              INTERNAL  internal
+   236   5631                   VAR  var
+   236   5635            IDENTIFIER  timeout
+   236   5642                 COLON  :
+   236   5644              TYPE_INT  Int
+   236   5648                ASSIGN  =
+   236   5650           INT_LITERAL  30
+   236   5665               NEWLINE  
+
+
+   238   5671                  INIT  init
+   238   5675                LPAREN  (
+   238   5676            IDENTIFIER  endpoint
+   238   5684                 COLON  :
+   238   5686           TYPE_STRING  String
+   238   5692                RPAREN  )
+   238   5694                LBRACE  {
+   238   5695               NEWLINE  
+
+   239   5704                  SELF  self
+   239   5708                   DOT  .
+   239   5709            IDENTIFIER  endpoint
+   239   5718                ASSIGN  =
+   239   5720            IDENTIFIER  endpoint
+   239   5728               NEWLINE  
+
+   240   5733                RBRACE  }
+   240   5734               NEWLINE  
+
+
+   242   5740                  FUNC  func
+   242   5745            IDENTIFIER  hacerPeticion
+   242   5758                LPAREN  (
+   242   5759                RPAREN  )
+   242   5761                 ARROW  ->
+   242   5764             TYPE_BOOL  Bool
+   242   5769                LBRACE  {
+   242   5770               NEWLINE  
+
+   243   5779            IDENTIFIER  print
+   243   5784                LPAREN  (
+   243   5785                STRING  Llamando a
+   243   5797                 COMMA  ,
+   243   5799                  SELF  self
+   243   5803                   DOT  .
+   243   5804            IDENTIFIER  endpoint
+   243   5812                RPAREN  )
+   243   5813               NEWLINE  
+
+   244   5822                RETURN  return
+   244   5829                  TRUE  true
+   244   5833               NEWLINE  
+
+   245   5838                RBRACE  }
+   245   5839               NEWLINE  
+
+   246   5840                RBRACE  }
+   246   5841               NEWLINE  
+
+
+   248   5898               NEWLINE  
+
+   249   5899             EXTENSION  extension
+   249   5909            IDENTIFIER  ServicioRed
+   249   5921                LBRACE  {
+   249   5947               NEWLINE  
+
+   250   5952                  FUNC  func
+   250   5957            IDENTIFIER  logEstado
+   250   5966                LPAREN  (
+   250   5967            IDENTIFIER  logger
+   250   5973                 COLON  :
+   250   5975            IDENTIFIER  Logger
+   250   5981                RPAREN  )
+   250   5983                LBRACE  {
+   250   5984               NEWLINE  
+
+   251   5993            IDENTIFIER  logger
+   251   5999                   DOT  .
+   251   6000            IDENTIFIER  log
+   251   6003                LPAREN  (
+   251   6004                STRING  Estado OK
+   251   6015                RPAREN  )
+   251   6016               NEWLINE  
+
+   252   6021                RBRACE  }
+   252   6022               NEWLINE  
+
+   253   6023                RBRACE  }
+   253   6024               NEWLINE  
+
+
+
+   256   6059               NEWLINE  
+
+   257   6110               NEWLINE  
+
+   258   6143               NEWLINE  
+
+
+   260   6219               NEWLINE  
+
+
+   262   6221                  FUNC  func
+   262   6226            IDENTIFIER  construirValor
+   262   6240                LPAREN  (
+   262   6241                RPAREN  )
+   262   6243                 ARROW  ->
+   262   6246                  SOME  some
+   262   6251              TYPE_INT  Int
+   262   6255                LBRACE  {
+   262   6264               NEWLINE  
+
+   263   6269                RETURN  return
+   263   6276           INT_LITERAL  42
+   263   6278               NEWLINE  
+
+   264   6279                RBRACE  }
+   264   6280               NEWLINE  
+
+
+   266   6335               NEWLINE  
+
+   267   6336                 CLASS  class
+   267   6342            IDENTIFIER  ContadorDeClicks
+   267   6359                LBRACE  {
+   267   6360               NEWLINE  
+
+   268   6365                   VAR  var
+   268   6369            IDENTIFIER  clicks
+   268   6376                ASSIGN  =
+   268   6378           INT_LITERAL  0
+   268   6379               NEWLINE  
+
+
+   270   6385                  FUNC  func
+   270   6390            IDENTIFIER  click
+   270   6395                LPAREN  (
+   270   6396                RPAREN  )
+   270   6398                LBRACE  {
+   270   6399               NEWLINE  
+
+   271   6408                  SELF  self
+   271   6412                   DOT  .
+   271   6413            IDENTIFIER  clicks
+   271   6420           PLUS_ASSIGN  +=
+   271   6423           INT_LITERAL  1
+   271   6424               NEWLINE  
+
+   272   6429                RBRACE  }
+   272   6430               NEWLINE  
+
+   273   6431                RBRACE  }
+   273   6432               NEWLINE  
+
+
+
+   276   6467               NEWLINE  
+
+   277   6515               NEWLINE  
+
+   278   6548               NEWLINE  
+
+
+   280   6550                   LET  let
+   280   6554            IDENTIFIER  numeros
+   280   6562                ASSIGN  =
+   280   6564              LBRACKET  [
+   280   6565           INT_LITERAL  1
+   280   6566                 COMMA  ,
+   280   6568           INT_LITERAL  2
+   280   6569                 COMMA  ,
+   280   6571           INT_LITERAL  3
+   280   6572                 COMMA  ,
+   280   6574           INT_LITERAL  4
+   280   6575                 COMMA  ,
+   280   6577           INT_LITERAL  5
+   280   6578              RBRACKET  ]
+   280   6579               NEWLINE  
+
+   281   6580                   LET  let
+   281   6584            IDENTIFIER  usuario
+   281   6592                ASSIGN  =
+   281   6594              LBRACKET  [
+   281   6595                STRING  name
+   281   6601                 COLON  :
+   281   6603                STRING  Ana
+   281   6608                 COMMA  ,
+   281   6610                STRING  role
+   281   6616                 COLON  :
+   281   6618                STRING  admin
+   281   6625              RBRACKET  ]
+   281   6626               NEWLINE  
+
+   282   6627                   LET  let
+   282   6631            IDENTIFIER  punto
+   282   6637                ASSIGN  =
+   282   6639                LPAREN  (
+   282   6640            IDENTIFIER  x
+   282   6641                 COLON  :
+   282   6643           INT_LITERAL  10
+   282   6645                 COMMA  ,
+   282   6647            IDENTIFIER  y
+   282   6648                 COLON  :
+   282   6650           INT_LITERAL  20
+   282   6652                RPAREN  )
+   282   6653               NEWLINE  
+
+   283   6654                   LET  let
+   283   6658            IDENTIFIER  mezcla
+   283   6664                 COLON  :
+   283   6666              LBRACKET  [
+   283   6667            IDENTIFIER  Any
+   283   6670              RBRACKET  ]
+   283   6672                ASSIGN  =
+   283   6674              LBRACKET  [
+   283   6675                STRING  texto
+   283   6682                 COMMA  ,
+   283   6684           INT_LITERAL  10
+   283   6686                 COMMA  ,
+   283   6688                  TRUE  true
+   283   6692              RBRACKET  ]
+   283   6693               NEWLINE  
+
+
+   285   6695                   VAR  var
+   285   6699            IDENTIFIER  mutableDict
+   285   6711                ASSIGN  =
+   285   6713              LBRACKET  [
+   285   6714                STRING  visitas
+   285   6723                 COLON  :
+   285   6725           INT_LITERAL  1
+   285   6726              RBRACKET  ]
+   285   6727               NEWLINE  
+
+   286   6728            IDENTIFIER  mutableDict
+   286   6739              LBRACKET  [
+   286   6740                STRING  visitas
+   286   6749              RBRACKET  ]
+   286   6751                ASSIGN  =
+   286   6753                LPAREN  (
+   286   6754            IDENTIFIER  mutableDict
+   286   6765              LBRACKET  [
+   286   6766                STRING  visitas
+   286   6775              RBRACKET  ]
+   286   6777          NIL_COALESCE  ??
+   286   6780           INT_LITERAL  0
+   286   6781                RPAREN  )
+   286   6783                  PLUS  +
+   286   6785           INT_LITERAL  1
+   286   6786               NEWLINE  
+
+
+   288   6829               NEWLINE  
+
+   289   6830                   LET  let
+   289   6834            IDENTIFIER  primerosTres
+   289   6847                ASSIGN  =
+   289   6849            IDENTIFIER  Array
+   289   6854                LPAREN  (
+   289   6855            IDENTIFIER  numeros
+   289   6862              LBRACKET  [
+   289   6863           INT_LITERAL  0
+   289   6864       HALF_OPEN_RANGE  ..<
+   289   6867           INT_LITERAL  3
+   289   6868              RBRACKET  ]
+   289   6869                RPAREN  )
+   289   6870               NEWLINE  
+
+
+   291   6918               NEWLINE  
+
+======================================================================
