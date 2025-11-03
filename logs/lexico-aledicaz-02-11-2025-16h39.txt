@@ -1,0 +1,60 @@
+======================================================================
+LEXICO | usuario=aledicaz | fecha-hora=02-11-2025-16h39
+======================================================================
+Total de tokens reconocidos: 52
+
+ LÍNEA    POS                  TIPO  VALOR
+----------------------------------------------------------------------
+     5    103                  PLUS  +
+     6    113                ASSIGN  =
+     7    124                ASSIGN  =
+    10    164                ASSIGN  =
+    10    168                  PLUS  +
+    11    182                ASSIGN  =
+    11    186                 MINUS  -
+    12    209                ASSIGN  =
+    12    213                 TIMES  *
+    13    230                ASSIGN  =
+    13    234                DIVIDE  /
+    14    249                ASSIGN  =
+    14    253                MODULO  %
+    17    299                ASSIGN  =
+    17    303                    EQ  ==
+    18    324                ASSIGN  =
+    18    328                    NE  !=
+    19    345                ASSIGN  =
+    19    349                    GT  >
+    20    365                ASSIGN  =
+    20    369                    LT  <
+    21    388                ASSIGN  =
+    21    392                    GE  >=
+    22    412                ASSIGN  =
+    22    416                    LE  <=
+    25    473                ASSIGN  =
+    26    486           PLUS_ASSIGN  +=
+    27    500          MINUS_ASSIGN  -=
+    28    514          TIMES_ASSIGN  *=
+    29    528            DIV_ASSIGN  /=
+    30    542            MOD_ASSIGN  %=
+    33    580                ASSIGN  =
+    34    600                ASSIGN  =
+    34    602                   NOT  !
+    35    622                ASSIGN  =
+    35    629                   AND  &&
+    36    650                ASSIGN  =
+    36    657                    OR  ||
+    39    702                ASSIGN  =
+    39    706                    GT  >
+    39    710              QUESTION  ?
+    39    714                 COLON  :
+    42    748                ASSIGN  =
+    43    773                ASSIGN  =
+    43    782          NIL_COALESCE  ??
+    46    836                ASSIGN  =
+    46    839          CLOSED_RANGE  ...
+    47    865                ASSIGN  =
+    47    868       HALF_OPEN_RANGE  ..<
+    49    881                ASSIGN  =
+    55    995                 TIMES  *
+    55    996                DIVIDE  /
+======================================================================
