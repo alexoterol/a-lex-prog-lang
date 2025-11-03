@@ -1,0 +1,177 @@
+======================================================================
+LEXICO | usuario=aledicaz | fecha-hora=02-11-2025-20h05
+======================================================================
+Total de tokens reconocidos: 111
+
+ LÍNEA    POS                  TIPO  VALOR
+----------------------------------------------------------------------
+     1     52               NEWLINE  
+
+     2     78               NEWLINE  
+
+     3     99               NEWLINE  
+
+
+     5    103                  PLUS  +
+     5    106               NEWLINE  
+
+     6    113                ASSIGN  =
+     6    115           INT_LITERAL  10
+     6    117               NEWLINE  
+
+     7    124                ASSIGN  =
+     7    126           INT_LITERAL  5
+     7    127               NEWLINE  
+
+
+     9    154               NEWLINE  
+
+    10    164                ASSIGN  =
+    10    168                  PLUS  +
+    10    171               NEWLINE  
+
+    11    182                ASSIGN  =
+    11    186                 MINUS  -
+    11    189               NEWLINE  
+
+    12    209                ASSIGN  =
+    12    213                 TIMES  *
+    12    216               NEWLINE  
+
+    13    230                ASSIGN  =
+    13    234                DIVIDE  /
+    13    237               NEWLINE  
+
+    14    249                ASSIGN  =
+    14    253                MODULO  %
+    14    256               NEWLINE  
+
+
+    16    286               NEWLINE  
+
+    17    299                ASSIGN  =
+    17    303                    EQ  ==
+    17    307               NEWLINE  
+
+    18    324                ASSIGN  =
+    18    328                    NE  !=
+    18    332               NEWLINE  
+
+    19    345                ASSIGN  =
+    19    349                    GT  >
+    19    352               NEWLINE  
+
+    20    365                ASSIGN  =
+    20    369                    LT  <
+    20    372               NEWLINE  
+
+    21    388                ASSIGN  =
+    21    392                    GE  >=
+    21    396               NEWLINE  
+
+    22    412                ASSIGN  =
+    22    416                    LE  <=
+    22    420               NEWLINE  
+
+
+    24    459               NEWLINE  
+
+    25    473                ASSIGN  =
+    25    475           INT_LITERAL  0
+    25    476               NEWLINE  
+
+    26    486           PLUS_ASSIGN  +=
+    26    489           INT_LITERAL  1
+    26    490               NEWLINE  
+
+    27    500          MINUS_ASSIGN  -=
+    27    503           INT_LITERAL  1
+    27    504               NEWLINE  
+
+    28    514          TIMES_ASSIGN  *=
+    28    517           INT_LITERAL  2
+    28    518               NEWLINE  
+
+    29    528            DIV_ASSIGN  /=
+    29    531           INT_LITERAL  2
+    29    532               NEWLINE  
+
+    30    542            MOD_ASSIGN  %=
+    30    545           INT_LITERAL  3
+    30    546               NEWLINE  
+
+
+    32    570               NEWLINE  
+
+    33    580                ASSIGN  =
+    33    586               NEWLINE  
+
+    34    600                ASSIGN  =
+    34    602                   NOT  !
+    34    607               NEWLINE  
+
+    35    622                ASSIGN  =
+    35    629                   AND  &&
+    35    636               NEWLINE  
+
+    36    650                ASSIGN  =
+    36    657                    OR  ||
+    36    665               NEWLINE  
+
+
+    38    687               NEWLINE  
+
+    39    702                ASSIGN  =
+    39    706                    GT  >
+    39    710              QUESTION  ?
+    39    714                 COLON  :
+    39    717               NEWLINE  
+
+
+    41    736               NEWLINE  
+
+    42    748                ASSIGN  =
+    42    750                STRING  Juan
+    42    756               NEWLINE  
+
+    43    773                ASSIGN  =
+    43    782          NIL_COALESCE  ??
+    43    785                STRING  Anónimo
+    43    794               NEWLINE  
+
+
+    45    818               NEWLINE  
+
+    46    836                ASSIGN  =
+    46    838           INT_LITERAL  1
+    46    839          CLOSED_RANGE  ...
+    46    842           INT_LITERAL  5
+    46    843               NEWLINE  
+
+    47    865                ASSIGN  =
+    47    867           INT_LITERAL  0
+    47    868       HALF_OPEN_RANGE  ..<
+    47    871           INT_LITERAL  10
+    47    873               NEWLINE  
+
+
+    49    881                ASSIGN  =
+    49    883           INT_LITERAL  10
+    49    904               NEWLINE  
+
+
+    51    928               NEWLINE  
+
+    52    965               NEWLINE  
+
+
+    55    995                 TIMES  *
+    55    996                DIVIDE  /
+    55    997               NEWLINE  
+
+
+    58   1031               NEWLINE  
+
+
+
+======================================================================
