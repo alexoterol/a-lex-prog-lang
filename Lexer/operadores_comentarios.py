@@ -245,7 +245,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
 if __name__ == "__main__":    
     
     GITHUB_USER = "aledicaz"
-    ARCHIVO_SWIFT = "Examples/alexandre.swift"
+    ARCHIVO_SWIFT = "Examples/alexandre_prueba_1.swift"
     
 
     analizar_archivo_swift(ARCHIVO_SWIFT, GITHUB_USER)
