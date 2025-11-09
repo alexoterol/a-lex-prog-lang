@@ -1,0 +1,629 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ARROW
+    ASYNC
+    AWAIT
+    CASE
+    CATCH
+    CLASS
+    CLOSED_RANGE
+    COMMA
+    DEFAULT
+    DEFER
+    DIDSET
+    DIVIDE
+    DIV_ASSIGN
+    DO
+    DOT
+    ELSE
+    ENUM
+    EQ
+    EXTENSION
+    FOR
+    FUNC
+    GE
+    GET
+    GT
+    GUARD
+    HALF_OPEN_RANGE
+    IF
+    IMPORT
+    IN
+    INIT
+    INTERNAL
+    LBRACE
+    LBRACKET
+    LE
+    LPAREN
+    LT
+    MINUS
+    MINUS_ASSIGN
+    MODULO
+    MOD_ASSIGN
+    NE
+    NEWLINE
+    PLUS
+    PLUS_ASSIGN
+    PRIVATE
+    PROTOCOL
+    PUBLIC
+    RBRACE
+    RBRACKET
+    RETURN
+    RPAREN
+    SELF
+    SEMI_COLON
+    SET
+    SOME
+    STATIC
+    STRUCT
+    SWITCH
+    THROW
+    THROWS
+    TIMES
+    TIMES_ASSIGN
+    TRY
+    TYPE_BOOL
+    TYPE_DOUBLE
+    TYPE_INT
+    TYPE_STRING
+    WHILE
+    WILLSET
+
+Grammar
+
+Rule 0     S' -> sentences
+Rule 1     sentences -> bool_exp
+Rule 2     sentences -> assign
+Rule 3     sentences -> expression
+Rule 4     sentences -> <empty>
+Rule 5     bool_exp -> value
+Rule 6     bool_exp -> value bool_operator bool_exp
+Rule 7     assign -> type_data IDENTIFIER ASSIGN value
+Rule 8     expression -> bool_exp QUESTION value COLON value
+Rule 9     expression -> IDENTIFIER NIL_COALESCE STRING
+Rule 10    bool_operator -> AND
+Rule 11    bool_operator -> OR
+Rule 12    bool_neg -> NOT
+Rule 13    type_data -> VAR
+Rule 14    type_data -> LET
+Rule 15    value -> INT_LITERAL
+Rule 16    value -> FLOAT_LITERAL
+Rule 17    value -> IDENTIFIER
+Rule 18    value -> STRING
+Rule 19    value -> NIL
+Rule 20    value -> TRUE
+Rule 21    value -> FALSE
+Rule 22    value -> bool_neg value
+
+Terminals, with rules where they appear
+
+AND                  : 10
+ARROW                : 
+ASSIGN               : 7
+ASYNC                : 
+AWAIT                : 
+CASE                 : 
+CATCH                : 
+CLASS                : 
+CLOSED_RANGE         : 
+COLON                : 8
+COMMA                : 
+DEFAULT              : 
+DEFER                : 
+DIDSET               : 
+DIVIDE               : 
+DIV_ASSIGN           : 
+DO                   : 
+DOT                  : 
+ELSE                 : 
+ENUM                 : 
+EQ                   : 
+EXTENSION            : 
+FALSE                : 21
+FLOAT_LITERAL        : 16
+FOR                  : 
+FUNC                 : 
+GE                   : 
+GET                  : 
+GT                   : 
+GUARD                : 
+HALF_OPEN_RANGE      : 
+IDENTIFIER           : 7 9 17
+IF                   : 
+IMPORT               : 
+IN                   : 
+INIT                 : 
+INTERNAL             : 
+INT_LITERAL          : 15
+LBRACE               : 
+LBRACKET             : 
+LE                   : 
+LET                  : 14
+LPAREN               : 
+LT                   : 
+MINUS                : 
+MINUS_ASSIGN         : 
+MODULO               : 
+MOD_ASSIGN           : 
+NE                   : 
+NEWLINE              : 
+NIL                  : 19
+NIL_COALESCE         : 9
+NOT                  : 12
+OR                   : 11
+PLUS                 : 
+PLUS_ASSIGN          : 
+PRIVATE              : 
+PROTOCOL             : 
+PUBLIC               : 
+QUESTION             : 8
+RBRACE               : 
+RBRACKET             : 
+RETURN               : 
+RPAREN               : 
+SELF                 : 
+SEMI_COLON           : 
+SET                  : 
+SOME                 : 
+STATIC               : 
+STRING               : 9 18
+STRUCT               : 
+SWITCH               : 
+THROW                : 
+THROWS               : 
+TIMES                : 
+TIMES_ASSIGN         : 
+TRUE                 : 20
+TRY                  : 
+TYPE_BOOL            : 
+TYPE_DOUBLE          : 
+TYPE_INT             : 
+TYPE_STRING          : 
+VAR                  : 13
+WHILE                : 
+WILLSET              : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+assign               : 2
+bool_exp             : 1 6 8
+bool_neg             : 22
+bool_operator        : 6
+expression           : 3
+sentences            : 0
+type_data            : 7
+value                : 5 6 7 8 8 22
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . sentences
+    (1) sentences -> . bool_exp
+    (2) sentences -> . assign
+    (3) sentences -> . expression
+    (4) sentences -> .
+    (5) bool_exp -> . value
+    (6) bool_exp -> . value bool_operator bool_exp
+    (7) assign -> . type_data IDENTIFIER ASSIGN value
+    (8) expression -> . bool_exp QUESTION value COLON value
+    (9) expression -> . IDENTIFIER NIL_COALESCE STRING
+    (15) value -> . INT_LITERAL
+    (16) value -> . FLOAT_LITERAL
+    (17) value -> . IDENTIFIER
+    (18) value -> . STRING
+    (19) value -> . NIL
+    (20) value -> . TRUE
+    (21) value -> . FALSE
+    (22) value -> . bool_neg value
+    (13) type_data -> . VAR
+    (14) type_data -> . LET
+    (12) bool_neg -> . NOT
+
+    $end            reduce using rule 4 (sentences -> .)
+    IDENTIFIER      shift and go to state 7
+    INT_LITERAL     shift and go to state 9
+    FLOAT_LITERAL   shift and go to state 10
+    STRING          shift and go to state 8
+    NIL             shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+    VAR             shift and go to state 15
+    LET             shift and go to state 16
+    NOT             shift and go to state 17
+
+    sentences                      shift and go to state 1
+    bool_exp                       shift and go to state 2
+    assign                         shift and go to state 3
+    expression                     shift and go to state 4
+    value                          shift and go to state 5
+    type_data                      shift and go to state 6
+    bool_neg                       shift and go to state 14
+
+state 1
+
+    (0) S' -> sentences .
+
+
+
+state 2
+
+    (1) sentences -> bool_exp .
+    (8) expression -> bool_exp . QUESTION value COLON value
+
+    $end            reduce using rule 1 (sentences -> bool_exp .)
+    QUESTION        shift and go to state 18
+
+
+state 3
+
+    (2) sentences -> assign .
+
+    $end            reduce using rule 2 (sentences -> assign .)
+
+
+state 4
+
+    (3) sentences -> expression .
+
+    $end            reduce using rule 3 (sentences -> expression .)
+
+
+state 5
+
+    (5) bool_exp -> value .
+    (6) bool_exp -> value . bool_operator bool_exp
+    (10) bool_operator -> . AND
+    (11) bool_operator -> . OR
+
+    QUESTION        reduce using rule 5 (bool_exp -> value .)
+    $end            reduce using rule 5 (bool_exp -> value .)
+    AND             shift and go to state 20
+    OR              shift and go to state 21
+
+    bool_operator                  shift and go to state 19
+
+state 6
+
+    (7) assign -> type_data . IDENTIFIER ASSIGN value
+
+    IDENTIFIER      shift and go to state 22
+
+
+state 7
+
+    (9) expression -> IDENTIFIER . NIL_COALESCE STRING
+    (17) value -> IDENTIFIER .
+
+    NIL_COALESCE    shift and go to state 23
+    AND             reduce using rule 17 (value -> IDENTIFIER .)
+    OR              reduce using rule 17 (value -> IDENTIFIER .)
+    QUESTION        reduce using rule 17 (value -> IDENTIFIER .)
+    $end            reduce using rule 17 (value -> IDENTIFIER .)
+
+
+state 8
+
+    (18) value -> STRING .
+
+    AND             reduce using rule 18 (value -> STRING .)
+    OR              reduce using rule 18 (value -> STRING .)
+    QUESTION        reduce using rule 18 (value -> STRING .)
+    $end            reduce using rule 18 (value -> STRING .)
+    COLON           reduce using rule 18 (value -> STRING .)
+
+
+state 9
+
+    (15) value -> INT_LITERAL .
+
+    AND             reduce using rule 15 (value -> INT_LITERAL .)
+    OR              reduce using rule 15 (value -> INT_LITERAL .)
+    QUESTION        reduce using rule 15 (value -> INT_LITERAL .)
+    $end            reduce using rule 15 (value -> INT_LITERAL .)
+    COLON           reduce using rule 15 (value -> INT_LITERAL .)
+
+
+state 10
+
+    (16) value -> FLOAT_LITERAL .
+
+    AND             reduce using rule 16 (value -> FLOAT_LITERAL .)
+    OR              reduce using rule 16 (value -> FLOAT_LITERAL .)
+    QUESTION        reduce using rule 16 (value -> FLOAT_LITERAL .)
+    $end            reduce using rule 16 (value -> FLOAT_LITERAL .)
+    COLON           reduce using rule 16 (value -> FLOAT_LITERAL .)
+
+
+state 11
+
+    (19) value -> NIL .
+
+    AND             reduce using rule 19 (value -> NIL .)
+    OR              reduce using rule 19 (value -> NIL .)
+    QUESTION        reduce using rule 19 (value -> NIL .)
+    $end            reduce using rule 19 (value -> NIL .)
+    COLON           reduce using rule 19 (value -> NIL .)
+
+
+state 12
+
+    (20) value -> TRUE .
+
+    AND             reduce using rule 20 (value -> TRUE .)
+    OR              reduce using rule 20 (value -> TRUE .)
+    QUESTION        reduce using rule 20 (value -> TRUE .)
+    $end            reduce using rule 20 (value -> TRUE .)
+    COLON           reduce using rule 20 (value -> TRUE .)
+
+
+state 13
+
+    (21) value -> FALSE .
+
+    AND             reduce using rule 21 (value -> FALSE .)
+    OR              reduce using rule 21 (value -> FALSE .)
+    QUESTION        reduce using rule 21 (value -> FALSE .)
+    $end            reduce using rule 21 (value -> FALSE .)
+    COLON           reduce using rule 21 (value -> FALSE .)
+
+
+state 14
+
+    (22) value -> bool_neg . value
+    (15) value -> . INT_LITERAL
+    (16) value -> . FLOAT_LITERAL
+    (17) value -> . IDENTIFIER
+    (18) value -> . STRING
+    (19) value -> . NIL
+    (20) value -> . TRUE
+    (21) value -> . FALSE
+    (22) value -> . bool_neg value
+    (12) bool_neg -> . NOT
+
+    INT_LITERAL     shift and go to state 9
+    FLOAT_LITERAL   shift and go to state 10
+    IDENTIFIER      shift and go to state 25
+    STRING          shift and go to state 8
+    NIL             shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+    NOT             shift and go to state 17
+
+    bool_neg                       shift and go to state 14
+    value                          shift and go to state 24
+
+state 15
+
+    (13) type_data -> VAR .
+
+    IDENTIFIER      reduce using rule 13 (type_data -> VAR .)
+
+
+state 16
+
+    (14) type_data -> LET .
+
+    IDENTIFIER      reduce using rule 14 (type_data -> LET .)
+
+
+state 17
+
+    (12) bool_neg -> NOT .
+
+    INT_LITERAL     reduce using rule 12 (bool_neg -> NOT .)
+    FLOAT_LITERAL   reduce using rule 12 (bool_neg -> NOT .)
+    IDENTIFIER      reduce using rule 12 (bool_neg -> NOT .)
+    STRING          reduce using rule 12 (bool_neg -> NOT .)
+    NIL             reduce using rule 12 (bool_neg -> NOT .)
+    TRUE            reduce using rule 12 (bool_neg -> NOT .)
+    FALSE           reduce using rule 12 (bool_neg -> NOT .)
+    NOT             reduce using rule 12 (bool_neg -> NOT .)
+
+
+state 18
+
+    (8) expression -> bool_exp QUESTION . value COLON value
+    (15) value -> . INT_LITERAL
+    (16) value -> . FLOAT_LITERAL
+    (17) value -> . IDENTIFIER
+    (18) value -> . STRING
+    (19) value -> . NIL
+    (20) value -> . TRUE
+    (21) value -> . FALSE
+    (22) value -> . bool_neg value
+    (12) bool_neg -> . NOT
+
+    INT_LITERAL     shift and go to state 9
+    FLOAT_LITERAL   shift and go to state 10
+    IDENTIFIER      shift and go to state 25
+    STRING          shift and go to state 8
+    NIL             shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+    NOT             shift and go to state 17
+
+    value                          shift and go to state 26
+    bool_neg                       shift and go to state 14
+
+state 19
+
+    (6) bool_exp -> value bool_operator . bool_exp
+    (5) bool_exp -> . value
+    (6) bool_exp -> . value bool_operator bool_exp
+    (15) value -> . INT_LITERAL
+    (16) value -> . FLOAT_LITERAL
+    (17) value -> . IDENTIFIER
+    (18) value -> . STRING
+    (19) value -> . NIL
+    (20) value -> . TRUE
+    (21) value -> . FALSE
+    (22) value -> . bool_neg value
+    (12) bool_neg -> . NOT
+
+    INT_LITERAL     shift and go to state 9
+    FLOAT_LITERAL   shift and go to state 10
+    IDENTIFIER      shift and go to state 25
+    STRING          shift and go to state 8
+    NIL             shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+    NOT             shift and go to state 17
+
+    value                          shift and go to state 5
+    bool_exp                       shift and go to state 27
+    bool_neg                       shift and go to state 14
+
+state 20
+
+    (10) bool_operator -> AND .
+
+    INT_LITERAL     reduce using rule 10 (bool_operator -> AND .)
+    FLOAT_LITERAL   reduce using rule 10 (bool_operator -> AND .)
+    IDENTIFIER      reduce using rule 10 (bool_operator -> AND .)
+    STRING          reduce using rule 10 (bool_operator -> AND .)
+    NIL             reduce using rule 10 (bool_operator -> AND .)
+    TRUE            reduce using rule 10 (bool_operator -> AND .)
+    FALSE           reduce using rule 10 (bool_operator -> AND .)
+    NOT             reduce using rule 10 (bool_operator -> AND .)
+
+
+state 21
+
+    (11) bool_operator -> OR .
+
+    INT_LITERAL     reduce using rule 11 (bool_operator -> OR .)
+    FLOAT_LITERAL   reduce using rule 11 (bool_operator -> OR .)
+    IDENTIFIER      reduce using rule 11 (bool_operator -> OR .)
+    STRING          reduce using rule 11 (bool_operator -> OR .)
+    NIL             reduce using rule 11 (bool_operator -> OR .)
+    TRUE            reduce using rule 11 (bool_operator -> OR .)
+    FALSE           reduce using rule 11 (bool_operator -> OR .)
+    NOT             reduce using rule 11 (bool_operator -> OR .)
+
+
+state 22
+
+    (7) assign -> type_data IDENTIFIER . ASSIGN value
+
+    ASSIGN          shift and go to state 28
+
+
+state 23
+
+    (9) expression -> IDENTIFIER NIL_COALESCE . STRING
+
+    STRING          shift and go to state 29
+
+
+state 24
+
+    (22) value -> bool_neg value .
+
+    AND             reduce using rule 22 (value -> bool_neg value .)
+    OR              reduce using rule 22 (value -> bool_neg value .)
+    QUESTION        reduce using rule 22 (value -> bool_neg value .)
+    $end            reduce using rule 22 (value -> bool_neg value .)
+    COLON           reduce using rule 22 (value -> bool_neg value .)
+
+
+state 25
+
+    (17) value -> IDENTIFIER .
+
+    AND             reduce using rule 17 (value -> IDENTIFIER .)
+    OR              reduce using rule 17 (value -> IDENTIFIER .)
+    QUESTION        reduce using rule 17 (value -> IDENTIFIER .)
+    $end            reduce using rule 17 (value -> IDENTIFIER .)
+    COLON           reduce using rule 17 (value -> IDENTIFIER .)
+
+
+state 26
+
+    (8) expression -> bool_exp QUESTION value . COLON value
+
+    COLON           shift and go to state 30
+
+
+state 27
+
+    (6) bool_exp -> value bool_operator bool_exp .
+
+    QUESTION        reduce using rule 6 (bool_exp -> value bool_operator bool_exp .)
+    $end            reduce using rule 6 (bool_exp -> value bool_operator bool_exp .)
+
+
+state 28
+
+    (7) assign -> type_data IDENTIFIER ASSIGN . value
+    (15) value -> . INT_LITERAL
+    (16) value -> . FLOAT_LITERAL
+    (17) value -> . IDENTIFIER
+    (18) value -> . STRING
+    (19) value -> . NIL
+    (20) value -> . TRUE
+    (21) value -> . FALSE
+    (22) value -> . bool_neg value
+    (12) bool_neg -> . NOT
+
+    INT_LITERAL     shift and go to state 9
+    FLOAT_LITERAL   shift and go to state 10
+    IDENTIFIER      shift and go to state 25
+    STRING          shift and go to state 8
+    NIL             shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+    NOT             shift and go to state 17
+
+    value                          shift and go to state 31
+    bool_neg                       shift and go to state 14
+
+state 29
+
+    (9) expression -> IDENTIFIER NIL_COALESCE STRING .
+
+    $end            reduce using rule 9 (expression -> IDENTIFIER NIL_COALESCE STRING .)
+
+
+state 30
+
+    (8) expression -> bool_exp QUESTION value COLON . value
+    (15) value -> . INT_LITERAL
+    (16) value -> . FLOAT_LITERAL
+    (17) value -> . IDENTIFIER
+    (18) value -> . STRING
+    (19) value -> . NIL
+    (20) value -> . TRUE
+    (21) value -> . FALSE
+    (22) value -> . bool_neg value
+    (12) bool_neg -> . NOT
+
+    INT_LITERAL     shift and go to state 9
+    FLOAT_LITERAL   shift and go to state 10
+    IDENTIFIER      shift and go to state 25
+    STRING          shift and go to state 8
+    NIL             shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+    NOT             shift and go to state 17
+
+    value                          shift and go to state 32
+    bool_neg                       shift and go to state 14
+
+state 31
+
+    (7) assign -> type_data IDENTIFIER ASSIGN value .
+
+    $end            reduce using rule 7 (assign -> type_data IDENTIFIER ASSIGN value .)
+
+
+state 32
+
+    (8) expression -> bool_exp QUESTION value COLON value .
+
+    $end            reduce using rule 8 (expression -> bool_exp QUESTION value COLON value .)
+
