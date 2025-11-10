@@ -1,0 +1,3722 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    ARROW
+    ASSIGN
+    ASYNC
+    AWAIT
+    CATCH
+    CLOSED_RANGE
+    DEFER
+    DIDSET
+    DIVIDE
+    DIV_ASSIGN
+    DO
+    ELSE
+    ENUM
+    EQ
+    EXTENSION
+    FOR
+    GE
+    GT
+    GUARD
+    HALF_OPEN_RANGE
+    IF
+    IMPORT
+    IN
+    INTERNAL
+    LBRACKET
+    LE
+    LT
+    MINUS
+    MINUS_ASSIGN
+    MODULO
+    MOD_ASSIGN
+    NE
+    NIL
+    NIL_COALESCE
+    NOT
+    OR
+    PLUS
+    PLUS_ASSIGN
+    PRIVATE
+    PROTOCOL
+    PUBLIC
+    QUESTION
+    RBRACKET
+    SEMI_COLON
+    SET
+    SOME
+    STATIC
+    STRUCT
+    THROW
+    THROWS
+    TIMES
+    TIMES_ASSIGN
+    TRY
+    WHILE
+    WILLSET
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement_list statement
+Rule 3     statement_list -> statement
+Rule 4     statement -> function_call_statement
+Rule 5     statement -> class_declaration
+Rule 6     statement -> switch_statement
+Rule 7     statement -> variable_declaration
+Rule 8     statement -> expression
+Rule 9     statement -> return_statement
+Rule 10    statement -> NEWLINE
+Rule 11    function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN
+Rule 12    function_call_statement -> IDENTIFIER LPAREN RPAREN
+Rule 13    argument_list -> argument_list COMMA expression
+Rule 14    argument_list -> expression
+Rule 15    class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE
+Rule 16    class_body -> class_body class_member
+Rule 17    class_body -> class_member
+Rule 18    class_body -> empty
+Rule 19    class_member -> property_declaration
+Rule 20    class_member -> init_declaration
+Rule 21    class_member -> method_declaration
+Rule 22    class_member -> computed_property
+Rule 23    class_member -> NEWLINE
+Rule 24    property_declaration -> VAR IDENTIFIER COLON type_annotation
+Rule 25    property_declaration -> LET IDENTIFIER COLON type_annotation
+Rule 26    property_declaration -> VAR IDENTIFIER COLON tuple_type
+Rule 27    property_declaration -> LET IDENTIFIER COLON tuple_type
+Rule 28    computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+Rule 29    init_declaration -> INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
+Rule 30    init_declaration -> INIT LPAREN RPAREN LBRACE statement_list RBRACE
+Rule 31    method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
+Rule 32    method_declaration -> FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE
+Rule 33    expression -> SELF DOT IDENTIFIER
+Rule 34    tuple_type -> LPAREN tuple_type_elements RPAREN
+Rule 35    tuple_type_elements -> tuple_type_elements COMMA tuple_type_element
+Rule 36    tuple_type_elements -> tuple_type_element
+Rule 37    tuple_type_element -> IDENTIFIER COLON type_annotation
+Rule 38    tuple_type_element -> type_annotation
+Rule 39    expression -> LPAREN tuple_elements RPAREN
+Rule 40    tuple_elements -> tuple_elements COMMA tuple_element
+Rule 41    tuple_elements -> tuple_element
+Rule 42    tuple_element -> IDENTIFIER COLON expression
+Rule 43    tuple_element -> expression
+Rule 44    expression -> expression DOT INT_LITERAL
+Rule 45    expression -> expression DOT IDENTIFIER
+Rule 46    switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+Rule 47    switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+Rule 48    case_list -> case_list optional_newlines case_clause
+Rule 49    case_list -> optional_newlines case_clause
+Rule 50    case_clause -> CASE case_patterns COLON optional_newlines case_body
+Rule 51    case_body -> statement_list
+Rule 52    case_patterns -> case_patterns COMMA expression
+Rule 53    case_patterns -> expression
+Rule 54    default_case -> DEFAULT COLON optional_newlines case_body
+Rule 55    variable_declaration -> LET IDENTIFIER COLON type_annotation
+Rule 56    variable_declaration -> VAR IDENTIFIER COLON type_annotation
+Rule 57    variable_declaration -> LET IDENTIFIER COLON tuple_type
+Rule 58    variable_declaration -> VAR IDENTIFIER COLON tuple_type
+Rule 59    expression -> INT_LITERAL
+Rule 60    expression -> FLOAT_LITERAL
+Rule 61    expression -> STRING
+Rule 62    expression -> TRUE
+Rule 63    expression -> FALSE
+Rule 64    expression -> IDENTIFIER
+Rule 65    expression -> LPAREN expression RPAREN
+Rule 66    return_statement -> RETURN expression
+Rule 67    return_statement -> RETURN
+Rule 68    parameter_list -> parameter_list COMMA parameter
+Rule 69    parameter_list -> parameter
+Rule 70    parameter -> IDENTIFIER COLON type_annotation
+Rule 71    type_annotation -> TYPE_INT
+Rule 72    type_annotation -> TYPE_DOUBLE
+Rule 73    type_annotation -> TYPE_BOOL
+Rule 74    type_annotation -> TYPE_STRING
+Rule 75    type_annotation -> IDENTIFIER
+Rule 76    empty -> <empty>
+Rule 77    optional_newlines -> optional_newlines NEWLINE
+Rule 78    optional_newlines -> empty
+
+Terminals, with rules where they appear
+
+AND                  : 
+ARROW                : 
+ASSIGN               : 
+ASYNC                : 
+AWAIT                : 
+CASE                 : 50
+CATCH                : 
+CLASS                : 15
+CLOSED_RANGE         : 
+COLON                : 24 25 26 27 28 37 42 50 54 55 56 57 58 70
+COMMA                : 13 35 40 52 68
+DEFAULT              : 54
+DEFER                : 
+DIDSET               : 
+DIVIDE               : 
+DIV_ASSIGN           : 
+DO                   : 
+DOT                  : 33 44 45
+ELSE                 : 
+ENUM                 : 
+EQ                   : 
+EXTENSION            : 
+FALSE                : 63
+FLOAT_LITERAL        : 60
+FOR                  : 
+FUNC                 : 31 32
+GE                   : 
+GET                  : 28
+GT                   : 
+GUARD                : 
+HALF_OPEN_RANGE      : 
+IDENTIFIER           : 11 12 15 24 25 26 27 28 31 32 33 37 42 45 55 56 57 58 64 70 75
+IF                   : 
+IMPORT               : 
+IN                   : 
+INIT                 : 29 30
+INTERNAL             : 
+INT_LITERAL          : 44 59
+LBRACE               : 15 28 28 29 30 31 32 46 47
+LBRACKET             : 
+LE                   : 
+LET                  : 25 27 55 57
+LPAREN               : 11 12 29 30 31 32 34 39 65
+LT                   : 
+MINUS                : 
+MINUS_ASSIGN         : 
+MODULO               : 
+MOD_ASSIGN           : 
+NE                   : 
+NEWLINE              : 10 23 77
+NIL                  : 
+NIL_COALESCE         : 
+NOT                  : 
+OR                   : 
+PLUS                 : 
+PLUS_ASSIGN          : 
+PRIVATE              : 
+PROTOCOL             : 
+PUBLIC               : 
+QUESTION             : 
+RBRACE               : 15 28 28 29 30 31 32 46 47
+RBRACKET             : 
+RETURN               : 66 67
+RPAREN               : 11 12 29 30 31 32 34 39 65
+SELF                 : 33
+SEMI_COLON           : 
+SET                  : 
+SOME                 : 
+STATIC               : 
+STRING               : 61
+STRUCT               : 
+SWITCH               : 46 47
+THROW                : 
+THROWS               : 
+TIMES                : 
+TIMES_ASSIGN         : 
+TRUE                 : 62
+TRY                  : 
+TYPE_BOOL            : 73
+TYPE_DOUBLE          : 72
+TYPE_INT             : 71
+TYPE_STRING          : 74
+VAR                  : 24 26 28 56 58
+WHILE                : 
+WILLSET              : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+argument_list        : 11 13
+case_body            : 50 54
+case_clause          : 48 49
+case_list            : 46 47 48
+case_patterns        : 50 52
+class_body           : 15 16
+class_declaration    : 5
+class_member         : 16 17
+computed_property    : 22
+default_case         : 47
+empty                : 18 78
+expression           : 8 13 14 42 43 44 45 46 47 52 53 65 66
+function_call_statement : 4
+init_declaration     : 20
+method_declaration   : 21
+optional_newlines    : 28 28 28 28 46 46 47 47 48 49 50 54 77
+parameter            : 68 69
+parameter_list       : 29 31 68
+program              : 0
+property_declaration : 19
+return_statement     : 9
+statement            : 2 3
+statement_list       : 1 2 28 29 30 31 32 51
+switch_statement     : 6
+tuple_element        : 40 41
+tuple_elements       : 39 40
+tuple_type           : 26 27 57 58
+tuple_type_element   : 35 36
+tuple_type_elements  : 34 35
+type_annotation      : 24 25 28 37 38 55 56 70
+variable_declaration : 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    statement                      shift and go to state 24
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 3
+
+    (3) statement_list -> statement .
+
+    NEWLINE         reduce using rule 3 (statement_list -> statement .)
+    IDENTIFIER      reduce using rule 3 (statement_list -> statement .)
+    CLASS           reduce using rule 3 (statement_list -> statement .)
+    SWITCH          reduce using rule 3 (statement_list -> statement .)
+    LET             reduce using rule 3 (statement_list -> statement .)
+    VAR             reduce using rule 3 (statement_list -> statement .)
+    SELF            reduce using rule 3 (statement_list -> statement .)
+    LPAREN          reduce using rule 3 (statement_list -> statement .)
+    INT_LITERAL     reduce using rule 3 (statement_list -> statement .)
+    FLOAT_LITERAL   reduce using rule 3 (statement_list -> statement .)
+    STRING          reduce using rule 3 (statement_list -> statement .)
+    TRUE            reduce using rule 3 (statement_list -> statement .)
+    FALSE           reduce using rule 3 (statement_list -> statement .)
+    RETURN          reduce using rule 3 (statement_list -> statement .)
+    $end            reduce using rule 3 (statement_list -> statement .)
+    RBRACE          reduce using rule 3 (statement_list -> statement .)
+    DEFAULT         reduce using rule 3 (statement_list -> statement .)
+    CASE            reduce using rule 3 (statement_list -> statement .)
+
+
+state 4
+
+    (4) statement -> function_call_statement .
+
+    NEWLINE         reduce using rule 4 (statement -> function_call_statement .)
+    IDENTIFIER      reduce using rule 4 (statement -> function_call_statement .)
+    CLASS           reduce using rule 4 (statement -> function_call_statement .)
+    SWITCH          reduce using rule 4 (statement -> function_call_statement .)
+    LET             reduce using rule 4 (statement -> function_call_statement .)
+    VAR             reduce using rule 4 (statement -> function_call_statement .)
+    SELF            reduce using rule 4 (statement -> function_call_statement .)
+    LPAREN          reduce using rule 4 (statement -> function_call_statement .)
+    INT_LITERAL     reduce using rule 4 (statement -> function_call_statement .)
+    FLOAT_LITERAL   reduce using rule 4 (statement -> function_call_statement .)
+    STRING          reduce using rule 4 (statement -> function_call_statement .)
+    TRUE            reduce using rule 4 (statement -> function_call_statement .)
+    FALSE           reduce using rule 4 (statement -> function_call_statement .)
+    RETURN          reduce using rule 4 (statement -> function_call_statement .)
+    $end            reduce using rule 4 (statement -> function_call_statement .)
+    RBRACE          reduce using rule 4 (statement -> function_call_statement .)
+    DEFAULT         reduce using rule 4 (statement -> function_call_statement .)
+    CASE            reduce using rule 4 (statement -> function_call_statement .)
+
+
+state 5
+
+    (5) statement -> class_declaration .
+
+    NEWLINE         reduce using rule 5 (statement -> class_declaration .)
+    IDENTIFIER      reduce using rule 5 (statement -> class_declaration .)
+    CLASS           reduce using rule 5 (statement -> class_declaration .)
+    SWITCH          reduce using rule 5 (statement -> class_declaration .)
+    LET             reduce using rule 5 (statement -> class_declaration .)
+    VAR             reduce using rule 5 (statement -> class_declaration .)
+    SELF            reduce using rule 5 (statement -> class_declaration .)
+    LPAREN          reduce using rule 5 (statement -> class_declaration .)
+    INT_LITERAL     reduce using rule 5 (statement -> class_declaration .)
+    FLOAT_LITERAL   reduce using rule 5 (statement -> class_declaration .)
+    STRING          reduce using rule 5 (statement -> class_declaration .)
+    TRUE            reduce using rule 5 (statement -> class_declaration .)
+    FALSE           reduce using rule 5 (statement -> class_declaration .)
+    RETURN          reduce using rule 5 (statement -> class_declaration .)
+    $end            reduce using rule 5 (statement -> class_declaration .)
+    RBRACE          reduce using rule 5 (statement -> class_declaration .)
+    DEFAULT         reduce using rule 5 (statement -> class_declaration .)
+    CASE            reduce using rule 5 (statement -> class_declaration .)
+
+
+state 6
+
+    (6) statement -> switch_statement .
+
+    NEWLINE         reduce using rule 6 (statement -> switch_statement .)
+    IDENTIFIER      reduce using rule 6 (statement -> switch_statement .)
+    CLASS           reduce using rule 6 (statement -> switch_statement .)
+    SWITCH          reduce using rule 6 (statement -> switch_statement .)
+    LET             reduce using rule 6 (statement -> switch_statement .)
+    VAR             reduce using rule 6 (statement -> switch_statement .)
+    SELF            reduce using rule 6 (statement -> switch_statement .)
+    LPAREN          reduce using rule 6 (statement -> switch_statement .)
+    INT_LITERAL     reduce using rule 6 (statement -> switch_statement .)
+    FLOAT_LITERAL   reduce using rule 6 (statement -> switch_statement .)
+    STRING          reduce using rule 6 (statement -> switch_statement .)
+    TRUE            reduce using rule 6 (statement -> switch_statement .)
+    FALSE           reduce using rule 6 (statement -> switch_statement .)
+    RETURN          reduce using rule 6 (statement -> switch_statement .)
+    $end            reduce using rule 6 (statement -> switch_statement .)
+    RBRACE          reduce using rule 6 (statement -> switch_statement .)
+    DEFAULT         reduce using rule 6 (statement -> switch_statement .)
+    CASE            reduce using rule 6 (statement -> switch_statement .)
+
+
+state 7
+
+    (7) statement -> variable_declaration .
+
+    NEWLINE         reduce using rule 7 (statement -> variable_declaration .)
+    IDENTIFIER      reduce using rule 7 (statement -> variable_declaration .)
+    CLASS           reduce using rule 7 (statement -> variable_declaration .)
+    SWITCH          reduce using rule 7 (statement -> variable_declaration .)
+    LET             reduce using rule 7 (statement -> variable_declaration .)
+    VAR             reduce using rule 7 (statement -> variable_declaration .)
+    SELF            reduce using rule 7 (statement -> variable_declaration .)
+    LPAREN          reduce using rule 7 (statement -> variable_declaration .)
+    INT_LITERAL     reduce using rule 7 (statement -> variable_declaration .)
+    FLOAT_LITERAL   reduce using rule 7 (statement -> variable_declaration .)
+    STRING          reduce using rule 7 (statement -> variable_declaration .)
+    TRUE            reduce using rule 7 (statement -> variable_declaration .)
+    FALSE           reduce using rule 7 (statement -> variable_declaration .)
+    RETURN          reduce using rule 7 (statement -> variable_declaration .)
+    $end            reduce using rule 7 (statement -> variable_declaration .)
+    RBRACE          reduce using rule 7 (statement -> variable_declaration .)
+    DEFAULT         reduce using rule 7 (statement -> variable_declaration .)
+    CASE            reduce using rule 7 (statement -> variable_declaration .)
+
+
+state 8
+
+    (8) statement -> expression .
+    (44) expression -> expression . DOT INT_LITERAL
+    (45) expression -> expression . DOT IDENTIFIER
+
+    NEWLINE         reduce using rule 8 (statement -> expression .)
+    IDENTIFIER      reduce using rule 8 (statement -> expression .)
+    CLASS           reduce using rule 8 (statement -> expression .)
+    SWITCH          reduce using rule 8 (statement -> expression .)
+    LET             reduce using rule 8 (statement -> expression .)
+    VAR             reduce using rule 8 (statement -> expression .)
+    SELF            reduce using rule 8 (statement -> expression .)
+    LPAREN          reduce using rule 8 (statement -> expression .)
+    INT_LITERAL     reduce using rule 8 (statement -> expression .)
+    FLOAT_LITERAL   reduce using rule 8 (statement -> expression .)
+    STRING          reduce using rule 8 (statement -> expression .)
+    TRUE            reduce using rule 8 (statement -> expression .)
+    FALSE           reduce using rule 8 (statement -> expression .)
+    RETURN          reduce using rule 8 (statement -> expression .)
+    $end            reduce using rule 8 (statement -> expression .)
+    RBRACE          reduce using rule 8 (statement -> expression .)
+    DEFAULT         reduce using rule 8 (statement -> expression .)
+    CASE            reduce using rule 8 (statement -> expression .)
+    DOT             shift and go to state 25
+
+
+state 9
+
+    (9) statement -> return_statement .
+
+    NEWLINE         reduce using rule 9 (statement -> return_statement .)
+    IDENTIFIER      reduce using rule 9 (statement -> return_statement .)
+    CLASS           reduce using rule 9 (statement -> return_statement .)
+    SWITCH          reduce using rule 9 (statement -> return_statement .)
+    LET             reduce using rule 9 (statement -> return_statement .)
+    VAR             reduce using rule 9 (statement -> return_statement .)
+    SELF            reduce using rule 9 (statement -> return_statement .)
+    LPAREN          reduce using rule 9 (statement -> return_statement .)
+    INT_LITERAL     reduce using rule 9 (statement -> return_statement .)
+    FLOAT_LITERAL   reduce using rule 9 (statement -> return_statement .)
+    STRING          reduce using rule 9 (statement -> return_statement .)
+    TRUE            reduce using rule 9 (statement -> return_statement .)
+    FALSE           reduce using rule 9 (statement -> return_statement .)
+    RETURN          reduce using rule 9 (statement -> return_statement .)
+    $end            reduce using rule 9 (statement -> return_statement .)
+    RBRACE          reduce using rule 9 (statement -> return_statement .)
+    DEFAULT         reduce using rule 9 (statement -> return_statement .)
+    CASE            reduce using rule 9 (statement -> return_statement .)
+
+
+state 10
+
+    (10) statement -> NEWLINE .
+
+    NEWLINE         reduce using rule 10 (statement -> NEWLINE .)
+    IDENTIFIER      reduce using rule 10 (statement -> NEWLINE .)
+    CLASS           reduce using rule 10 (statement -> NEWLINE .)
+    SWITCH          reduce using rule 10 (statement -> NEWLINE .)
+    LET             reduce using rule 10 (statement -> NEWLINE .)
+    VAR             reduce using rule 10 (statement -> NEWLINE .)
+    SELF            reduce using rule 10 (statement -> NEWLINE .)
+    LPAREN          reduce using rule 10 (statement -> NEWLINE .)
+    INT_LITERAL     reduce using rule 10 (statement -> NEWLINE .)
+    FLOAT_LITERAL   reduce using rule 10 (statement -> NEWLINE .)
+    STRING          reduce using rule 10 (statement -> NEWLINE .)
+    TRUE            reduce using rule 10 (statement -> NEWLINE .)
+    FALSE           reduce using rule 10 (statement -> NEWLINE .)
+    RETURN          reduce using rule 10 (statement -> NEWLINE .)
+    $end            reduce using rule 10 (statement -> NEWLINE .)
+    RBRACE          reduce using rule 10 (statement -> NEWLINE .)
+    DEFAULT         reduce using rule 10 (statement -> NEWLINE .)
+    CASE            reduce using rule 10 (statement -> NEWLINE .)
+
+
+state 11
+
+    (11) function_call_statement -> IDENTIFIER . LPAREN argument_list RPAREN
+    (12) function_call_statement -> IDENTIFIER . LPAREN RPAREN
+    (64) expression -> IDENTIFIER .
+
+  ! shift/reduce conflict for LPAREN resolved as shift
+    LPAREN          shift and go to state 26
+    DOT             reduce using rule 64 (expression -> IDENTIFIER .)
+    NEWLINE         reduce using rule 64 (expression -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 64 (expression -> IDENTIFIER .)
+    CLASS           reduce using rule 64 (expression -> IDENTIFIER .)
+    SWITCH          reduce using rule 64 (expression -> IDENTIFIER .)
+    LET             reduce using rule 64 (expression -> IDENTIFIER .)
+    VAR             reduce using rule 64 (expression -> IDENTIFIER .)
+    SELF            reduce using rule 64 (expression -> IDENTIFIER .)
+    INT_LITERAL     reduce using rule 64 (expression -> IDENTIFIER .)
+    FLOAT_LITERAL   reduce using rule 64 (expression -> IDENTIFIER .)
+    STRING          reduce using rule 64 (expression -> IDENTIFIER .)
+    TRUE            reduce using rule 64 (expression -> IDENTIFIER .)
+    FALSE           reduce using rule 64 (expression -> IDENTIFIER .)
+    RETURN          reduce using rule 64 (expression -> IDENTIFIER .)
+    $end            reduce using rule 64 (expression -> IDENTIFIER .)
+    RBRACE          reduce using rule 64 (expression -> IDENTIFIER .)
+    DEFAULT         reduce using rule 64 (expression -> IDENTIFIER .)
+    CASE            reduce using rule 64 (expression -> IDENTIFIER .)
+
+  ! LPAREN          [ reduce using rule 64 (expression -> IDENTIFIER .) ]
+
+
+state 12
+
+    (39) expression -> LPAREN . tuple_elements RPAREN
+    (65) expression -> LPAREN . expression RPAREN
+    (40) tuple_elements -> . tuple_elements COMMA tuple_element
+    (41) tuple_elements -> . tuple_element
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (42) tuple_element -> . IDENTIFIER COLON expression
+    (43) tuple_element -> . expression
+
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    IDENTIFIER      shift and go to state 30
+
+    tuple_elements                 shift and go to state 27
+    expression                     shift and go to state 28
+    tuple_element                  shift and go to state 29
+
+state 13
+
+    (15) class_declaration -> CLASS . IDENTIFIER LBRACE class_body RBRACE
+
+    IDENTIFIER      shift and go to state 31
+
+
+state 14
+
+    (46) switch_statement -> SWITCH . expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> SWITCH . expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    IDENTIFIER      shift and go to state 33
+
+    expression                     shift and go to state 32
+
+state 15
+
+    (55) variable_declaration -> LET . IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> LET . IDENTIFIER COLON tuple_type
+
+    IDENTIFIER      shift and go to state 34
+
+
+state 16
+
+    (56) variable_declaration -> VAR . IDENTIFIER COLON type_annotation
+    (58) variable_declaration -> VAR . IDENTIFIER COLON tuple_type
+
+    IDENTIFIER      shift and go to state 35
+
+
+state 17
+
+    (33) expression -> SELF . DOT IDENTIFIER
+
+    DOT             shift and go to state 36
+
+
+state 18
+
+    (59) expression -> INT_LITERAL .
+
+    DOT             reduce using rule 59 (expression -> INT_LITERAL .)
+    NEWLINE         reduce using rule 59 (expression -> INT_LITERAL .)
+    IDENTIFIER      reduce using rule 59 (expression -> INT_LITERAL .)
+    CLASS           reduce using rule 59 (expression -> INT_LITERAL .)
+    SWITCH          reduce using rule 59 (expression -> INT_LITERAL .)
+    LET             reduce using rule 59 (expression -> INT_LITERAL .)
+    VAR             reduce using rule 59 (expression -> INT_LITERAL .)
+    SELF            reduce using rule 59 (expression -> INT_LITERAL .)
+    LPAREN          reduce using rule 59 (expression -> INT_LITERAL .)
+    INT_LITERAL     reduce using rule 59 (expression -> INT_LITERAL .)
+    FLOAT_LITERAL   reduce using rule 59 (expression -> INT_LITERAL .)
+    STRING          reduce using rule 59 (expression -> INT_LITERAL .)
+    TRUE            reduce using rule 59 (expression -> INT_LITERAL .)
+    FALSE           reduce using rule 59 (expression -> INT_LITERAL .)
+    RETURN          reduce using rule 59 (expression -> INT_LITERAL .)
+    $end            reduce using rule 59 (expression -> INT_LITERAL .)
+    RPAREN          reduce using rule 59 (expression -> INT_LITERAL .)
+    COMMA           reduce using rule 59 (expression -> INT_LITERAL .)
+    LBRACE          reduce using rule 59 (expression -> INT_LITERAL .)
+    RBRACE          reduce using rule 59 (expression -> INT_LITERAL .)
+    DEFAULT         reduce using rule 59 (expression -> INT_LITERAL .)
+    CASE            reduce using rule 59 (expression -> INT_LITERAL .)
+    COLON           reduce using rule 59 (expression -> INT_LITERAL .)
+
+
+state 19
+
+    (60) expression -> FLOAT_LITERAL .
+
+    DOT             reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    NEWLINE         reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    IDENTIFIER      reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    CLASS           reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    SWITCH          reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    LET             reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    VAR             reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    SELF            reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    LPAREN          reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    INT_LITERAL     reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    FLOAT_LITERAL   reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    STRING          reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    TRUE            reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    FALSE           reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    RETURN          reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    $end            reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    RPAREN          reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    COMMA           reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    LBRACE          reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    RBRACE          reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    DEFAULT         reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    CASE            reduce using rule 60 (expression -> FLOAT_LITERAL .)
+    COLON           reduce using rule 60 (expression -> FLOAT_LITERAL .)
+
+
+state 20
+
+    (61) expression -> STRING .
+
+    DOT             reduce using rule 61 (expression -> STRING .)
+    NEWLINE         reduce using rule 61 (expression -> STRING .)
+    IDENTIFIER      reduce using rule 61 (expression -> STRING .)
+    CLASS           reduce using rule 61 (expression -> STRING .)
+    SWITCH          reduce using rule 61 (expression -> STRING .)
+    LET             reduce using rule 61 (expression -> STRING .)
+    VAR             reduce using rule 61 (expression -> STRING .)
+    SELF            reduce using rule 61 (expression -> STRING .)
+    LPAREN          reduce using rule 61 (expression -> STRING .)
+    INT_LITERAL     reduce using rule 61 (expression -> STRING .)
+    FLOAT_LITERAL   reduce using rule 61 (expression -> STRING .)
+    STRING          reduce using rule 61 (expression -> STRING .)
+    TRUE            reduce using rule 61 (expression -> STRING .)
+    FALSE           reduce using rule 61 (expression -> STRING .)
+    RETURN          reduce using rule 61 (expression -> STRING .)
+    $end            reduce using rule 61 (expression -> STRING .)
+    RPAREN          reduce using rule 61 (expression -> STRING .)
+    COMMA           reduce using rule 61 (expression -> STRING .)
+    LBRACE          reduce using rule 61 (expression -> STRING .)
+    RBRACE          reduce using rule 61 (expression -> STRING .)
+    DEFAULT         reduce using rule 61 (expression -> STRING .)
+    CASE            reduce using rule 61 (expression -> STRING .)
+    COLON           reduce using rule 61 (expression -> STRING .)
+
+
+state 21
+
+    (62) expression -> TRUE .
+
+    DOT             reduce using rule 62 (expression -> TRUE .)
+    NEWLINE         reduce using rule 62 (expression -> TRUE .)
+    IDENTIFIER      reduce using rule 62 (expression -> TRUE .)
+    CLASS           reduce using rule 62 (expression -> TRUE .)
+    SWITCH          reduce using rule 62 (expression -> TRUE .)
+    LET             reduce using rule 62 (expression -> TRUE .)
+    VAR             reduce using rule 62 (expression -> TRUE .)
+    SELF            reduce using rule 62 (expression -> TRUE .)
+    LPAREN          reduce using rule 62 (expression -> TRUE .)
+    INT_LITERAL     reduce using rule 62 (expression -> TRUE .)
+    FLOAT_LITERAL   reduce using rule 62 (expression -> TRUE .)
+    STRING          reduce using rule 62 (expression -> TRUE .)
+    TRUE            reduce using rule 62 (expression -> TRUE .)
+    FALSE           reduce using rule 62 (expression -> TRUE .)
+    RETURN          reduce using rule 62 (expression -> TRUE .)
+    $end            reduce using rule 62 (expression -> TRUE .)
+    RPAREN          reduce using rule 62 (expression -> TRUE .)
+    COMMA           reduce using rule 62 (expression -> TRUE .)
+    LBRACE          reduce using rule 62 (expression -> TRUE .)
+    RBRACE          reduce using rule 62 (expression -> TRUE .)
+    DEFAULT         reduce using rule 62 (expression -> TRUE .)
+    CASE            reduce using rule 62 (expression -> TRUE .)
+    COLON           reduce using rule 62 (expression -> TRUE .)
+
+
+state 22
+
+    (63) expression -> FALSE .
+
+    DOT             reduce using rule 63 (expression -> FALSE .)
+    NEWLINE         reduce using rule 63 (expression -> FALSE .)
+    IDENTIFIER      reduce using rule 63 (expression -> FALSE .)
+    CLASS           reduce using rule 63 (expression -> FALSE .)
+    SWITCH          reduce using rule 63 (expression -> FALSE .)
+    LET             reduce using rule 63 (expression -> FALSE .)
+    VAR             reduce using rule 63 (expression -> FALSE .)
+    SELF            reduce using rule 63 (expression -> FALSE .)
+    LPAREN          reduce using rule 63 (expression -> FALSE .)
+    INT_LITERAL     reduce using rule 63 (expression -> FALSE .)
+    FLOAT_LITERAL   reduce using rule 63 (expression -> FALSE .)
+    STRING          reduce using rule 63 (expression -> FALSE .)
+    TRUE            reduce using rule 63 (expression -> FALSE .)
+    FALSE           reduce using rule 63 (expression -> FALSE .)
+    RETURN          reduce using rule 63 (expression -> FALSE .)
+    $end            reduce using rule 63 (expression -> FALSE .)
+    RPAREN          reduce using rule 63 (expression -> FALSE .)
+    COMMA           reduce using rule 63 (expression -> FALSE .)
+    LBRACE          reduce using rule 63 (expression -> FALSE .)
+    RBRACE          reduce using rule 63 (expression -> FALSE .)
+    DEFAULT         reduce using rule 63 (expression -> FALSE .)
+    CASE            reduce using rule 63 (expression -> FALSE .)
+    COLON           reduce using rule 63 (expression -> FALSE .)
+
+
+state 23
+
+    (66) return_statement -> RETURN . expression
+    (67) return_statement -> RETURN .
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+
+  ! shift/reduce conflict for SELF resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for INT_LITERAL resolved as shift
+  ! shift/reduce conflict for FLOAT_LITERAL resolved as shift
+  ! shift/reduce conflict for STRING resolved as shift
+  ! shift/reduce conflict for TRUE resolved as shift
+  ! shift/reduce conflict for FALSE resolved as shift
+  ! shift/reduce conflict for IDENTIFIER resolved as shift
+    NEWLINE         reduce using rule 67 (return_statement -> RETURN .)
+    CLASS           reduce using rule 67 (return_statement -> RETURN .)
+    SWITCH          reduce using rule 67 (return_statement -> RETURN .)
+    LET             reduce using rule 67 (return_statement -> RETURN .)
+    VAR             reduce using rule 67 (return_statement -> RETURN .)
+    RETURN          reduce using rule 67 (return_statement -> RETURN .)
+    $end            reduce using rule 67 (return_statement -> RETURN .)
+    RBRACE          reduce using rule 67 (return_statement -> RETURN .)
+    DEFAULT         reduce using rule 67 (return_statement -> RETURN .)
+    CASE            reduce using rule 67 (return_statement -> RETURN .)
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    IDENTIFIER      shift and go to state 33
+
+  ! IDENTIFIER      [ reduce using rule 67 (return_statement -> RETURN .) ]
+  ! SELF            [ reduce using rule 67 (return_statement -> RETURN .) ]
+  ! LPAREN          [ reduce using rule 67 (return_statement -> RETURN .) ]
+  ! INT_LITERAL     [ reduce using rule 67 (return_statement -> RETURN .) ]
+  ! FLOAT_LITERAL   [ reduce using rule 67 (return_statement -> RETURN .) ]
+  ! STRING          [ reduce using rule 67 (return_statement -> RETURN .) ]
+  ! TRUE            [ reduce using rule 67 (return_statement -> RETURN .) ]
+  ! FALSE           [ reduce using rule 67 (return_statement -> RETURN .) ]
+
+    expression                     shift and go to state 37
+
+state 24
+
+    (2) statement_list -> statement_list statement .
+
+    NEWLINE         reduce using rule 2 (statement_list -> statement_list statement .)
+    IDENTIFIER      reduce using rule 2 (statement_list -> statement_list statement .)
+    CLASS           reduce using rule 2 (statement_list -> statement_list statement .)
+    SWITCH          reduce using rule 2 (statement_list -> statement_list statement .)
+    LET             reduce using rule 2 (statement_list -> statement_list statement .)
+    VAR             reduce using rule 2 (statement_list -> statement_list statement .)
+    SELF            reduce using rule 2 (statement_list -> statement_list statement .)
+    LPAREN          reduce using rule 2 (statement_list -> statement_list statement .)
+    INT_LITERAL     reduce using rule 2 (statement_list -> statement_list statement .)
+    FLOAT_LITERAL   reduce using rule 2 (statement_list -> statement_list statement .)
+    STRING          reduce using rule 2 (statement_list -> statement_list statement .)
+    TRUE            reduce using rule 2 (statement_list -> statement_list statement .)
+    FALSE           reduce using rule 2 (statement_list -> statement_list statement .)
+    RETURN          reduce using rule 2 (statement_list -> statement_list statement .)
+    $end            reduce using rule 2 (statement_list -> statement_list statement .)
+    RBRACE          reduce using rule 2 (statement_list -> statement_list statement .)
+    DEFAULT         reduce using rule 2 (statement_list -> statement_list statement .)
+    CASE            reduce using rule 2 (statement_list -> statement_list statement .)
+
+
+state 25
+
+    (44) expression -> expression DOT . INT_LITERAL
+    (45) expression -> expression DOT . IDENTIFIER
+
+    INT_LITERAL     shift and go to state 38
+    IDENTIFIER      shift and go to state 39
+
+
+state 26
+
+    (11) function_call_statement -> IDENTIFIER LPAREN . argument_list RPAREN
+    (12) function_call_statement -> IDENTIFIER LPAREN . RPAREN
+    (13) argument_list -> . argument_list COMMA expression
+    (14) argument_list -> . expression
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+
+    RPAREN          shift and go to state 41
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    IDENTIFIER      shift and go to state 33
+
+    argument_list                  shift and go to state 40
+    expression                     shift and go to state 42
+
+state 27
+
+    (39) expression -> LPAREN tuple_elements . RPAREN
+    (40) tuple_elements -> tuple_elements . COMMA tuple_element
+
+    RPAREN          shift and go to state 43
+    COMMA           shift and go to state 44
+
+
+state 28
+
+    (65) expression -> LPAREN expression . RPAREN
+    (44) expression -> expression . DOT INT_LITERAL
+    (45) expression -> expression . DOT IDENTIFIER
+    (43) tuple_element -> expression .
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 45
+    DOT             shift and go to state 25
+    COMMA           reduce using rule 43 (tuple_element -> expression .)
+
+  ! RPAREN          [ reduce using rule 43 (tuple_element -> expression .) ]
+
+
+state 29
+
+    (41) tuple_elements -> tuple_element .
+
+    RPAREN          reduce using rule 41 (tuple_elements -> tuple_element .)
+    COMMA           reduce using rule 41 (tuple_elements -> tuple_element .)
+
+
+state 30
+
+    (64) expression -> IDENTIFIER .
+    (42) tuple_element -> IDENTIFIER . COLON expression
+
+    RPAREN          reduce using rule 64 (expression -> IDENTIFIER .)
+    DOT             reduce using rule 64 (expression -> IDENTIFIER .)
+    COMMA           reduce using rule 64 (expression -> IDENTIFIER .)
+    COLON           shift and go to state 46
+
+
+state 31
+
+    (15) class_declaration -> CLASS IDENTIFIER . LBRACE class_body RBRACE
+
+    LBRACE          shift and go to state 47
+
+
+state 32
+
+    (46) switch_statement -> SWITCH expression . LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> SWITCH expression . LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (44) expression -> expression . DOT INT_LITERAL
+    (45) expression -> expression . DOT IDENTIFIER
+
+    LBRACE          shift and go to state 48
+    DOT             shift and go to state 25
+
+
+state 33
+
+    (64) expression -> IDENTIFIER .
+
+    LBRACE          reduce using rule 64 (expression -> IDENTIFIER .)
+    DOT             reduce using rule 64 (expression -> IDENTIFIER .)
+    NEWLINE         reduce using rule 64 (expression -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 64 (expression -> IDENTIFIER .)
+    CLASS           reduce using rule 64 (expression -> IDENTIFIER .)
+    SWITCH          reduce using rule 64 (expression -> IDENTIFIER .)
+    LET             reduce using rule 64 (expression -> IDENTIFIER .)
+    VAR             reduce using rule 64 (expression -> IDENTIFIER .)
+    SELF            reduce using rule 64 (expression -> IDENTIFIER .)
+    LPAREN          reduce using rule 64 (expression -> IDENTIFIER .)
+    INT_LITERAL     reduce using rule 64 (expression -> IDENTIFIER .)
+    FLOAT_LITERAL   reduce using rule 64 (expression -> IDENTIFIER .)
+    STRING          reduce using rule 64 (expression -> IDENTIFIER .)
+    TRUE            reduce using rule 64 (expression -> IDENTIFIER .)
+    FALSE           reduce using rule 64 (expression -> IDENTIFIER .)
+    RETURN          reduce using rule 64 (expression -> IDENTIFIER .)
+    $end            reduce using rule 64 (expression -> IDENTIFIER .)
+    RBRACE          reduce using rule 64 (expression -> IDENTIFIER .)
+    DEFAULT         reduce using rule 64 (expression -> IDENTIFIER .)
+    CASE            reduce using rule 64 (expression -> IDENTIFIER .)
+    RPAREN          reduce using rule 64 (expression -> IDENTIFIER .)
+    COMMA           reduce using rule 64 (expression -> IDENTIFIER .)
+    COLON           reduce using rule 64 (expression -> IDENTIFIER .)
+
+
+state 34
+
+    (55) variable_declaration -> LET IDENTIFIER . COLON type_annotation
+    (57) variable_declaration -> LET IDENTIFIER . COLON tuple_type
+
+    COLON           shift and go to state 49
+
+
+state 35
+
+    (56) variable_declaration -> VAR IDENTIFIER . COLON type_annotation
+    (58) variable_declaration -> VAR IDENTIFIER . COLON tuple_type
+
+    COLON           shift and go to state 50
+
+
+state 36
+
+    (33) expression -> SELF DOT . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 51
+
+
+state 37
+
+    (66) return_statement -> RETURN expression .
+    (44) expression -> expression . DOT INT_LITERAL
+    (45) expression -> expression . DOT IDENTIFIER
+
+    NEWLINE         reduce using rule 66 (return_statement -> RETURN expression .)
+    IDENTIFIER      reduce using rule 66 (return_statement -> RETURN expression .)
+    CLASS           reduce using rule 66 (return_statement -> RETURN expression .)
+    SWITCH          reduce using rule 66 (return_statement -> RETURN expression .)
+    LET             reduce using rule 66 (return_statement -> RETURN expression .)
+    VAR             reduce using rule 66 (return_statement -> RETURN expression .)
+    SELF            reduce using rule 66 (return_statement -> RETURN expression .)
+    LPAREN          reduce using rule 66 (return_statement -> RETURN expression .)
+    INT_LITERAL     reduce using rule 66 (return_statement -> RETURN expression .)
+    FLOAT_LITERAL   reduce using rule 66 (return_statement -> RETURN expression .)
+    STRING          reduce using rule 66 (return_statement -> RETURN expression .)
+    TRUE            reduce using rule 66 (return_statement -> RETURN expression .)
+    FALSE           reduce using rule 66 (return_statement -> RETURN expression .)
+    RETURN          reduce using rule 66 (return_statement -> RETURN expression .)
+    $end            reduce using rule 66 (return_statement -> RETURN expression .)
+    RBRACE          reduce using rule 66 (return_statement -> RETURN expression .)
+    DEFAULT         reduce using rule 66 (return_statement -> RETURN expression .)
+    CASE            reduce using rule 66 (return_statement -> RETURN expression .)
+    DOT             shift and go to state 25
+
+
+state 38
+
+    (44) expression -> expression DOT INT_LITERAL .
+
+    DOT             reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    NEWLINE         reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    IDENTIFIER      reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    CLASS           reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    SWITCH          reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    LET             reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    VAR             reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    SELF            reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    LPAREN          reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    INT_LITERAL     reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    FLOAT_LITERAL   reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    STRING          reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    TRUE            reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    FALSE           reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    RETURN          reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    $end            reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    RPAREN          reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    COMMA           reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    LBRACE          reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    RBRACE          reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    DEFAULT         reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    CASE            reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+    COLON           reduce using rule 44 (expression -> expression DOT INT_LITERAL .)
+
+
+state 39
+
+    (45) expression -> expression DOT IDENTIFIER .
+
+    DOT             reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    NEWLINE         reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    IDENTIFIER      reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    CLASS           reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    SWITCH          reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    LET             reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    VAR             reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    SELF            reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    LPAREN          reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    INT_LITERAL     reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    FLOAT_LITERAL   reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    STRING          reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    TRUE            reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    FALSE           reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    RETURN          reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    $end            reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    RPAREN          reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    COMMA           reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    LBRACE          reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    RBRACE          reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    DEFAULT         reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    CASE            reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+    COLON           reduce using rule 45 (expression -> expression DOT IDENTIFIER .)
+
+
+state 40
+
+    (11) function_call_statement -> IDENTIFIER LPAREN argument_list . RPAREN
+    (13) argument_list -> argument_list . COMMA expression
+
+    RPAREN          shift and go to state 52
+    COMMA           shift and go to state 53
+
+
+state 41
+
+    (12) function_call_statement -> IDENTIFIER LPAREN RPAREN .
+
+    NEWLINE         reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    IDENTIFIER      reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    CLASS           reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    SWITCH          reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    LET             reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    VAR             reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    SELF            reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    LPAREN          reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    INT_LITERAL     reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    FLOAT_LITERAL   reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    STRING          reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    TRUE            reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    FALSE           reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    RETURN          reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    $end            reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    RBRACE          reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    DEFAULT         reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+    CASE            reduce using rule 12 (function_call_statement -> IDENTIFIER LPAREN RPAREN .)
+
+
+state 42
+
+    (14) argument_list -> expression .
+    (44) expression -> expression . DOT INT_LITERAL
+    (45) expression -> expression . DOT IDENTIFIER
+
+    RPAREN          reduce using rule 14 (argument_list -> expression .)
+    COMMA           reduce using rule 14 (argument_list -> expression .)
+    DOT             shift and go to state 25
+
+
+state 43
+
+    (39) expression -> LPAREN tuple_elements RPAREN .
+
+    DOT             reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    NEWLINE         reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    IDENTIFIER      reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    CLASS           reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    SWITCH          reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    LET             reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    VAR             reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    SELF            reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    LPAREN          reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    INT_LITERAL     reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    FLOAT_LITERAL   reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    STRING          reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    TRUE            reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    FALSE           reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    RETURN          reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    $end            reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    RPAREN          reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    COMMA           reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    LBRACE          reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    RBRACE          reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    DEFAULT         reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    CASE            reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+    COLON           reduce using rule 39 (expression -> LPAREN tuple_elements RPAREN .)
+
+
+state 44
+
+    (40) tuple_elements -> tuple_elements COMMA . tuple_element
+    (42) tuple_element -> . IDENTIFIER COLON expression
+    (43) tuple_element -> . expression
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+
+    IDENTIFIER      shift and go to state 55
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+
+    tuple_element                  shift and go to state 54
+    expression                     shift and go to state 56
+
+state 45
+
+    (65) expression -> LPAREN expression RPAREN .
+
+    DOT             reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    NEWLINE         reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    IDENTIFIER      reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    CLASS           reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    SWITCH          reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    LET             reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    VAR             reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    SELF            reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    LPAREN          reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    INT_LITERAL     reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    FLOAT_LITERAL   reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    STRING          reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    TRUE            reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    FALSE           reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    RETURN          reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    $end            reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    COMMA           reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    LBRACE          reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    RBRACE          reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    DEFAULT         reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    CASE            reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+    COLON           reduce using rule 65 (expression -> LPAREN expression RPAREN .)
+
+
+state 46
+
+    (42) tuple_element -> IDENTIFIER COLON . expression
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    IDENTIFIER      shift and go to state 33
+
+    expression                     shift and go to state 57
+
+state 47
+
+    (15) class_declaration -> CLASS IDENTIFIER LBRACE . class_body RBRACE
+    (16) class_body -> . class_body class_member
+    (17) class_body -> . class_member
+    (18) class_body -> . empty
+    (19) class_member -> . property_declaration
+    (20) class_member -> . init_declaration
+    (21) class_member -> . method_declaration
+    (22) class_member -> . computed_property
+    (23) class_member -> . NEWLINE
+    (76) empty -> .
+    (24) property_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (25) property_declaration -> . LET IDENTIFIER COLON type_annotation
+    (26) property_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (27) property_declaration -> . LET IDENTIFIER COLON tuple_type
+    (29) init_declaration -> . INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
+    (30) init_declaration -> . INIT LPAREN RPAREN LBRACE statement_list RBRACE
+    (31) method_declaration -> . FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
+    (32) method_declaration -> . FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE
+    (28) computed_property -> . VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+  ! shift/reduce conflict for VAR resolved as shift
+  ! shift/reduce conflict for LET resolved as shift
+  ! shift/reduce conflict for INIT resolved as shift
+  ! shift/reduce conflict for FUNC resolved as shift
+    NEWLINE         shift and go to state 65
+    RBRACE          reduce using rule 76 (empty -> .)
+    VAR             shift and go to state 66
+    LET             shift and go to state 67
+    INIT            shift and go to state 68
+    FUNC            shift and go to state 69
+
+  ! NEWLINE         [ reduce using rule 76 (empty -> .) ]
+  ! VAR             [ reduce using rule 76 (empty -> .) ]
+  ! LET             [ reduce using rule 76 (empty -> .) ]
+  ! INIT            [ reduce using rule 76 (empty -> .) ]
+  ! FUNC            [ reduce using rule 76 (empty -> .) ]
+
+    class_body                     shift and go to state 58
+    class_member                   shift and go to state 59
+    empty                          shift and go to state 60
+    property_declaration           shift and go to state 61
+    init_declaration               shift and go to state 62
+    method_declaration             shift and go to state 63
+    computed_property              shift and go to state 64
+
+state 48
+
+    (46) switch_statement -> SWITCH expression LBRACE . optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> SWITCH expression LBRACE . optional_newlines case_list default_case optional_newlines RBRACE
+    (77) optional_newlines -> . optional_newlines NEWLINE
+    (78) optional_newlines -> . empty
+    (76) empty -> .
+
+    NEWLINE         reduce using rule 76 (empty -> .)
+    CASE            reduce using rule 76 (empty -> .)
+
+    optional_newlines              shift and go to state 70
+    empty                          shift and go to state 71
+
+state 49
+
+    (55) variable_declaration -> LET IDENTIFIER COLON . type_annotation
+    (57) variable_declaration -> LET IDENTIFIER COLON . tuple_type
+    (71) type_annotation -> . TYPE_INT
+    (72) type_annotation -> . TYPE_DOUBLE
+    (73) type_annotation -> . TYPE_BOOL
+    (74) type_annotation -> . TYPE_STRING
+    (75) type_annotation -> . IDENTIFIER
+    (34) tuple_type -> . LPAREN tuple_type_elements RPAREN
+
+    TYPE_INT        shift and go to state 75
+    TYPE_DOUBLE     shift and go to state 76
+    TYPE_BOOL       shift and go to state 77
+    TYPE_STRING     shift and go to state 78
+    IDENTIFIER      shift and go to state 72
+    LPAREN          shift and go to state 79
+
+    type_annotation                shift and go to state 73
+    tuple_type                     shift and go to state 74
+
+state 50
+
+    (56) variable_declaration -> VAR IDENTIFIER COLON . type_annotation
+    (58) variable_declaration -> VAR IDENTIFIER COLON . tuple_type
+    (71) type_annotation -> . TYPE_INT
+    (72) type_annotation -> . TYPE_DOUBLE
+    (73) type_annotation -> . TYPE_BOOL
+    (74) type_annotation -> . TYPE_STRING
+    (75) type_annotation -> . IDENTIFIER
+    (34) tuple_type -> . LPAREN tuple_type_elements RPAREN
+
+    TYPE_INT        shift and go to state 75
+    TYPE_DOUBLE     shift and go to state 76
+    TYPE_BOOL       shift and go to state 77
+    TYPE_STRING     shift and go to state 78
+    IDENTIFIER      shift and go to state 72
+    LPAREN          shift and go to state 79
+
+    type_annotation                shift and go to state 80
+    tuple_type                     shift and go to state 81
+
+state 51
+
+    (33) expression -> SELF DOT IDENTIFIER .
+
+    DOT             reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    NEWLINE         reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    IDENTIFIER      reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    CLASS           reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    SWITCH          reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    LET             reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    VAR             reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    SELF            reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    LPAREN          reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    INT_LITERAL     reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    FLOAT_LITERAL   reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    STRING          reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    TRUE            reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    FALSE           reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    RETURN          reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    $end            reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    RPAREN          reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    COMMA           reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    LBRACE          reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    RBRACE          reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    DEFAULT         reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    CASE            reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+    COLON           reduce using rule 33 (expression -> SELF DOT IDENTIFIER .)
+
+
+state 52
+
+    (11) function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .
+
+    NEWLINE         reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    IDENTIFIER      reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    CLASS           reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    SWITCH          reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    LET             reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    VAR             reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    SELF            reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    LPAREN          reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    INT_LITERAL     reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    FLOAT_LITERAL   reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    STRING          reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    TRUE            reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    FALSE           reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    RETURN          reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    $end            reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    RBRACE          reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    DEFAULT         reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+    CASE            reduce using rule 11 (function_call_statement -> IDENTIFIER LPAREN argument_list RPAREN .)
+
+
+state 53
+
+    (13) argument_list -> argument_list COMMA . expression
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    IDENTIFIER      shift and go to state 33
+
+    expression                     shift and go to state 82
+
+state 54
+
+    (40) tuple_elements -> tuple_elements COMMA tuple_element .
+
+    RPAREN          reduce using rule 40 (tuple_elements -> tuple_elements COMMA tuple_element .)
+    COMMA           reduce using rule 40 (tuple_elements -> tuple_elements COMMA tuple_element .)
+
+
+state 55
+
+    (42) tuple_element -> IDENTIFIER . COLON expression
+    (64) expression -> IDENTIFIER .
+
+    COLON           shift and go to state 46
+    DOT             reduce using rule 64 (expression -> IDENTIFIER .)
+    RPAREN          reduce using rule 64 (expression -> IDENTIFIER .)
+    COMMA           reduce using rule 64 (expression -> IDENTIFIER .)
+
+
+state 56
+
+    (43) tuple_element -> expression .
+    (44) expression -> expression . DOT INT_LITERAL
+    (45) expression -> expression . DOT IDENTIFIER
+
+    RPAREN          reduce using rule 43 (tuple_element -> expression .)
+    COMMA           reduce using rule 43 (tuple_element -> expression .)
+    DOT             shift and go to state 25
+
+
+state 57
+
+    (42) tuple_element -> IDENTIFIER COLON expression .
+    (44) expression -> expression . DOT INT_LITERAL
+    (45) expression -> expression . DOT IDENTIFIER
+
+    RPAREN          reduce using rule 42 (tuple_element -> IDENTIFIER COLON expression .)
+    COMMA           reduce using rule 42 (tuple_element -> IDENTIFIER COLON expression .)
+    DOT             shift and go to state 25
+
+
+state 58
+
+    (15) class_declaration -> CLASS IDENTIFIER LBRACE class_body . RBRACE
+    (16) class_body -> class_body . class_member
+    (19) class_member -> . property_declaration
+    (20) class_member -> . init_declaration
+    (21) class_member -> . method_declaration
+    (22) class_member -> . computed_property
+    (23) class_member -> . NEWLINE
+    (24) property_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (25) property_declaration -> . LET IDENTIFIER COLON type_annotation
+    (26) property_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (27) property_declaration -> . LET IDENTIFIER COLON tuple_type
+    (29) init_declaration -> . INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
+    (30) init_declaration -> . INIT LPAREN RPAREN LBRACE statement_list RBRACE
+    (31) method_declaration -> . FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
+    (32) method_declaration -> . FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE
+    (28) computed_property -> . VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+
+    RBRACE          shift and go to state 83
+    NEWLINE         shift and go to state 65
+    VAR             shift and go to state 66
+    LET             shift and go to state 67
+    INIT            shift and go to state 68
+    FUNC            shift and go to state 69
+
+    class_member                   shift and go to state 84
+    property_declaration           shift and go to state 61
+    init_declaration               shift and go to state 62
+    method_declaration             shift and go to state 63
+    computed_property              shift and go to state 64
+
+state 59
+
+    (17) class_body -> class_member .
+
+    RBRACE          reduce using rule 17 (class_body -> class_member .)
+    NEWLINE         reduce using rule 17 (class_body -> class_member .)
+    VAR             reduce using rule 17 (class_body -> class_member .)
+    LET             reduce using rule 17 (class_body -> class_member .)
+    INIT            reduce using rule 17 (class_body -> class_member .)
+    FUNC            reduce using rule 17 (class_body -> class_member .)
+
+
+state 60
+
+    (18) class_body -> empty .
+
+    RBRACE          reduce using rule 18 (class_body -> empty .)
+    NEWLINE         reduce using rule 18 (class_body -> empty .)
+    VAR             reduce using rule 18 (class_body -> empty .)
+    LET             reduce using rule 18 (class_body -> empty .)
+    INIT            reduce using rule 18 (class_body -> empty .)
+    FUNC            reduce using rule 18 (class_body -> empty .)
+
+
+state 61
+
+    (19) class_member -> property_declaration .
+
+    RBRACE          reduce using rule 19 (class_member -> property_declaration .)
+    NEWLINE         reduce using rule 19 (class_member -> property_declaration .)
+    VAR             reduce using rule 19 (class_member -> property_declaration .)
+    LET             reduce using rule 19 (class_member -> property_declaration .)
+    INIT            reduce using rule 19 (class_member -> property_declaration .)
+    FUNC            reduce using rule 19 (class_member -> property_declaration .)
+
+
+state 62
+
+    (20) class_member -> init_declaration .
+
+    RBRACE          reduce using rule 20 (class_member -> init_declaration .)
+    NEWLINE         reduce using rule 20 (class_member -> init_declaration .)
+    VAR             reduce using rule 20 (class_member -> init_declaration .)
+    LET             reduce using rule 20 (class_member -> init_declaration .)
+    INIT            reduce using rule 20 (class_member -> init_declaration .)
+    FUNC            reduce using rule 20 (class_member -> init_declaration .)
+
+
+state 63
+
+    (21) class_member -> method_declaration .
+
+    RBRACE          reduce using rule 21 (class_member -> method_declaration .)
+    NEWLINE         reduce using rule 21 (class_member -> method_declaration .)
+    VAR             reduce using rule 21 (class_member -> method_declaration .)
+    LET             reduce using rule 21 (class_member -> method_declaration .)
+    INIT            reduce using rule 21 (class_member -> method_declaration .)
+    FUNC            reduce using rule 21 (class_member -> method_declaration .)
+
+
+state 64
+
+    (22) class_member -> computed_property .
+
+    RBRACE          reduce using rule 22 (class_member -> computed_property .)
+    NEWLINE         reduce using rule 22 (class_member -> computed_property .)
+    VAR             reduce using rule 22 (class_member -> computed_property .)
+    LET             reduce using rule 22 (class_member -> computed_property .)
+    INIT            reduce using rule 22 (class_member -> computed_property .)
+    FUNC            reduce using rule 22 (class_member -> computed_property .)
+
+
+state 65
+
+    (23) class_member -> NEWLINE .
+
+    RBRACE          reduce using rule 23 (class_member -> NEWLINE .)
+    NEWLINE         reduce using rule 23 (class_member -> NEWLINE .)
+    VAR             reduce using rule 23 (class_member -> NEWLINE .)
+    LET             reduce using rule 23 (class_member -> NEWLINE .)
+    INIT            reduce using rule 23 (class_member -> NEWLINE .)
+    FUNC            reduce using rule 23 (class_member -> NEWLINE .)
+
+
+state 66
+
+    (24) property_declaration -> VAR . IDENTIFIER COLON type_annotation
+    (26) property_declaration -> VAR . IDENTIFIER COLON tuple_type
+    (28) computed_property -> VAR . IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+
+    IDENTIFIER      shift and go to state 85
+
+
+state 67
+
+    (25) property_declaration -> LET . IDENTIFIER COLON type_annotation
+    (27) property_declaration -> LET . IDENTIFIER COLON tuple_type
+
+    IDENTIFIER      shift and go to state 86
+
+
+state 68
+
+    (29) init_declaration -> INIT . LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
+    (30) init_declaration -> INIT . LPAREN RPAREN LBRACE statement_list RBRACE
+
+    LPAREN          shift and go to state 87
+
+
+state 69
+
+    (31) method_declaration -> FUNC . IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
+    (32) method_declaration -> FUNC . IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE
+
+    IDENTIFIER      shift and go to state 88
+
+
+state 70
+
+    (46) switch_statement -> SWITCH expression LBRACE optional_newlines . case_list optional_newlines RBRACE
+    (47) switch_statement -> SWITCH expression LBRACE optional_newlines . case_list default_case optional_newlines RBRACE
+    (77) optional_newlines -> optional_newlines . NEWLINE
+    (48) case_list -> . case_list optional_newlines case_clause
+    (49) case_list -> . optional_newlines case_clause
+    (77) optional_newlines -> . optional_newlines NEWLINE
+    (78) optional_newlines -> . empty
+    (76) empty -> .
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    NEWLINE         shift and go to state 91
+    CASE            reduce using rule 76 (empty -> .)
+
+  ! NEWLINE         [ reduce using rule 76 (empty -> .) ]
+
+    optional_newlines              shift and go to state 89
+    case_list                      shift and go to state 90
+    empty                          shift and go to state 71
+
+state 71
+
+    (78) optional_newlines -> empty .
+
+    NEWLINE         reduce using rule 78 (optional_newlines -> empty .)
+    CASE            reduce using rule 78 (optional_newlines -> empty .)
+    RBRACE          reduce using rule 78 (optional_newlines -> empty .)
+    IDENTIFIER      reduce using rule 78 (optional_newlines -> empty .)
+    CLASS           reduce using rule 78 (optional_newlines -> empty .)
+    SWITCH          reduce using rule 78 (optional_newlines -> empty .)
+    LET             reduce using rule 78 (optional_newlines -> empty .)
+    VAR             reduce using rule 78 (optional_newlines -> empty .)
+    SELF            reduce using rule 78 (optional_newlines -> empty .)
+    LPAREN          reduce using rule 78 (optional_newlines -> empty .)
+    INT_LITERAL     reduce using rule 78 (optional_newlines -> empty .)
+    FLOAT_LITERAL   reduce using rule 78 (optional_newlines -> empty .)
+    STRING          reduce using rule 78 (optional_newlines -> empty .)
+    TRUE            reduce using rule 78 (optional_newlines -> empty .)
+    FALSE           reduce using rule 78 (optional_newlines -> empty .)
+    RETURN          reduce using rule 78 (optional_newlines -> empty .)
+    GET             reduce using rule 78 (optional_newlines -> empty .)
+
+
+state 72
+
+    (75) type_annotation -> IDENTIFIER .
+
+    NEWLINE         reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    CLASS           reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    SWITCH          reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    LET             reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    VAR             reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    SELF            reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    LPAREN          reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    INT_LITERAL     reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    FLOAT_LITERAL   reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    STRING          reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    TRUE            reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    FALSE           reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    RETURN          reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    $end            reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    RBRACE          reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    DEFAULT         reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    CASE            reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    LBRACE          reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    INIT            reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    FUNC            reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    RPAREN          reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    COMMA           reduce using rule 75 (type_annotation -> IDENTIFIER .)
+
+
+state 73
+
+    (55) variable_declaration -> LET IDENTIFIER COLON type_annotation .
+
+    NEWLINE         reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    IDENTIFIER      reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    CLASS           reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    SWITCH          reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    LET             reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    VAR             reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    SELF            reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    LPAREN          reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    INT_LITERAL     reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    FLOAT_LITERAL   reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    STRING          reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    TRUE            reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    FALSE           reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    RETURN          reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    $end            reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    RBRACE          reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    DEFAULT         reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+    CASE            reduce using rule 55 (variable_declaration -> LET IDENTIFIER COLON type_annotation .)
+
+
+state 74
+
+    (57) variable_declaration -> LET IDENTIFIER COLON tuple_type .
+
+    NEWLINE         reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    IDENTIFIER      reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    CLASS           reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    SWITCH          reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    LET             reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    VAR             reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    SELF            reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    LPAREN          reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    INT_LITERAL     reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    FLOAT_LITERAL   reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    STRING          reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    TRUE            reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    FALSE           reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    RETURN          reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    $end            reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    RBRACE          reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    DEFAULT         reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+    CASE            reduce using rule 57 (variable_declaration -> LET IDENTIFIER COLON tuple_type .)
+
+
+state 75
+
+    (71) type_annotation -> TYPE_INT .
+
+    NEWLINE         reduce using rule 71 (type_annotation -> TYPE_INT .)
+    IDENTIFIER      reduce using rule 71 (type_annotation -> TYPE_INT .)
+    CLASS           reduce using rule 71 (type_annotation -> TYPE_INT .)
+    SWITCH          reduce using rule 71 (type_annotation -> TYPE_INT .)
+    LET             reduce using rule 71 (type_annotation -> TYPE_INT .)
+    VAR             reduce using rule 71 (type_annotation -> TYPE_INT .)
+    SELF            reduce using rule 71 (type_annotation -> TYPE_INT .)
+    LPAREN          reduce using rule 71 (type_annotation -> TYPE_INT .)
+    INT_LITERAL     reduce using rule 71 (type_annotation -> TYPE_INT .)
+    FLOAT_LITERAL   reduce using rule 71 (type_annotation -> TYPE_INT .)
+    STRING          reduce using rule 71 (type_annotation -> TYPE_INT .)
+    TRUE            reduce using rule 71 (type_annotation -> TYPE_INT .)
+    FALSE           reduce using rule 71 (type_annotation -> TYPE_INT .)
+    RETURN          reduce using rule 71 (type_annotation -> TYPE_INT .)
+    $end            reduce using rule 71 (type_annotation -> TYPE_INT .)
+    RBRACE          reduce using rule 71 (type_annotation -> TYPE_INT .)
+    DEFAULT         reduce using rule 71 (type_annotation -> TYPE_INT .)
+    CASE            reduce using rule 71 (type_annotation -> TYPE_INT .)
+    RPAREN          reduce using rule 71 (type_annotation -> TYPE_INT .)
+    COMMA           reduce using rule 71 (type_annotation -> TYPE_INT .)
+    LBRACE          reduce using rule 71 (type_annotation -> TYPE_INT .)
+    INIT            reduce using rule 71 (type_annotation -> TYPE_INT .)
+    FUNC            reduce using rule 71 (type_annotation -> TYPE_INT .)
+
+
+state 76
+
+    (72) type_annotation -> TYPE_DOUBLE .
+
+    NEWLINE         reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    IDENTIFIER      reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    CLASS           reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    SWITCH          reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    LET             reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    VAR             reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    SELF            reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    LPAREN          reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    INT_LITERAL     reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    FLOAT_LITERAL   reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    STRING          reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    TRUE            reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    FALSE           reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    RETURN          reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    $end            reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    RBRACE          reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    DEFAULT         reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    CASE            reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    RPAREN          reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    COMMA           reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    LBRACE          reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    INIT            reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+    FUNC            reduce using rule 72 (type_annotation -> TYPE_DOUBLE .)
+
+
+state 77
+
+    (73) type_annotation -> TYPE_BOOL .
+
+    NEWLINE         reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    IDENTIFIER      reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    CLASS           reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    SWITCH          reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    LET             reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    VAR             reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    SELF            reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    LPAREN          reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    INT_LITERAL     reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    FLOAT_LITERAL   reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    STRING          reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    TRUE            reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    FALSE           reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    RETURN          reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    $end            reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    RBRACE          reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    DEFAULT         reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    CASE            reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    RPAREN          reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    COMMA           reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    LBRACE          reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    INIT            reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+    FUNC            reduce using rule 73 (type_annotation -> TYPE_BOOL .)
+
+
+state 78
+
+    (74) type_annotation -> TYPE_STRING .
+
+    NEWLINE         reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    IDENTIFIER      reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    CLASS           reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    SWITCH          reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    LET             reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    VAR             reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    SELF            reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    LPAREN          reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    INT_LITERAL     reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    FLOAT_LITERAL   reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    STRING          reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    TRUE            reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    FALSE           reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    RETURN          reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    $end            reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    RBRACE          reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    DEFAULT         reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    CASE            reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    RPAREN          reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    COMMA           reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    LBRACE          reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    INIT            reduce using rule 74 (type_annotation -> TYPE_STRING .)
+    FUNC            reduce using rule 74 (type_annotation -> TYPE_STRING .)
+
+
+state 79
+
+    (34) tuple_type -> LPAREN . tuple_type_elements RPAREN
+    (35) tuple_type_elements -> . tuple_type_elements COMMA tuple_type_element
+    (36) tuple_type_elements -> . tuple_type_element
+    (37) tuple_type_element -> . IDENTIFIER COLON type_annotation
+    (38) tuple_type_element -> . type_annotation
+    (71) type_annotation -> . TYPE_INT
+    (72) type_annotation -> . TYPE_DOUBLE
+    (73) type_annotation -> . TYPE_BOOL
+    (74) type_annotation -> . TYPE_STRING
+    (75) type_annotation -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 94
+    TYPE_INT        shift and go to state 75
+    TYPE_DOUBLE     shift and go to state 76
+    TYPE_BOOL       shift and go to state 77
+    TYPE_STRING     shift and go to state 78
+
+    tuple_type_elements            shift and go to state 92
+    tuple_type_element             shift and go to state 93
+    type_annotation                shift and go to state 95
+
+state 80
+
+    (56) variable_declaration -> VAR IDENTIFIER COLON type_annotation .
+
+    NEWLINE         reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    IDENTIFIER      reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    CLASS           reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    SWITCH          reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    LET             reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    VAR             reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    SELF            reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    LPAREN          reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    INT_LITERAL     reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    FLOAT_LITERAL   reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    STRING          reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    TRUE            reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    FALSE           reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    RETURN          reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    $end            reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    RBRACE          reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    DEFAULT         reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    CASE            reduce using rule 56 (variable_declaration -> VAR IDENTIFIER COLON type_annotation .)
+
+
+state 81
+
+    (58) variable_declaration -> VAR IDENTIFIER COLON tuple_type .
+
+    NEWLINE         reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    IDENTIFIER      reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    CLASS           reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    SWITCH          reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    LET             reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    VAR             reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    SELF            reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    LPAREN          reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    INT_LITERAL     reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    FLOAT_LITERAL   reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    STRING          reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    TRUE            reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    FALSE           reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    RETURN          reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    $end            reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    RBRACE          reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    DEFAULT         reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    CASE            reduce using rule 58 (variable_declaration -> VAR IDENTIFIER COLON tuple_type .)
+
+
+state 82
+
+    (13) argument_list -> argument_list COMMA expression .
+    (44) expression -> expression . DOT INT_LITERAL
+    (45) expression -> expression . DOT IDENTIFIER
+
+    RPAREN          reduce using rule 13 (argument_list -> argument_list COMMA expression .)
+    COMMA           reduce using rule 13 (argument_list -> argument_list COMMA expression .)
+    DOT             shift and go to state 25
+
+
+state 83
+
+    (15) class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .
+
+    NEWLINE         reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    IDENTIFIER      reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    CLASS           reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    SWITCH          reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    LET             reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    VAR             reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    SELF            reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    LPAREN          reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    INT_LITERAL     reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    FLOAT_LITERAL   reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    STRING          reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    TRUE            reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    FALSE           reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    RETURN          reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    $end            reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    RBRACE          reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    DEFAULT         reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+    CASE            reduce using rule 15 (class_declaration -> CLASS IDENTIFIER LBRACE class_body RBRACE .)
+
+
+state 84
+
+    (16) class_body -> class_body class_member .
+
+    RBRACE          reduce using rule 16 (class_body -> class_body class_member .)
+    NEWLINE         reduce using rule 16 (class_body -> class_body class_member .)
+    VAR             reduce using rule 16 (class_body -> class_body class_member .)
+    LET             reduce using rule 16 (class_body -> class_body class_member .)
+    INIT            reduce using rule 16 (class_body -> class_body class_member .)
+    FUNC            reduce using rule 16 (class_body -> class_body class_member .)
+
+
+state 85
+
+    (24) property_declaration -> VAR IDENTIFIER . COLON type_annotation
+    (26) property_declaration -> VAR IDENTIFIER . COLON tuple_type
+    (28) computed_property -> VAR IDENTIFIER . COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+
+    COLON           shift and go to state 96
+
+
+state 86
+
+    (25) property_declaration -> LET IDENTIFIER . COLON type_annotation
+    (27) property_declaration -> LET IDENTIFIER . COLON tuple_type
+
+    COLON           shift and go to state 97
+
+
+state 87
+
+    (29) init_declaration -> INIT LPAREN . parameter_list RPAREN LBRACE statement_list RBRACE
+    (30) init_declaration -> INIT LPAREN . RPAREN LBRACE statement_list RBRACE
+    (68) parameter_list -> . parameter_list COMMA parameter
+    (69) parameter_list -> . parameter
+    (70) parameter -> . IDENTIFIER COLON type_annotation
+
+    RPAREN          shift and go to state 99
+    IDENTIFIER      shift and go to state 101
+
+    parameter_list                 shift and go to state 98
+    parameter                      shift and go to state 100
+
+state 88
+
+    (31) method_declaration -> FUNC IDENTIFIER . LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
+    (32) method_declaration -> FUNC IDENTIFIER . LPAREN RPAREN LBRACE statement_list RBRACE
+
+    LPAREN          shift and go to state 102
+
+
+state 89
+
+    (49) case_list -> optional_newlines . case_clause
+    (77) optional_newlines -> optional_newlines . NEWLINE
+    (50) case_clause -> . CASE case_patterns COLON optional_newlines case_body
+
+    NEWLINE         shift and go to state 91
+    CASE            shift and go to state 104
+
+    case_clause                    shift and go to state 103
+
+state 90
+
+    (46) switch_statement -> SWITCH expression LBRACE optional_newlines case_list . optional_newlines RBRACE
+    (47) switch_statement -> SWITCH expression LBRACE optional_newlines case_list . default_case optional_newlines RBRACE
+    (48) case_list -> case_list . optional_newlines case_clause
+    (77) optional_newlines -> . optional_newlines NEWLINE
+    (78) optional_newlines -> . empty
+    (54) default_case -> . DEFAULT COLON optional_newlines case_body
+    (76) empty -> .
+
+    DEFAULT         shift and go to state 107
+    RBRACE          reduce using rule 76 (empty -> .)
+    NEWLINE         reduce using rule 76 (empty -> .)
+    CASE            reduce using rule 76 (empty -> .)
+
+    optional_newlines              shift and go to state 105
+    default_case                   shift and go to state 106
+    empty                          shift and go to state 71
+
+state 91
+
+    (77) optional_newlines -> optional_newlines NEWLINE .
+
+    NEWLINE         reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .)
+    CASE            reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .)
+    RBRACE          reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .)
+    GET             reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .)
+
+
+state 92
+
+    (34) tuple_type -> LPAREN tuple_type_elements . RPAREN
+    (35) tuple_type_elements -> tuple_type_elements . COMMA tuple_type_element
+
+    RPAREN          shift and go to state 108
+    COMMA           shift and go to state 109
+
+
+state 93
+
+    (36) tuple_type_elements -> tuple_type_element .
+
+    RPAREN          reduce using rule 36 (tuple_type_elements -> tuple_type_element .)
+    COMMA           reduce using rule 36 (tuple_type_elements -> tuple_type_element .)
+
+
+state 94
+
+    (37) tuple_type_element -> IDENTIFIER . COLON type_annotation
+    (75) type_annotation -> IDENTIFIER .
+
+    COLON           shift and go to state 110
+    RPAREN          reduce using rule 75 (type_annotation -> IDENTIFIER .)
+    COMMA           reduce using rule 75 (type_annotation -> IDENTIFIER .)
+
+
+state 95
+
+    (38) tuple_type_element -> type_annotation .
+
+    RPAREN          reduce using rule 38 (tuple_type_element -> type_annotation .)
+    COMMA           reduce using rule 38 (tuple_type_element -> type_annotation .)
+
+
+state 96
+
+    (24) property_declaration -> VAR IDENTIFIER COLON . type_annotation
+    (26) property_declaration -> VAR IDENTIFIER COLON . tuple_type
+    (28) computed_property -> VAR IDENTIFIER COLON . type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+    (71) type_annotation -> . TYPE_INT
+    (72) type_annotation -> . TYPE_DOUBLE
+    (73) type_annotation -> . TYPE_BOOL
+    (74) type_annotation -> . TYPE_STRING
+    (75) type_annotation -> . IDENTIFIER
+    (34) tuple_type -> . LPAREN tuple_type_elements RPAREN
+
+    TYPE_INT        shift and go to state 75
+    TYPE_DOUBLE     shift and go to state 76
+    TYPE_BOOL       shift and go to state 77
+    TYPE_STRING     shift and go to state 78
+    IDENTIFIER      shift and go to state 72
+    LPAREN          shift and go to state 79
+
+    type_annotation                shift and go to state 111
+    tuple_type                     shift and go to state 112
+
+state 97
+
+    (25) property_declaration -> LET IDENTIFIER COLON . type_annotation
+    (27) property_declaration -> LET IDENTIFIER COLON . tuple_type
+    (71) type_annotation -> . TYPE_INT
+    (72) type_annotation -> . TYPE_DOUBLE
+    (73) type_annotation -> . TYPE_BOOL
+    (74) type_annotation -> . TYPE_STRING
+    (75) type_annotation -> . IDENTIFIER
+    (34) tuple_type -> . LPAREN tuple_type_elements RPAREN
+
+    TYPE_INT        shift and go to state 75
+    TYPE_DOUBLE     shift and go to state 76
+    TYPE_BOOL       shift and go to state 77
+    TYPE_STRING     shift and go to state 78
+    IDENTIFIER      shift and go to state 72
+    LPAREN          shift and go to state 79
+
+    type_annotation                shift and go to state 113
+    tuple_type                     shift and go to state 114
+
+state 98
+
+    (29) init_declaration -> INIT LPAREN parameter_list . RPAREN LBRACE statement_list RBRACE
+    (68) parameter_list -> parameter_list . COMMA parameter
+
+    RPAREN          shift and go to state 115
+    COMMA           shift and go to state 116
+
+
+state 99
+
+    (30) init_declaration -> INIT LPAREN RPAREN . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 117
+
+
+state 100
+
+    (69) parameter_list -> parameter .
+
+    RPAREN          reduce using rule 69 (parameter_list -> parameter .)
+    COMMA           reduce using rule 69 (parameter_list -> parameter .)
+
+
+state 101
+
+    (70) parameter -> IDENTIFIER . COLON type_annotation
+
+    COLON           shift and go to state 118
+
+
+state 102
+
+    (31) method_declaration -> FUNC IDENTIFIER LPAREN . parameter_list RPAREN LBRACE statement_list RBRACE
+    (32) method_declaration -> FUNC IDENTIFIER LPAREN . RPAREN LBRACE statement_list RBRACE
+    (68) parameter_list -> . parameter_list COMMA parameter
+    (69) parameter_list -> . parameter
+    (70) parameter -> . IDENTIFIER COLON type_annotation
+
+    RPAREN          shift and go to state 120
+    IDENTIFIER      shift and go to state 101
+
+    parameter_list                 shift and go to state 119
+    parameter                      shift and go to state 100
+
+state 103
+
+    (49) case_list -> optional_newlines case_clause .
+
+    DEFAULT         reduce using rule 49 (case_list -> optional_newlines case_clause .)
+    RBRACE          reduce using rule 49 (case_list -> optional_newlines case_clause .)
+    NEWLINE         reduce using rule 49 (case_list -> optional_newlines case_clause .)
+    CASE            reduce using rule 49 (case_list -> optional_newlines case_clause .)
+
+
+state 104
+
+    (50) case_clause -> CASE . case_patterns COLON optional_newlines case_body
+    (52) case_patterns -> . case_patterns COMMA expression
+    (53) case_patterns -> . expression
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    IDENTIFIER      shift and go to state 33
+
+    case_patterns                  shift and go to state 121
+    expression                     shift and go to state 122
+
+state 105
+
+    (46) switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines . RBRACE
+    (48) case_list -> case_list optional_newlines . case_clause
+    (77) optional_newlines -> optional_newlines . NEWLINE
+    (50) case_clause -> . CASE case_patterns COLON optional_newlines case_body
+
+    RBRACE          shift and go to state 123
+    NEWLINE         shift and go to state 91
+    CASE            shift and go to state 104
+
+    case_clause                    shift and go to state 124
+
+state 106
+
+    (47) switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case . optional_newlines RBRACE
+    (77) optional_newlines -> . optional_newlines NEWLINE
+    (78) optional_newlines -> . empty
+    (76) empty -> .
+
+    RBRACE          reduce using rule 76 (empty -> .)
+    NEWLINE         reduce using rule 76 (empty -> .)
+
+    optional_newlines              shift and go to state 125
+    empty                          shift and go to state 71
+
+state 107
+
+    (54) default_case -> DEFAULT . COLON optional_newlines case_body
+
+    COLON           shift and go to state 126
+
+
+state 108
+
+    (34) tuple_type -> LPAREN tuple_type_elements RPAREN .
+
+    NEWLINE         reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    IDENTIFIER      reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    CLASS           reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    SWITCH          reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    LET             reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    VAR             reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    SELF            reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    LPAREN          reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    INT_LITERAL     reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    FLOAT_LITERAL   reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    STRING          reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    TRUE            reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    FALSE           reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    RETURN          reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    $end            reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    RBRACE          reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    DEFAULT         reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    CASE            reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    INIT            reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+    FUNC            reduce using rule 34 (tuple_type -> LPAREN tuple_type_elements RPAREN .)
+
+
+state 109
+
+    (35) tuple_type_elements -> tuple_type_elements COMMA . tuple_type_element
+    (37) tuple_type_element -> . IDENTIFIER COLON type_annotation
+    (38) tuple_type_element -> . type_annotation
+    (71) type_annotation -> . TYPE_INT
+    (72) type_annotation -> . TYPE_DOUBLE
+    (73) type_annotation -> . TYPE_BOOL
+    (74) type_annotation -> . TYPE_STRING
+    (75) type_annotation -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 94
+    TYPE_INT        shift and go to state 75
+    TYPE_DOUBLE     shift and go to state 76
+    TYPE_BOOL       shift and go to state 77
+    TYPE_STRING     shift and go to state 78
+
+    tuple_type_element             shift and go to state 127
+    type_annotation                shift and go to state 95
+
+state 110
+
+    (37) tuple_type_element -> IDENTIFIER COLON . type_annotation
+    (71) type_annotation -> . TYPE_INT
+    (72) type_annotation -> . TYPE_DOUBLE
+    (73) type_annotation -> . TYPE_BOOL
+    (74) type_annotation -> . TYPE_STRING
+    (75) type_annotation -> . IDENTIFIER
+
+    TYPE_INT        shift and go to state 75
+    TYPE_DOUBLE     shift and go to state 76
+    TYPE_BOOL       shift and go to state 77
+    TYPE_STRING     shift and go to state 78
+    IDENTIFIER      shift and go to state 72
+
+    type_annotation                shift and go to state 128
+
+state 111
+
+    (24) property_declaration -> VAR IDENTIFIER COLON type_annotation .
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation . LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+
+    RBRACE          reduce using rule 24 (property_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    NEWLINE         reduce using rule 24 (property_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    VAR             reduce using rule 24 (property_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    LET             reduce using rule 24 (property_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    INIT            reduce using rule 24 (property_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    FUNC            reduce using rule 24 (property_declaration -> VAR IDENTIFIER COLON type_annotation .)
+    LBRACE          shift and go to state 129
+
+
+state 112
+
+    (26) property_declaration -> VAR IDENTIFIER COLON tuple_type .
+
+    RBRACE          reduce using rule 26 (property_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    NEWLINE         reduce using rule 26 (property_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    VAR             reduce using rule 26 (property_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    LET             reduce using rule 26 (property_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    INIT            reduce using rule 26 (property_declaration -> VAR IDENTIFIER COLON tuple_type .)
+    FUNC            reduce using rule 26 (property_declaration -> VAR IDENTIFIER COLON tuple_type .)
+
+
+state 113
+
+    (25) property_declaration -> LET IDENTIFIER COLON type_annotation .
+
+    RBRACE          reduce using rule 25 (property_declaration -> LET IDENTIFIER COLON type_annotation .)
+    NEWLINE         reduce using rule 25 (property_declaration -> LET IDENTIFIER COLON type_annotation .)
+    VAR             reduce using rule 25 (property_declaration -> LET IDENTIFIER COLON type_annotation .)
+    LET             reduce using rule 25 (property_declaration -> LET IDENTIFIER COLON type_annotation .)
+    INIT            reduce using rule 25 (property_declaration -> LET IDENTIFIER COLON type_annotation .)
+    FUNC            reduce using rule 25 (property_declaration -> LET IDENTIFIER COLON type_annotation .)
+
+
+state 114
+
+    (27) property_declaration -> LET IDENTIFIER COLON tuple_type .
+
+    RBRACE          reduce using rule 27 (property_declaration -> LET IDENTIFIER COLON tuple_type .)
+    NEWLINE         reduce using rule 27 (property_declaration -> LET IDENTIFIER COLON tuple_type .)
+    VAR             reduce using rule 27 (property_declaration -> LET IDENTIFIER COLON tuple_type .)
+    LET             reduce using rule 27 (property_declaration -> LET IDENTIFIER COLON tuple_type .)
+    INIT            reduce using rule 27 (property_declaration -> LET IDENTIFIER COLON tuple_type .)
+    FUNC            reduce using rule 27 (property_declaration -> LET IDENTIFIER COLON tuple_type .)
+
+
+state 115
+
+    (29) init_declaration -> INIT LPAREN parameter_list RPAREN . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 130
+
+
+state 116
+
+    (68) parameter_list -> parameter_list COMMA . parameter
+    (70) parameter -> . IDENTIFIER COLON type_annotation
+
+    IDENTIFIER      shift and go to state 101
+
+    parameter                      shift and go to state 131
+
+state 117
+
+    (30) init_declaration -> INIT LPAREN RPAREN LBRACE . statement_list RBRACE
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    statement_list                 shift and go to state 132
+    statement                      shift and go to state 3
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 118
+
+    (70) parameter -> IDENTIFIER COLON . type_annotation
+    (71) type_annotation -> . TYPE_INT
+    (72) type_annotation -> . TYPE_DOUBLE
+    (73) type_annotation -> . TYPE_BOOL
+    (74) type_annotation -> . TYPE_STRING
+    (75) type_annotation -> . IDENTIFIER
+
+    TYPE_INT        shift and go to state 75
+    TYPE_DOUBLE     shift and go to state 76
+    TYPE_BOOL       shift and go to state 77
+    TYPE_STRING     shift and go to state 78
+    IDENTIFIER      shift and go to state 72
+
+    type_annotation                shift and go to state 133
+
+state 119
+
+    (31) method_declaration -> FUNC IDENTIFIER LPAREN parameter_list . RPAREN LBRACE statement_list RBRACE
+    (68) parameter_list -> parameter_list . COMMA parameter
+
+    RPAREN          shift and go to state 134
+    COMMA           shift and go to state 116
+
+
+state 120
+
+    (32) method_declaration -> FUNC IDENTIFIER LPAREN RPAREN . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 135
+
+
+state 121
+
+    (50) case_clause -> CASE case_patterns . COLON optional_newlines case_body
+    (52) case_patterns -> case_patterns . COMMA expression
+
+    COLON           shift and go to state 136
+    COMMA           shift and go to state 137
+
+
+state 122
+
+    (53) case_patterns -> expression .
+    (44) expression -> expression . DOT INT_LITERAL
+    (45) expression -> expression . DOT IDENTIFIER
+
+    COLON           reduce using rule 53 (case_patterns -> expression .)
+    COMMA           reduce using rule 53 (case_patterns -> expression .)
+    DOT             shift and go to state 25
+
+
+state 123
+
+    (46) switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .
+
+    NEWLINE         reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    IDENTIFIER      reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    CLASS           reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    SWITCH          reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    LET             reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    VAR             reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    SELF            reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    LPAREN          reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    INT_LITERAL     reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    FLOAT_LITERAL   reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    STRING          reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    TRUE            reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    FALSE           reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    RETURN          reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    $end            reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    RBRACE          reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    DEFAULT         reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+    CASE            reduce using rule 46 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE .)
+
+
+state 124
+
+    (48) case_list -> case_list optional_newlines case_clause .
+
+    DEFAULT         reduce using rule 48 (case_list -> case_list optional_newlines case_clause .)
+    RBRACE          reduce using rule 48 (case_list -> case_list optional_newlines case_clause .)
+    NEWLINE         reduce using rule 48 (case_list -> case_list optional_newlines case_clause .)
+    CASE            reduce using rule 48 (case_list -> case_list optional_newlines case_clause .)
+
+
+state 125
+
+    (47) switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines . RBRACE
+    (77) optional_newlines -> optional_newlines . NEWLINE
+
+    RBRACE          shift and go to state 138
+    NEWLINE         shift and go to state 91
+
+
+state 126
+
+    (54) default_case -> DEFAULT COLON . optional_newlines case_body
+    (77) optional_newlines -> . optional_newlines NEWLINE
+    (78) optional_newlines -> . empty
+    (76) empty -> .
+
+    NEWLINE         reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+    CLASS           reduce using rule 76 (empty -> .)
+    SWITCH          reduce using rule 76 (empty -> .)
+    LET             reduce using rule 76 (empty -> .)
+    VAR             reduce using rule 76 (empty -> .)
+    SELF            reduce using rule 76 (empty -> .)
+    LPAREN          reduce using rule 76 (empty -> .)
+    INT_LITERAL     reduce using rule 76 (empty -> .)
+    FLOAT_LITERAL   reduce using rule 76 (empty -> .)
+    STRING          reduce using rule 76 (empty -> .)
+    TRUE            reduce using rule 76 (empty -> .)
+    FALSE           reduce using rule 76 (empty -> .)
+    RETURN          reduce using rule 76 (empty -> .)
+
+    optional_newlines              shift and go to state 139
+    empty                          shift and go to state 71
+
+state 127
+
+    (35) tuple_type_elements -> tuple_type_elements COMMA tuple_type_element .
+
+    RPAREN          reduce using rule 35 (tuple_type_elements -> tuple_type_elements COMMA tuple_type_element .)
+    COMMA           reduce using rule 35 (tuple_type_elements -> tuple_type_elements COMMA tuple_type_element .)
+
+
+state 128
+
+    (37) tuple_type_element -> IDENTIFIER COLON type_annotation .
+
+    RPAREN          reduce using rule 37 (tuple_type_element -> IDENTIFIER COLON type_annotation .)
+    COMMA           reduce using rule 37 (tuple_type_element -> IDENTIFIER COLON type_annotation .)
+
+
+state 129
+
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE . optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+    (77) optional_newlines -> . optional_newlines NEWLINE
+    (78) optional_newlines -> . empty
+    (76) empty -> .
+
+    GET             reduce using rule 76 (empty -> .)
+    NEWLINE         reduce using rule 76 (empty -> .)
+
+    optional_newlines              shift and go to state 140
+    empty                          shift and go to state 71
+
+state 130
+
+    (29) init_declaration -> INIT LPAREN parameter_list RPAREN LBRACE . statement_list RBRACE
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    statement_list                 shift and go to state 141
+    statement                      shift and go to state 3
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 131
+
+    (68) parameter_list -> parameter_list COMMA parameter .
+
+    RPAREN          reduce using rule 68 (parameter_list -> parameter_list COMMA parameter .)
+    COMMA           reduce using rule 68 (parameter_list -> parameter_list COMMA parameter .)
+
+
+state 132
+
+    (30) init_declaration -> INIT LPAREN RPAREN LBRACE statement_list . RBRACE
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    RBRACE          shift and go to state 142
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    statement                      shift and go to state 24
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 133
+
+    (70) parameter -> IDENTIFIER COLON type_annotation .
+
+    RPAREN          reduce using rule 70 (parameter -> IDENTIFIER COLON type_annotation .)
+    COMMA           reduce using rule 70 (parameter -> IDENTIFIER COLON type_annotation .)
+
+
+state 134
+
+    (31) method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 143
+
+
+state 135
+
+    (32) method_declaration -> FUNC IDENTIFIER LPAREN RPAREN LBRACE . statement_list RBRACE
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    statement_list                 shift and go to state 144
+    statement                      shift and go to state 3
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 136
+
+    (50) case_clause -> CASE case_patterns COLON . optional_newlines case_body
+    (77) optional_newlines -> . optional_newlines NEWLINE
+    (78) optional_newlines -> . empty
+    (76) empty -> .
+
+    NEWLINE         reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+    CLASS           reduce using rule 76 (empty -> .)
+    SWITCH          reduce using rule 76 (empty -> .)
+    LET             reduce using rule 76 (empty -> .)
+    VAR             reduce using rule 76 (empty -> .)
+    SELF            reduce using rule 76 (empty -> .)
+    LPAREN          reduce using rule 76 (empty -> .)
+    INT_LITERAL     reduce using rule 76 (empty -> .)
+    FLOAT_LITERAL   reduce using rule 76 (empty -> .)
+    STRING          reduce using rule 76 (empty -> .)
+    TRUE            reduce using rule 76 (empty -> .)
+    FALSE           reduce using rule 76 (empty -> .)
+    RETURN          reduce using rule 76 (empty -> .)
+
+    optional_newlines              shift and go to state 145
+    empty                          shift and go to state 71
+
+state 137
+
+    (52) case_patterns -> case_patterns COMMA . expression
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    IDENTIFIER      shift and go to state 33
+
+    expression                     shift and go to state 146
+
+state 138
+
+    (47) switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .
+
+    NEWLINE         reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    IDENTIFIER      reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    CLASS           reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    SWITCH          reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    LET             reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    VAR             reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    SELF            reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    LPAREN          reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    INT_LITERAL     reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    FLOAT_LITERAL   reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    STRING          reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    TRUE            reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    FALSE           reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    RETURN          reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    $end            reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    RBRACE          reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    DEFAULT         reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+    CASE            reduce using rule 47 (switch_statement -> SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE .)
+
+
+state 139
+
+    (54) default_case -> DEFAULT COLON optional_newlines . case_body
+    (77) optional_newlines -> optional_newlines . NEWLINE
+    (51) case_body -> . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    NEWLINE         shift and go to state 148
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    case_body                      shift and go to state 147
+    statement_list                 shift and go to state 149
+    statement                      shift and go to state 3
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 140
+
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines . GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+    (77) optional_newlines -> optional_newlines . NEWLINE
+
+    GET             shift and go to state 150
+    NEWLINE         shift and go to state 91
+
+
+state 141
+
+    (29) init_declaration -> INIT LPAREN parameter_list RPAREN LBRACE statement_list . RBRACE
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    RBRACE          shift and go to state 151
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    statement                      shift and go to state 24
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 142
+
+    (30) init_declaration -> INIT LPAREN RPAREN LBRACE statement_list RBRACE .
+
+    RBRACE          reduce using rule 30 (init_declaration -> INIT LPAREN RPAREN LBRACE statement_list RBRACE .)
+    NEWLINE         reduce using rule 30 (init_declaration -> INIT LPAREN RPAREN LBRACE statement_list RBRACE .)
+    VAR             reduce using rule 30 (init_declaration -> INIT LPAREN RPAREN LBRACE statement_list RBRACE .)
+    LET             reduce using rule 30 (init_declaration -> INIT LPAREN RPAREN LBRACE statement_list RBRACE .)
+    INIT            reduce using rule 30 (init_declaration -> INIT LPAREN RPAREN LBRACE statement_list RBRACE .)
+    FUNC            reduce using rule 30 (init_declaration -> INIT LPAREN RPAREN LBRACE statement_list RBRACE .)
+
+
+state 143
+
+    (31) method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE . statement_list RBRACE
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    statement_list                 shift and go to state 152
+    statement                      shift and go to state 3
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 144
+
+    (32) method_declaration -> FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list . RBRACE
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    RBRACE          shift and go to state 153
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    statement                      shift and go to state 24
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 145
+
+    (50) case_clause -> CASE case_patterns COLON optional_newlines . case_body
+    (77) optional_newlines -> optional_newlines . NEWLINE
+    (51) case_body -> . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    NEWLINE         shift and go to state 148
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    case_body                      shift and go to state 154
+    statement_list                 shift and go to state 149
+    statement                      shift and go to state 3
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 146
+
+    (52) case_patterns -> case_patterns COMMA expression .
+    (44) expression -> expression . DOT INT_LITERAL
+    (45) expression -> expression . DOT IDENTIFIER
+
+    COLON           reduce using rule 52 (case_patterns -> case_patterns COMMA expression .)
+    COMMA           reduce using rule 52 (case_patterns -> case_patterns COMMA expression .)
+    DOT             shift and go to state 25
+
+
+state 147
+
+    (54) default_case -> DEFAULT COLON optional_newlines case_body .
+
+    RBRACE          reduce using rule 54 (default_case -> DEFAULT COLON optional_newlines case_body .)
+    NEWLINE         reduce using rule 54 (default_case -> DEFAULT COLON optional_newlines case_body .)
+
+
+state 148
+
+    (77) optional_newlines -> optional_newlines NEWLINE .
+    (10) statement -> NEWLINE .
+
+  ! reduce/reduce conflict for NEWLINE resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for IDENTIFIER resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for CLASS resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for SWITCH resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for LET resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for VAR resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for SELF resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for LPAREN resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for INT_LITERAL resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for FLOAT_LITERAL resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for STRING resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for TRUE resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for FALSE resolved using rule 10 (statement -> NEWLINE .)
+  ! reduce/reduce conflict for RETURN resolved using rule 10 (statement -> NEWLINE .)
+    NEWLINE         reduce using rule 10 (statement -> NEWLINE .)
+    IDENTIFIER      reduce using rule 10 (statement -> NEWLINE .)
+    CLASS           reduce using rule 10 (statement -> NEWLINE .)
+    SWITCH          reduce using rule 10 (statement -> NEWLINE .)
+    LET             reduce using rule 10 (statement -> NEWLINE .)
+    VAR             reduce using rule 10 (statement -> NEWLINE .)
+    SELF            reduce using rule 10 (statement -> NEWLINE .)
+    LPAREN          reduce using rule 10 (statement -> NEWLINE .)
+    INT_LITERAL     reduce using rule 10 (statement -> NEWLINE .)
+    FLOAT_LITERAL   reduce using rule 10 (statement -> NEWLINE .)
+    STRING          reduce using rule 10 (statement -> NEWLINE .)
+    TRUE            reduce using rule 10 (statement -> NEWLINE .)
+    FALSE           reduce using rule 10 (statement -> NEWLINE .)
+    RETURN          reduce using rule 10 (statement -> NEWLINE .)
+    RBRACE          reduce using rule 10 (statement -> NEWLINE .)
+    DEFAULT         reduce using rule 10 (statement -> NEWLINE .)
+    CASE            reduce using rule 10 (statement -> NEWLINE .)
+
+  ! NEWLINE         [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! IDENTIFIER      [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! CLASS           [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! SWITCH          [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! LET             [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! VAR             [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! SELF            [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! LPAREN          [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! INT_LITERAL     [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! FLOAT_LITERAL   [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! STRING          [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! TRUE            [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! FALSE           [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+  ! RETURN          [ reduce using rule 77 (optional_newlines -> optional_newlines NEWLINE .) ]
+
+
+state 149
+
+    (51) case_body -> statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    RBRACE          reduce using rule 51 (case_body -> statement_list .)
+    DEFAULT         reduce using rule 51 (case_body -> statement_list .)
+    CASE            reduce using rule 51 (case_body -> statement_list .)
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+  ! NEWLINE         [ reduce using rule 51 (case_body -> statement_list .) ]
+
+    statement                      shift and go to state 24
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 150
+
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET . LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+
+    LBRACE          shift and go to state 155
+
+
+state 151
+
+    (29) init_declaration -> INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .
+
+    RBRACE          reduce using rule 29 (init_declaration -> INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+    NEWLINE         reduce using rule 29 (init_declaration -> INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+    VAR             reduce using rule 29 (init_declaration -> INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+    LET             reduce using rule 29 (init_declaration -> INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+    INIT            reduce using rule 29 (init_declaration -> INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+    FUNC            reduce using rule 29 (init_declaration -> INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+
+
+state 152
+
+    (31) method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list . RBRACE
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    RBRACE          shift and go to state 156
+    NEWLINE         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    statement                      shift and go to state 24
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 153
+
+    (32) method_declaration -> FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE .
+
+    RBRACE          reduce using rule 32 (method_declaration -> FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE .)
+    NEWLINE         reduce using rule 32 (method_declaration -> FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE .)
+    VAR             reduce using rule 32 (method_declaration -> FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE .)
+    LET             reduce using rule 32 (method_declaration -> FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE .)
+    INIT            reduce using rule 32 (method_declaration -> FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE .)
+    FUNC            reduce using rule 32 (method_declaration -> FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE .)
+
+
+state 154
+
+    (50) case_clause -> CASE case_patterns COLON optional_newlines case_body .
+
+    DEFAULT         reduce using rule 50 (case_clause -> CASE case_patterns COLON optional_newlines case_body .)
+    RBRACE          reduce using rule 50 (case_clause -> CASE case_patterns COLON optional_newlines case_body .)
+    NEWLINE         reduce using rule 50 (case_clause -> CASE case_patterns COLON optional_newlines case_body .)
+    CASE            reduce using rule 50 (case_clause -> CASE case_patterns COLON optional_newlines case_body .)
+
+
+state 155
+
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE . optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE
+    (77) optional_newlines -> . optional_newlines NEWLINE
+    (78) optional_newlines -> . empty
+    (76) empty -> .
+
+    NEWLINE         reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+    CLASS           reduce using rule 76 (empty -> .)
+    SWITCH          reduce using rule 76 (empty -> .)
+    LET             reduce using rule 76 (empty -> .)
+    VAR             reduce using rule 76 (empty -> .)
+    SELF            reduce using rule 76 (empty -> .)
+    LPAREN          reduce using rule 76 (empty -> .)
+    INT_LITERAL     reduce using rule 76 (empty -> .)
+    FLOAT_LITERAL   reduce using rule 76 (empty -> .)
+    STRING          reduce using rule 76 (empty -> .)
+    TRUE            reduce using rule 76 (empty -> .)
+    FALSE           reduce using rule 76 (empty -> .)
+    RETURN          reduce using rule 76 (empty -> .)
+
+    optional_newlines              shift and go to state 157
+    empty                          shift and go to state 71
+
+state 156
+
+    (31) method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .
+
+    RBRACE          reduce using rule 31 (method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+    NEWLINE         reduce using rule 31 (method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+    VAR             reduce using rule 31 (method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+    LET             reduce using rule 31 (method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+    INIT            reduce using rule 31 (method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+    FUNC            reduce using rule 31 (method_declaration -> FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE .)
+
+
+state 157
+
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines . statement_list optional_newlines RBRACE optional_newlines RBRACE
+    (77) optional_newlines -> optional_newlines . NEWLINE
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+    NEWLINE         shift and go to state 148
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+    statement_list                 shift and go to state 158
+    statement                      shift and go to state 3
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 158
+
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list . optional_newlines RBRACE optional_newlines RBRACE
+    (2) statement_list -> statement_list . statement
+    (77) optional_newlines -> . optional_newlines NEWLINE
+    (78) optional_newlines -> . empty
+    (4) statement -> . function_call_statement
+    (5) statement -> . class_declaration
+    (6) statement -> . switch_statement
+    (7) statement -> . variable_declaration
+    (8) statement -> . expression
+    (9) statement -> . return_statement
+    (10) statement -> . NEWLINE
+    (76) empty -> .
+    (11) function_call_statement -> . IDENTIFIER LPAREN argument_list RPAREN
+    (12) function_call_statement -> . IDENTIFIER LPAREN RPAREN
+    (15) class_declaration -> . CLASS IDENTIFIER LBRACE class_body RBRACE
+    (46) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
+    (47) switch_statement -> . SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE
+    (55) variable_declaration -> . LET IDENTIFIER COLON type_annotation
+    (56) variable_declaration -> . VAR IDENTIFIER COLON type_annotation
+    (57) variable_declaration -> . LET IDENTIFIER COLON tuple_type
+    (58) variable_declaration -> . VAR IDENTIFIER COLON tuple_type
+    (33) expression -> . SELF DOT IDENTIFIER
+    (39) expression -> . LPAREN tuple_elements RPAREN
+    (44) expression -> . expression DOT INT_LITERAL
+    (45) expression -> . expression DOT IDENTIFIER
+    (59) expression -> . INT_LITERAL
+    (60) expression -> . FLOAT_LITERAL
+    (61) expression -> . STRING
+    (62) expression -> . TRUE
+    (63) expression -> . FALSE
+    (64) expression -> . IDENTIFIER
+    (65) expression -> . LPAREN expression RPAREN
+    (66) return_statement -> . RETURN expression
+    (67) return_statement -> . RETURN
+
+  ! shift/reduce conflict for NEWLINE resolved as shift
+    NEWLINE         shift and go to state 10
+    RBRACE          reduce using rule 76 (empty -> .)
+    IDENTIFIER      shift and go to state 11
+    CLASS           shift and go to state 13
+    SWITCH          shift and go to state 14
+    LET             shift and go to state 15
+    VAR             shift and go to state 16
+    SELF            shift and go to state 17
+    LPAREN          shift and go to state 12
+    INT_LITERAL     shift and go to state 18
+    FLOAT_LITERAL   shift and go to state 19
+    STRING          shift and go to state 20
+    TRUE            shift and go to state 21
+    FALSE           shift and go to state 22
+    RETURN          shift and go to state 23
+
+  ! NEWLINE         [ reduce using rule 76 (empty -> .) ]
+
+    optional_newlines              shift and go to state 159
+    statement                      shift and go to state 24
+    empty                          shift and go to state 71
+    function_call_statement        shift and go to state 4
+    class_declaration              shift and go to state 5
+    switch_statement               shift and go to state 6
+    variable_declaration           shift and go to state 7
+    expression                     shift and go to state 8
+    return_statement               shift and go to state 9
+
+state 159
+
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines . RBRACE optional_newlines RBRACE
+    (77) optional_newlines -> optional_newlines . NEWLINE
+
+    RBRACE          shift and go to state 160
+    NEWLINE         shift and go to state 91
+
+
+state 160
+
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE . optional_newlines RBRACE
+    (77) optional_newlines -> . optional_newlines NEWLINE
+    (78) optional_newlines -> . empty
+    (76) empty -> .
+
+    RBRACE          reduce using rule 76 (empty -> .)
+    NEWLINE         reduce using rule 76 (empty -> .)
+
+    optional_newlines              shift and go to state 161
+    empty                          shift and go to state 71
+
+state 161
+
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines . RBRACE
+    (77) optional_newlines -> optional_newlines . NEWLINE
+
+    RBRACE          shift and go to state 162
+    NEWLINE         shift and go to state 91
+
+
+state 162
+
+    (28) computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE .
+
+    RBRACE          reduce using rule 28 (computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE .)
+    NEWLINE         reduce using rule 28 (computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE .)
+    VAR             reduce using rule 28 (computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE .)
+    LET             reduce using rule 28 (computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE .)
+    INIT            reduce using rule 28 (computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE .)
+    FUNC            reduce using rule 28 (computed_property -> VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for LPAREN in state 11 resolved as shift
+WARNING: shift/reduce conflict for SELF in state 23 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 23 resolved as shift
+WARNING: shift/reduce conflict for INT_LITERAL in state 23 resolved as shift
+WARNING: shift/reduce conflict for FLOAT_LITERAL in state 23 resolved as shift
+WARNING: shift/reduce conflict for STRING in state 23 resolved as shift
+WARNING: shift/reduce conflict for TRUE in state 23 resolved as shift
+WARNING: shift/reduce conflict for FALSE in state 23 resolved as shift
+WARNING: shift/reduce conflict for IDENTIFIER in state 23 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 28 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 47 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 47 resolved as shift
+WARNING: shift/reduce conflict for LET in state 47 resolved as shift
+WARNING: shift/reduce conflict for INIT in state 47 resolved as shift
+WARNING: shift/reduce conflict for FUNC in state 47 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 70 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 149 resolved as shift
+WARNING: shift/reduce conflict for NEWLINE in state 158 resolved as shift
+WARNING: reduce/reduce conflict in state 148 resolved using rule (statement -> NEWLINE)
+WARNING: rejected rule (optional_newlines -> optional_newlines NEWLINE) in state 148
