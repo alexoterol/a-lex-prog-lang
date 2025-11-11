@@ -150,9 +150,9 @@ def p_array_elements(p):
 
 
 def p_expression_array_access(p):
-    '''expression : IDENTIFIER LBRACKET expression RBRACKET'''
-    p[0] = ('array_access', p[1], p[3])
-    print(f"✓ Acceso a array/diccionario: {p[1]}[...]")
+    '''expression : expression LBRACKET expression RBRACKET'''
+    p[0] = ('subscript_access', p[1], p[3])
+    print(f"✓ Acceso con subíndice: ...[...]")
 
 
 # ============================================================================
@@ -254,17 +254,30 @@ def p_expression_member_access(p):
 
 
 # ============================================================================
-# ASIGNACIÓN (Alexandre + Alex O)
+# ASIGNACIÓN (Alexandre + Alex O) - CORREGIDA PARA SOPORTAR EXPRESIONES
 # ============================================================================
 def p_assignment(p):
-    '''assignment : IDENTIFIER ASSIGN expression
-                  | IDENTIFIER PLUS_ASSIGN expression
-                  | IDENTIFIER MINUS_ASSIGN expression
-                  | IDENTIFIER TIMES_ASSIGN expression
-                  | IDENTIFIER DIV_ASSIGN expression
-                  | IDENTIFIER MOD_ASSIGN expression'''
+    '''assignment : lvalue ASSIGN expression
+                  | lvalue PLUS_ASSIGN expression
+                  | lvalue MINUS_ASSIGN expression
+                  | lvalue TIMES_ASSIGN expression
+                  | lvalue DIV_ASSIGN expression
+                  | lvalue MOD_ASSIGN expression'''
     p[0] = ('assignment', p[1], p[2], p[3])
-    print(f"✓ Asignación: {p[1]} {p[2]} ...")
+    print(f"✓ Asignación: ... {p[2]} ...")
+
+
+def p_lvalue(p):
+    '''lvalue : IDENTIFIER
+              | SELF DOT IDENTIFIER
+              | lvalue DOT IDENTIFIER
+              | lvalue LBRACKET expression RBRACKET'''
+    if len(p) == 2:
+        p[0] = ('identifier', p[1])
+    elif len(p) == 4 and p[2] == '.':
+        p[0] = ('member_access', p[1], p[3])
+    else:
+        p[0] = ('subscript_access', p[1], p[3])
 
 
 # ============================================================================
@@ -356,6 +369,21 @@ def p_expression_self_access(p):
     '''expression : SELF DOT IDENTIFIER'''
     p[0] = ('self_access', p[3])
     print(f"✓ Acceso a propiedad: self.{p[3]}")
+
+
+# ============================================================================
+# LLAMADAS A FUNCIÓN COMO EXPRESIÓN (CORREGIDO)
+# ============================================================================
+def p_expression_function_call(p):
+    '''expression : IDENTIFIER LPAREN argument_list RPAREN
+                  | IDENTIFIER LPAREN RPAREN'''
+    function_name = p[1]
+    
+    if len(p) == 5:
+        arguments = p[3]
+        p[0] = ('function_call', function_name, arguments)
+    else:
+        p[0] = ('function_call', function_name, [])
 
 
 # ============================================================================
@@ -538,7 +566,7 @@ def p_return_statement(p):
 
 
 # ============================================================================
-# ENTRADA/SALIDA: PRINT Y READLINE (Jose)
+# ENTRADA/SALIDA: PRINT Y READLINE (Jose) - COMO STATEMENT
 # ============================================================================
 def p_function_call_statement(p):
     '''function_call_statement : IDENTIFIER LPAREN argument_list RPAREN
@@ -559,6 +587,7 @@ def p_function_call_statement(p):
                 p[0] = ('error', 'readLine con argumentos incorrectos')
         else:
             p[0] = ('function_call', function_name, arguments)
+            print(f"✓ Llamada a función: {function_name}()")
     else:
         if function_name == 'print':
             p[0] = ('print', [])
@@ -568,6 +597,7 @@ def p_function_call_statement(p):
             print("✓ Lectura de entrada: readLine()")
         else:
             p[0] = ('function_call', function_name, [])
+            print(f"✓ Llamada a función: {function_name}()")
 
 
 def p_argument_list(p):
@@ -637,13 +667,21 @@ def p_init_declaration(p):
 
 
 def p_method_declaration(p):
-    '''method_declaration : FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
+    '''method_declaration : FUNC IDENTIFIER LPAREN parameter_list RPAREN ARROW type_annotation LBRACE statement_list RBRACE
+                          | FUNC IDENTIFIER LPAREN RPAREN ARROW type_annotation LBRACE statement_list RBRACE
+                          | FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
                           | FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE'''
-    if len(p) == 9:
-        p[0] = ('method', p[2], p[4], p[7])
+    if len(p) == 11:
+        p[0] = ('method', p[2], p[4], p[7], p[9])
+        print(f"✓ Método: func {p[2]}({len(p[4])} parámetros) -> {p[7]}")
+    elif len(p) == 10:
+        p[0] = ('method', p[2], [], p[6], p[8])
+        print(f"✓ Método: func {p[2]}() -> {p[6]}")
+    elif len(p) == 9:
+        p[0] = ('method', p[2], p[4], None, p[7])
         print(f"✓ Método: func {p[2]}({len(p[4])} parámetros)")
     else:
-        p[0] = ('method', p[2], [], p[6])
+        p[0] = ('method', p[2], [], None, p[6])
         print(f"✓ Método: func {p[2]}()")
 
 
@@ -748,7 +786,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
 # ============================================================================
 if __name__ == "__main__":
     # Cambiar según quien ejecute
-    GITHUB_USER = "Todos"  # ← Cambiar aquí
+    GITHUB_USER = "TODOS"  # ← Cambiar aquí
     ARCHIVO_SWIFT = "Examples/pruebaGlobalSyntac.swift"
     
     analizar_archivo_swift(ARCHIVO_SWIFT, GITHUB_USER)

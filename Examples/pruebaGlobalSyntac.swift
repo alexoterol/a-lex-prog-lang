@@ -371,8 +371,8 @@ func analyzeData(numbers: [Int], threshold: Int = 50) -> [String: Int] {
         }
     }
     
-    // results["high"] = count
-    // results["total"] = 0
+    results["high"] = count
+    results["total"] = 0
     
     return results
 }
