@@ -283,7 +283,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
 
     try:
         if os.path.exists("Lexer/parser.out"):
-            shutil.copy("Lexer/parser.out", log_filename)
+            shutil.copy("src/parser.out", log_filename)
             print(f"\n✓ Log guardado en: {log_filename}")
         else:
             print(f"\n⚠️  Advertencia: No se encontró parser.out")
