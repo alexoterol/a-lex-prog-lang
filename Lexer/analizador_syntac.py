@@ -18,25 +18,21 @@ INTEGRANTES:
 ANÁLISIS SINTÁCTICO COMPLETO DE SWIFT
 """
 
-# ============================================================================
-# PRECEDENCIA DE OPERADORES (UNIFICADA)
-# ============================================================================
+# precedencia de operadores
 precedence = (
-    ('right', 'QUESTION', 'COLON'),  # Ternario
-    ('left', 'NIL_COALESCE'),        # ??
-    ('left', 'OR'),                  # ||
-    ('left', 'AND'),                 # &&
-    ('left', 'EQ', 'NE'),            # == !=
-    ('left', 'LT', 'LE', 'GT', 'GE'), # < <= > >=
-    ('left', 'PLUS', 'MINUS'),       # + -
-    ('left', 'TIMES', 'DIVIDE', 'MODULO'), # * / %
-    ('right', 'UMINUS', 'UPLUS', 'NOT'),   # unarios
+    ('right', 'QUESTION', 'COLON'),
+    ('left', 'NIL_COALESCE'),
+    ('left', 'OR'),
+    ('left', 'AND'),
+    ('left', 'EQ', 'NE'),
+    ('left', 'LT', 'LE', 'GT', 'GE'),
+    ('left', 'PLUS', 'MINUS'),
+    ('left', 'TIMES', 'DIVIDE', 'MODULO'),
+    ('right', 'UMINUS', 'UPLUS', 'NOT'),
 )
 
 
-# ============================================================================
-# REGLA INICIAL Y ESTRUCTURA DEL PROGRAMA
-# ============================================================================
+# regla inicial y estructura del programa
 def p_program(p):
     '''program : statement_list'''
     p[0] = ('program', p[1])
@@ -75,9 +71,7 @@ def p_expression_statement(p):
     p[0] = ('expr_stmt', p[1])
 
 
-# ============================================================================
-# DECLARACIÓN DE VARIABLES (Alexandre + Alex O)
-# ============================================================================
+# declaración de variables
 def p_variable_declaration(p):
     '''variable_declaration : LET IDENTIFIER COLON type_annotation ASSIGN expression
                            | VAR IDENTIFIER COLON type_annotation ASSIGN expression
@@ -120,9 +114,7 @@ def p_optional_type(p):
     print(f"✓ Tipo opcional: {p[1]}?")
 
 
-# ============================================================================
-# ARRAYS (Alexandre)
-# ============================================================================
+# arrays
 def p_array_type(p):
     '''array_type : LBRACKET type_annotation RBRACKET'''
     p[0] = ('array_type', p[2])
@@ -155,9 +147,7 @@ def p_expression_array_access(p):
     print(f"✓ Acceso con subíndice: ...[...]")
 
 
-# ============================================================================
-# DICCIONARIOS (Alex O)
-# ============================================================================
+# diccionarios
 def p_dictionary_type(p):
     '''dictionary_type : LBRACKET type_annotation COLON type_annotation RBRACKET'''
     p[0] = ('dict_type', p[2], p[4])
@@ -189,9 +179,7 @@ def p_dictionary_pair(p):
     p[0] = ('dict_pair', p[1], p[3])
 
 
-# ============================================================================
-# TUPLAS (Jose)
-# ============================================================================
+# tuplas
 def p_tuple_type(p):
     '''tuple_type : LPAREN tuple_type_elements RPAREN'''
     p[0] = ('tuple_type', p[2])
@@ -253,9 +241,7 @@ def p_expression_member_access(p):
     print(f"✓ Acceso a miembro: .{p[3]}")
 
 
-# ============================================================================
-# ASIGNACIÓN (Alexandre + Alex O) - CORREGIDA PARA SOPORTAR EXPRESIONES
-# ============================================================================
+# asignación
 def p_assignment(p):
     '''assignment : lvalue ASSIGN expression
                   | lvalue PLUS_ASSIGN expression
@@ -280,9 +266,7 @@ def p_lvalue(p):
         p[0] = ('subscript_access', p[1], p[3])
 
 
-# ============================================================================
-# EXPRESIONES ARITMÉTICAS (Alexandre)
-# ============================================================================
+# expresiones aritméticas
 def p_expression_binop(p):
     '''expression : expression PLUS expression
                   | expression MINUS expression
@@ -300,9 +284,7 @@ def p_expression_unary(p):
     print(f"✓ Expresión unaria: {p[1]}...")
 
 
-# ============================================================================
-# EXPRESIONES LÓGICAS Y BOOLEANAS (Alex O)
-# ============================================================================
+# expresiones lógicas y booleanas
 def p_expression_logical(p):
     '''expression : expression AND expression
                   | expression OR expression'''
@@ -327,9 +309,7 @@ def p_expression_comparison(p):
     print(f"✓ Expresión de comparación: ... {p[2]} ...")
 
 
-# ============================================================================
-# OPERADOR TERNARIO Y NIL-COALESCING (Alex O)
-# ============================================================================
+# operador ternario y nil-coalescing
 def p_expression_ternary(p):
     '''expression : expression QUESTION expression COLON expression'''
     p[0] = ('ternary', p[1], p[3], p[5])
@@ -342,9 +322,7 @@ def p_expression_nil_coalescing(p):
     print(f"✓ Operador nil-coalescing: ... ?? ...")
 
 
-# ============================================================================
-# EXPRESIONES BÁSICAS Y LITERALES
-# ============================================================================
+# expresiones básicas y literales
 def p_expression_group(p):
     '''expression : LPAREN expression RPAREN'''
     p[0] = p[2]
@@ -371,14 +349,12 @@ def p_expression_self_access(p):
     print(f"✓ Acceso a propiedad: self.{p[3]}")
 
 
-# ============================================================================
-# LLAMADAS A FUNCIÓN COMO EXPRESIÓN (CORREGIDO)
-# ============================================================================
+# llamadas a función como expresión
 def p_expression_function_call(p):
     '''expression : IDENTIFIER LPAREN argument_list RPAREN
                   | IDENTIFIER LPAREN RPAREN'''
     function_name = p[1]
-    
+
     if len(p) == 5:
         arguments = p[3]
         p[0] = ('function_call', function_name, arguments)
@@ -386,9 +362,7 @@ def p_expression_function_call(p):
         p[0] = ('function_call', function_name, [])
 
 
-# ============================================================================
-# ESTRUCTURA DE CONTROL: FOR-IN (Alexandre)
-# ============================================================================
+# estructura de control: for-in
 def p_for_statement(p):
     '''for_statement : FOR IDENTIFIER IN range_expression LBRACE statement_list RBRACE
                      | FOR IDENTIFIER IN expression LBRACE statement_list RBRACE'''
@@ -403,9 +377,7 @@ def p_range_expression(p):
     print(f"✓ Rango: ... {p[2]} ...")
 
 
-# ============================================================================
-# ESTRUCTURA DE CONTROL: IF-ELSE (Alex O)
-# ============================================================================
+# estructura de control: if-else
 def p_if_statement(p):
     '''if_statement : IF expression LBRACE statement_list RBRACE
                     | IF expression LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
@@ -440,27 +412,21 @@ def p_else_if_statement(p):
     print(f"✓ else if")
 
 
-# ============================================================================
-# ESTRUCTURA DE CONTROL: GUARD (Alex O)
-# ============================================================================
+# estructura de control: guard
 def p_guard_statement(p):
     '''guard_statement : GUARD expression ELSE LBRACE statement_list RBRACE'''
     p[0] = ('guard', p[2], p[5])
     print(f"✓ Guard statement")
 
 
-# ============================================================================
-# ESTRUCTURA DE CONTROL: WHILE (Alex O)
-# ============================================================================
+# estructura de control: while
 def p_while_statement(p):
     '''while_statement : WHILE expression LBRACE statement_list RBRACE'''
     p[0] = ('while', p[2], p[4])
     print(f"✓ Bucle while")
 
 
-# ============================================================================
-# ESTRUCTURA DE CONTROL: SWITCH-CASE (Jose)
-# ============================================================================
+# estructura de control: switch-case
 def p_switch_statement(p):
     '''switch_statement : SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
                         | SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE'''
@@ -513,9 +479,7 @@ def p_optional_newlines(p):
     pass
 
 
-# ============================================================================
-# FUNCIONES (Alexandre + Alex O)
-# ============================================================================
+# funciones
 def p_function_declaration(p):
     '''function_declaration : FUNC IDENTIFIER LPAREN parameter_list RPAREN ARROW type_annotation LBRACE statement_list RBRACE
                            | FUNC IDENTIFIER LPAREN RPAREN ARROW type_annotation LBRACE statement_list RBRACE
@@ -565,14 +529,12 @@ def p_return_statement(p):
         print("✓ Return")
 
 
-# ============================================================================
-# ENTRADA/SALIDA: PRINT Y READLINE (Jose) - COMO STATEMENT
-# ============================================================================
+# entrada/salida: print y readline
 def p_function_call_statement(p):
     '''function_call_statement : IDENTIFIER LPAREN argument_list RPAREN
                                | IDENTIFIER LPAREN RPAREN'''
     function_name = p[1]
-    
+
     if len(p) == 5:
         arguments = p[3]
         if function_name == 'print':
@@ -609,9 +571,7 @@ def p_argument_list(p):
         p[0] = [p[1]]
 
 
-# ============================================================================
-# POO: CLASES (Jose)
-# ============================================================================
+# poo: clases
 def p_class_declaration(p):
     '''class_declaration : CLASS IDENTIFIER LBRACE class_body RBRACE'''
     p[0] = ('class_decl', p[2], p[4])
@@ -685,17 +645,13 @@ def p_method_declaration(p):
         print(f"✓ Método: func {p[2]}()")
 
 
-# ============================================================================
-# AUXILIARES
-# ============================================================================
+# auxiliares
 def p_empty(p):
     '''empty :'''
     pass
 
 
-# ============================================================================
 # MANEJO DE ERRORES
-# ============================================================================
 def p_error(p):
     if p:
         error_msg = f"Error de sintaxis en línea {p.lineno}: Token inesperado '{p.value}' (tipo: {p.type})"
@@ -705,15 +661,11 @@ def p_error(p):
         print(f"❌ {error_msg}")
 
 
-# ============================================================================
-# CONSTRUCCIÓN DEL PARSER
-# ============================================================================
+# construcción del parser
 parser = yacc.yacc()
 
 
-# ============================================================================
-# FUNCIÓN PARA ANALIZAR ARCHIVO Y COPIAR LOG
-# ============================================================================
+# función para analizar archivo y copiar log
 def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     """
     Lee un archivo Swift, lo analiza y copia el parser.out a logs/
@@ -729,8 +681,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     print("=" * 70)
     print(f"Archivo: {ruta_archivo}")
     print(f"Usuario ejecutando: {github_user}\n")
-    
-    # Leer archivo
+
     try:
         with open(ruta_archivo, "r", encoding="utf-8") as f:
             codigo = f.read()
@@ -740,29 +691,25 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     except Exception as e:
         print(f"❌ Error al leer el archivo: {e}")
         return
-    
-    # Analizar sintaxis
+
     print("Analizando sintaxis...\n")
     try:
         result = parser.parse(codigo, lexer=lexer)
         print("\n✓ Análisis sintáctico completado exitosamente")
     except Exception as e:
         print(f"\n❌ Error durante el análisis: {e}")
-    
-    # Crear carpeta logs/ si no existe
+
     os.makedirs("logs", exist_ok=True)
-    
-    # Copiar parser.out a logs/ con el nombre correcto
+
     timestamp = datetime.now().strftime("%d%m%Y-%Hh%M")
     log_filename = f"logs/sintactico-{github_user}-{timestamp}.txt"
-    
-    # Buscar parser.out en varias ubicaciones posibles
+
     posibles_rutas = [
         "parser.out",
         "Lexer/parser.out",
         os.path.join(os.path.dirname(__file__), "parser.out")
     ]
-    
+
     parser_out_encontrado = False
     for ruta in posibles_rutas:
         if os.path.exists(ruta):
@@ -773,20 +720,17 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
                 break
             except Exception as e:
                 print(f"⚠️ Error al copiar desde {ruta}: {e}")
-    
+
     if not parser_out_encontrado:
         print(f"\n⚠️ Advertencia: No se encontró parser.out")
         print(f"   Ubicaciones buscadas: {posibles_rutas}")
-    
+
     print("=" * 70)
 
 
-# ============================================================================
 # MAIN
-# ============================================================================
 if __name__ == "__main__":
-    # Cambiar según quien ejecute
-    GITHUB_USER = "TODOS"  # ← Cambiar aquí
+    GITHUB_USER = "TODOS"
     ARCHIVO_SWIFT = "Examples/pruebaGlobalSyntac.swift"
-    
+
     analizar_archivo_swift(ARCHIVO_SWIFT, GITHUB_USER)
