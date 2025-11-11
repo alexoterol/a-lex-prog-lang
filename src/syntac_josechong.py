@@ -20,7 +20,7 @@ Responsabilidades:
 5. Funciones: Métodos de clase con self
 """
 
-# PRECEDENCIA DE OPERADORES
+# precedencia de operadores
 precedence = (
     ('left', 'OR'),
     ('left', 'AND'),
@@ -32,7 +32,7 @@ precedence = (
 )
 
 
-# REGLA INICIAL
+# regla inicial
 def p_program(p):
     '''program : statement_list'''
     p[0] = ('program', p[1])
@@ -58,7 +58,7 @@ def p_statement(p):
         p[0] = p[1]
 
 
-# ENTRADA/SALIDA - PRINT y READLINE
+# entrada/salida - print y readline
 def p_function_call_statement(p):
     '''function_call_statement : IDENTIFIER LPAREN argument_list RPAREN
                                | IDENTIFIER LPAREN RPAREN'''
@@ -104,7 +104,7 @@ def p_argument_list(p):
     else:
         p[0] = [p[1]]
 
-# POO - DECLARACIÓN DE CLASES
+# poo - declaración de clases
 def p_class_declaration(p):
     '''class_declaration : CLASS IDENTIFIER LBRACE class_body RBRACE'''
     p[0] = ('class_decl', p[2], p[4])
@@ -131,7 +131,7 @@ def p_class_member(p):
         p[0] = p[1]
 
 
-# POO - PROPIEDADES ALMACENADAS
+# poo - propiedades almacenadas
 def p_property_declaration(p):
     '''property_declaration : VAR IDENTIFIER COLON type_annotation
                            | LET IDENTIFIER COLON type_annotation
@@ -141,14 +141,14 @@ def p_property_declaration(p):
     print(f"✓ Propiedad: {p[1]} {p[2]}: {p[4]}")
 
 
-# POO - PROPIEDADES COMPUTADAS
+# poo - propiedades computadas
 def p_computed_property(p):
     '''computed_property : VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE'''
     p[0] = ('computed_property', p[2], p[4], p[10])
     print(f"✓ Propiedad computada: var {p[2]}: {p[4]}")
 
 
-# POO - INICIALIZADORES
+# poo - inicializadores
 def p_init_declaration(p):
     '''init_declaration : INIT LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
                         | INIT LPAREN RPAREN LBRACE statement_list RBRACE'''
@@ -160,7 +160,7 @@ def p_init_declaration(p):
         print("✓ Inicializador: init()")
 
 
-# POO - MÉTODOS DE INSTANCIA
+# poo - métodos de instancia
 def p_method_declaration(p):
     '''method_declaration : FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
                           | FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE'''
@@ -172,14 +172,14 @@ def p_method_declaration(p):
         print(f"✓ Método: func {p[2]}()")
 
 
-# POO - ACCESO CON SELF
+# poo - acceso con self
 def p_expression_self_access(p):
     '''expression : SELF DOT IDENTIFIER'''
     p[0] = ('self_access', p[3])
     print(f"✓ Acceso a propiedad: self.{p[3]}")
 
 
-# TUPLAS - DECLARACIÓN
+# tuplas - declaración
 def p_tuple_type(p):
     '''tuple_type : LPAREN tuple_type_elements RPAREN'''
     p[0] = ('tuple_type', p[2])
@@ -224,7 +224,7 @@ def p_tuple_element(p):
         p[0] = p[1]
 
 
-# TUPLAS - ACCESO
+# tuplas - acceso
 def p_expression_tuple_access(p):
     '''expression : expression DOT INT_LITERAL'''
     p[0] = ('tuple_access', p[1], p[3])
@@ -232,12 +232,11 @@ def p_expression_tuple_access(p):
 
 def p_expression_tuple_named_access(p):
     '''expression : expression DOT IDENTIFIER'''
-    # Diferenciamos si es acceso a tupla nombrada o propiedad
     p[0] = ('member_access', p[1], p[3])
     print(f"✓ Acceso: .{p[3]}")
 
 
-# SWITCH-CASE
+# switch-case
 def p_switch_statement(p):
     '''switch_statement : SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
                         | SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE'''
@@ -279,7 +278,7 @@ def p_default_case(p):
     print("✓ Default case")
 
 
-# EXPRESIONES BÁSICAS
+# expresiones básicas
 def p_variable_declaration(p):
     '''variable_declaration : LET IDENTIFIER COLON type_annotation
                            | VAR IDENTIFIER COLON type_annotation
@@ -305,7 +304,7 @@ def p_expression_group(p):
     p[0] = p[2]
 
 
-# AUXILIARES
+# auxiliares
 def p_return_statement(p):
     '''return_statement : RETURN expression
                         | RETURN'''
@@ -347,7 +346,7 @@ def p_optional_newlines(p):
 
 
 
-# MANEJO DE ERRORES
+# manejo de errores
 def p_error(p):
     if p:
         error_msg = f"Error de sintaxis en línea {p.lineno}: Token inesperado '{p.value}' (tipo: {p.type})"
@@ -357,22 +356,18 @@ def p_error(p):
         print(f"❌ {error_msg}")
 
 
-# CONSTRUCCIÓN DEL PARSER
+# construcción del parser
 parser = yacc.yacc(debug=True, outputdir=os.path.dirname(__file__) or '.')
 
 
-# FUNCIÓN PARA ANALIZAR ARCHIVO
+# función para analizar archivo
 def analizar_archivo_swift(ruta_archivo: str, github_user: str):
-    """
-    Lee un archivo Swift, lo analiza y copia el parser.out a logs/
-    """
     print("=" * 70)
     print("ANALIZADOR SINTÁCTICO DE SWIFT - Entrada/Salida y POO")
     print("=" * 70)
     print(f"Archivo: {ruta_archivo}")
     print(f"Usuario: {github_user}\n")
 
-    # Leer archivo
     try:
         with open(ruta_archivo, "r", encoding="utf-8") as f:
             codigo = f.read()
@@ -383,7 +378,6 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
         print(f"❌ Error al leer el archivo: {e}")
         return
 
-    # Analizar sintaxis
     print("Analizando sintaxis...\n")
     try:
         result = parser.parse(codigo, lexer=lexer)
@@ -391,14 +385,11 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     except Exception as e:
         print(f"\n❌ Error durante el análisis: {e}")
 
-    # Crear carpeta logs/ si no existe
     os.makedirs("logs", exist_ok=True)
 
-    # Copiar parser.out a logs/
     timestamp = datetime.now().strftime("%d%m%Y-%Hh%M")
     log_filename = f"logs/sintactico-{github_user}-{timestamp}.txt"
 
-    # Buscar parser.out en varias ubicaciones posibles
     posibles_rutas = [
         "parser.out",
         "Lexers_Individuales/parser.out",

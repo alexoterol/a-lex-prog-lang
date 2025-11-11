@@ -377,7 +377,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     print("=" * 70)
     print(f"Archivo: {ruta_archivo}")
     print(f"Usuario: {github_user}\n")
-    
+
     # Leer archivo
     try:
         with open(ruta_archivo, "r", encoding="utf-8") as f:
@@ -388,36 +388,36 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     except Exception as e:
         print(f"❌ Error al leer el archivo: {e}")
         return
-    
+
     # --- MODIFICACIÓN CLAVE: Redirigir la salida a parser.out ---
     parser_out_path = "parser.out"
     print("Analizando sintaxis y capturando log de parser en 'parser.out'...\n")
-    
+
     # 1. Redirige la salida estándar (stdout) al archivo 'parser.out'
     try:
         with open(parser_out_path, 'w', encoding='utf-8') as f_out:
             with redirect_stdout(f_out):
                 # 2. El parser debe ser llamado *dentro* del bloque de redirección.
-                # Si tu parser de PLY escribe la tabla de gramática y estados 
-                # (como la que mostraste) usando la función 'output', esta llamada 
+                # Si tu parser de PLY escribe la tabla de gramática y estados
+                # (como la que mostraste) usando la función 'output', esta llamada
                 # asegurará que esa salida se escriba en f_out (parser.out).
-                result = parser.parse(codigo, lexer=lexer) 
-        
+                result = parser.parse(codigo, lexer=lexer)
+
         # Este print vuelve a la consola normal (sys.stdout) una vez fuera del 'with'
         print("\n✓ Análisis sintáctico completado")
-        
+
     except Exception as e:
         # Los errores de excepción se imprimirán en la consola normal
         print(f"\n❌ Error durante el análisis: {e}")
     # -------------------------------------------------------------------
-    
+
     # Crear carpeta logs/ si no existe
     os.makedirs("logs", exist_ok=True)
-    
+
     # Copiar parser.out a logs/ con el nombre correcto
     timestamp = datetime.now().strftime("%d%m%Y-%Hh%M")
     log_filename = f"logs/sintactico-{github_user}-{timestamp}.txt"
-    
+
     try:
         # Ahora el archivo parser.out debe existir
         if os.path.exists(parser_out_path):
@@ -429,7 +429,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
             print(f"\n⚠️ Advertencia: No se encontró {parser_out_path}. El parser no lo generó.")
     except Exception as e:
         print(f"\n❌ Error al copiar log: {e}")
-    
+
     print("=" * 70)
 
 
@@ -439,5 +439,5 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
 if __name__ == "__main__":
     GITHUB_USER = "alexoterol"  # Cambia esto por tu usuario
     ARCHIVO_SWIFT = "Examples/alexotero_prueba_synt.swift"
-    
+
     analizar_archivo_swift(ARCHIVO_SWIFT, GITHUB_USER)

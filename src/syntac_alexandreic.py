@@ -5,7 +5,7 @@ from datetime import datetime
 import time
 
 # Importar tokens del lexer global
-from analizador_lex import tokens, lexer
+from src.analizador_lex import tokens, lexer
 
 # <<< INICIO APORTE Alexandre Icaza
 
@@ -253,7 +253,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     print("=" * 70)
     print(f"Archivo: {ruta_archivo}")
     print(f"Usuario: {github_user}\n")
-    
+
     # Leer archivo
     try:
         with open(ruta_archivo, "r", encoding="utf-8") as f:
@@ -264,7 +264,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     except Exception as e:
         print(f"❌ Error al leer el archivo: {e}")
         return
-    
+
     # Analizar sintaxis
     print("Analizando sintaxis...\n")
     try:
@@ -272,15 +272,15 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
         print("\n✓ Análisis sintáctico completado")
     except Exception as e:
         print(f"\n❌ Error durante el análisis: {e}")
-    
+
     # Crear carpeta logs/ si no existe
     os.makedirs("logs", exist_ok=True)
-    
+
     #time.sleep(5)
     # Copiar parser.out a logs/ con el nombre correcto
     timestamp = datetime.now().strftime("%d%m%Y-%Hh%M")
     log_filename = f"logs/sintactico-{github_user}-{timestamp}.txt"
-    
+
     try:
         if os.path.exists("Lexer/parser.out"):
             shutil.copy("Lexer/parser.out", log_filename)
@@ -289,7 +289,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
             print(f"\n⚠️  Advertencia: No se encontró parser.out")
     except Exception as e:
         print(f"\n❌ Error al copiar log: {e}")
-    
+
     print("=" * 70)
 
 
@@ -297,7 +297,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
 if __name__ == "__main__":
     GITHUB_USER = "aledicaz"
     ARCHIVO_SWIFT = "Examples/alexandre_sintactico.swift"
-    
+
     analizar_archivo_swift(ARCHIVO_SWIFT, GITHUB_USER)
 
 # <<< FIN APORTE Alexandre Icaza
