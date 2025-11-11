@@ -706,7 +706,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
 
     posibles_rutas = [
         "parser.out",
-        "Lexer/parser.out",
+        "Lexers_Individuales/parser.out",
         os.path.join(os.path.dirname(__file__), "parser.out")
     ]
 
