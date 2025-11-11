@@ -5,7 +5,7 @@ from datetime import datetime
 import time
 
 # Importar tokens del lexer global
-from src.analizador_lex import tokens, lexer
+from analizador_lex import tokens, lexer
 
 # <<< INICIO APORTE Alexandre Icaza
 
