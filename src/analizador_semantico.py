@@ -7,7 +7,7 @@ from datetime import datetime
 from analizador_lex import tokens, lexer
 
 """
-ANALIZADOR SINTÁCTICO GLOBAL - SWIFT
+ANALIZADOR SINTÁCTICO Y SEMÁNTICO GLOBAL - SWIFT
 Proyecto de Lenguajes de Programación
 
 INTEGRANTES:
@@ -15,10 +15,137 @@ INTEGRANTES:
 2. Alex Otero (alexoterol) - Control de flujo, Lógica, Diccionarios, while, Guard, Operadores especiales
 3. Jose Chong (Jlchong3) - Entrada/Salida, POO, Tuplas, Switch-case
 
-ANÁLISIS SINTÁCTICO COMPLETO DE SWIFT
+ANÁLISIS SINTÁCTICO Y SEMÁNTICO COMPLETO DE SWIFT
 """
 
-# precedencia de operadores
+# ==============================================================================
+# ESTRUCTURAS PARA ANÁLISIS SEMÁNTICO
+# ==============================================================================
+
+class TablaSimbolos:
+    """Tabla de símbolos con soporte para ámbitos anidados"""
+    def __init__(self):
+        self.ambitos = [{}]  # Lista de diccionarios (stack de ámbitos)
+        
+    def entrar_ambito(self):
+        """Crear un nuevo ámbito"""
+        self.ambitos.append({})
+        
+    def salir_ambito(self):
+        """Salir del ámbito actual"""
+        if len(self.ambitos) > 1:
+            self.ambitos.pop()
+            
+    def agregar_simbolo(self, nombre, tipo, es_constante=False, tipo_retorno=None, linea=0):
+        """Agregar símbolo al ámbito actual"""
+        ambito_actual = self.ambitos[-1]
+        ambito_actual[nombre] = {
+            'tipo': tipo,
+            'es_constante': es_constante,
+            'tipo_retorno': tipo_retorno,  # Para funciones
+            'linea': linea
+        }
+        
+    def buscar_simbolo(self, nombre):
+        """Buscar símbolo en todos los ámbitos (del más interno al más externo)"""
+        for ambito in reversed(self.ambitos):
+            if nombre in ambito:
+                return ambito[nombre]
+        return None
+        
+    def existe_en_ambito_actual(self, nombre):
+        """Verificar si el símbolo existe en el ámbito actual"""
+        return nombre in self.ambitos[-1]
+
+# Inicializar tabla de símbolos global
+tabla_simbolos = TablaSimbolos()
+
+# Contexto para tracking de estructuras de control
+contexto = {
+    'en_bucle': 0,  # Contador de bucles anidados
+    'en_funcion': False,  # Flag para saber si estamos dentro de una función
+    'funcion_actual': None,  # Información de la función actual
+    'errores_semanticos': []  # Lista de errores semánticos
+}
+
+def agregar_error_semantico(linea, columna, mensaje):
+    """Agregar error semántico a la lista"""
+    error = f"Error Semántico (Línea {linea}, Columna {columna}): {mensaje}"
+    contexto['errores_semanticos'].append(error)
+    print(f"❌ {error}")
+
+def inferir_tipo(valor):
+    """Inferir el tipo de un valor o expresión"""
+    if valor is None:
+        return None
+    
+    # Si es una tupla que representa un AST
+    if isinstance(valor, tuple):
+        tipo_nodo = valor[0]
+        
+        if tipo_nodo == 'literal':
+            lit_val = valor[1]
+
+            if isinstance(lit_val, bool):  # CORRECCIÓN: verificar bool antes de string
+                return 'Bool'
+            elif lit_val in ['true', 'false']:
+                return 'Bool'
+            elif isinstance(lit_val, int):
+                return 'Int'
+            elif isinstance(lit_val, float):
+                return 'Double'
+            elif isinstance(lit_val, str):
+                return 'String'
+            
+            elif lit_val == 'nil':
+                return 'Optional'
+                
+        elif tipo_nodo == 'identifier':
+            nombre = valor[1]
+            simbolo = tabla_simbolos.buscar_simbolo(nombre)
+            if simbolo:
+                return simbolo['tipo']
+            return None
+            
+        elif tipo_nodo == 'binop':
+            operador = valor[1]
+            tipo_izq = inferir_tipo(valor[2])
+            tipo_der = inferir_tipo(valor[3])
+            
+            # Operaciones aritméticas
+            if operador in ['+', '-', '*', '/', '%']:
+                if tipo_izq == tipo_der and tipo_izq in ['Int', 'Double']:
+                    return tipo_izq
+                # Permitir String + String
+                if operador == '+' and tipo_izq == 'String' and tipo_der == 'String':
+                    return 'String'
+                return None  # Tipos incompatibles
+                
+        elif tipo_nodo == 'comparison':
+            return 'Bool'
+            
+        elif tipo_nodo == 'logical':
+            return 'Bool'
+            
+        elif tipo_nodo == 'array_literal':
+            if len(valor[1]) > 0:
+                tipo_primer_elem = inferir_tipo(valor[1][0])
+                return ('array_type', tipo_primer_elem)
+            return ('array_type', 'Any')
+            
+        elif tipo_nodo == 'function_call':
+            nombre_func = valor[1]
+            simbolo = tabla_simbolos.buscar_simbolo(nombre_func)
+            if simbolo and simbolo.get('tipo_retorno'):
+                return simbolo['tipo_retorno']
+            return None
+    
+    return None
+
+# ==============================================================================
+# PRECEDENCIA DE OPERADORES
+# ==============================================================================
+
 precedence = (
     ('right', 'QUESTION', 'COLON'),
     ('left', 'NIL_COALESCE'),
@@ -31,13 +158,15 @@ precedence = (
     ('right', 'UMINUS', 'UPLUS', 'NOT'),
 )
 
+# ==============================================================================
+# REGLAS GRAMATICALES
+# ==============================================================================
 
-# regla inicial y estructura del programa
+# Regla inicial y estructura del programa
 def p_program(p):
     '''program : statement_list'''
     p[0] = ('program', p[1])
-    print("✓ Programa válido")
-
+    print("✅ Programa válido")
 
 def p_statement_list(p):
     '''statement_list : statement_list statement
@@ -46,7 +175,6 @@ def p_statement_list(p):
         p[0] = p[1] + [p[2]]
     else:
         p[0] = [p[1]]
-
 
 def p_statement(p):
     '''statement : variable_declaration
@@ -61,17 +189,20 @@ def p_statement(p):
                  | class_declaration
                  | expression_statement
                  | return_statement
+                 | break_statement
+                 | continue_statement
                  | NEWLINE'''
     if p[1] != '\n':
         p[0] = p[1]
-
 
 def p_expression_statement(p):
     '''expression_statement : expression'''
     p[0] = ('expr_stmt', p[1])
 
+# ==============================================================================
+# DECLARACIÓN DE VARIABLES (Regla 6: Redeclaración)
+# ==============================================================================
 
-# declaración de variables
 def p_variable_declaration(p):
     '''variable_declaration : LET IDENTIFIER COLON type_annotation ASSIGN expression
                            | VAR IDENTIFIER COLON type_annotation ASSIGN expression
@@ -81,16 +212,42 @@ def p_variable_declaration(p):
                            | VAR IDENTIFIER COLON type_annotation
                            | LET IDENTIFIER COLON tuple_type
                            | VAR IDENTIFIER COLON tuple_type'''
-    if len(p) == 7:
-        p[0] = ('var_decl', p[1], p[2], p[4], p[6])
-        print(f"✓ Declaración de variable: {p[1]} {p[2]}: {p[4]} = ...")
-    elif len(p) == 5 and p[3] == ':':
-        p[0] = ('var_decl', p[1], p[2], p[4], None)
-        print(f"✓ Declaración de variable: {p[1]} {p[2]}: {p[4]}")
-    else:
-        p[0] = ('var_decl', p[1], p[2], None, p[4])
-        print(f"✓ Declaración de variable: {p[1]} {p[2]} = ...")
-
+    
+    nombre = p[2]
+    linea = p.lineno(2)
+    
+    # REGLA 6: Verificar redeclaración en el mismo ámbito
+    if tabla_simbolos.existe_en_ambito_actual(nombre):
+        agregar_error_semantico(linea, 0, 
+            f"El identificador '{nombre}' ya ha sido declarado en este ámbito.")
+    
+    es_constante = (p[1] == 'let')
+    
+    if len(p) == 7:  # Con tipo y valor
+        tipo_declarado = p[4]
+        tipo_inferido = inferir_tipo(p[6])
+        
+        # Validar compatibilidad de tipos
+        if tipo_inferido and tipo_declarado != tipo_inferido:
+            if not (tipo_declarado == 'Double' and tipo_inferido == 'Int'):
+                agregar_error_semantico(linea, 0,
+                    f"Tipo incompatible: se esperaba '{tipo_declarado}' pero se asignó '{tipo_inferido}'.")
+        
+        tabla_simbolos.agregar_simbolo(nombre, tipo_declarado, es_constante, linea=linea)
+        p[0] = ('var_decl', p[1], nombre, tipo_declarado, p[6])
+        print(f"✅ Declaración de variable: {p[1]} {nombre}: {tipo_declarado} = ...")
+        
+    elif len(p) == 5 and p[3] == ':':  # Solo tipo
+        tipo = p[4]
+        tabla_simbolos.agregar_simbolo(nombre, tipo, es_constante, linea=linea)
+        p[0] = ('var_decl', p[1], nombre, tipo, None)
+        print(f"✅ Declaración de variable: {p[1]} {nombre}: {tipo}")
+        
+    else:  # Sin tipo, con valor
+        tipo_inferido = inferir_tipo(p[4])
+        tabla_simbolos.agregar_simbolo(nombre, tipo_inferido, es_constante, linea=linea)
+        p[0] = ('var_decl', p[1], nombre, tipo_inferido, p[4])
+        print(f"✅ Declaración de variable: {p[1]} {nombre} = ... (tipo: {tipo_inferido})")
 
 def p_type_annotation(p):
     '''type_annotation : TYPE_INT
@@ -104,33 +261,32 @@ def p_type_annotation(p):
                        | IDENTIFIER'''
     p[0] = p[1]
 
-
 def p_optional_type(p):
     '''optional_type : TYPE_INT QUESTION
                      | TYPE_DOUBLE QUESTION
                      | TYPE_BOOL QUESTION
                      | TYPE_STRING QUESTION'''
     p[0] = ('optional_type', p[1])
-    print(f"✓ Tipo opcional: {p[1]}?")
+    print(f"✅ Tipo opcional: {p[1]}?")
 
+# ==============================================================================
+# ARRAYS
+# ==============================================================================
 
-# arrays
 def p_array_type(p):
     '''array_type : LBRACKET type_annotation RBRACKET'''
     p[0] = ('array_type', p[2])
-    print(f"✓ Tipo array: [{p[2]}]")
-
+    print(f"✅ Tipo array: [{p[2]}]")
 
 def p_expression_array_literal(p):
     '''expression : LBRACKET array_elements RBRACKET
                   | LBRACKET RBRACKET'''
     if len(p) == 4:
         p[0] = ('array_literal', p[2])
-        print(f"✓ Array literal: [{len(p[2])} elementos]")
+        print(f"✅ Array literal: [{len(p[2])} elementos]")
     else:
         p[0] = ('array_literal', [])
-        print("✓ Array vacío: []")
-
+        print("✅ Array vacío: []")
 
 def p_array_elements(p):
     '''array_elements : array_elements COMMA expression
@@ -140,30 +296,29 @@ def p_array_elements(p):
     else:
         p[0] = [p[1]]
 
-
 def p_expression_array_access(p):
     '''expression : expression LBRACKET expression RBRACKET'''
     p[0] = ('subscript_access', p[1], p[3])
-    print(f"✓ Acceso con subíndice: ...[...]")
+    print(f"✅ Acceso con subíndice: ...[...]")
 
+# ==============================================================================
+# DICCIONARIOS
+# ==============================================================================
 
-# diccionarios
 def p_dictionary_type(p):
     '''dictionary_type : LBRACKET type_annotation COLON type_annotation RBRACKET'''
     p[0] = ('dict_type', p[2], p[4])
-    print(f"✓ Tipo diccionario: [{p[2]}: {p[4]}]")
-
+    print(f"✅ Tipo diccionario: [{p[2]}: {p[4]}]")
 
 def p_expression_dictionary_literal(p):
     '''expression : LBRACKET dictionary_pairs RBRACKET
                   | LBRACKET COLON RBRACKET'''
     if len(p) == 4 and p[2] == ':':
         p[0] = ('dict_literal', [])
-        print("✓ Diccionario vacío: [:]")
+        print("✅ Diccionario vacío: [:]")
     else:
         p[0] = ('dict_literal', p[2])
-        print(f"✓ Diccionario literal: [{len(p[2])} pares]")
-
+        print(f"✅ Diccionario literal: [{len(p[2])} pares]")
 
 def p_dictionary_pairs(p):
     '''dictionary_pairs : dictionary_pairs COMMA dictionary_pair
@@ -173,18 +328,18 @@ def p_dictionary_pairs(p):
     else:
         p[0] = [p[1]]
 
-
 def p_dictionary_pair(p):
     '''dictionary_pair : expression COLON expression'''
     p[0] = ('dict_pair', p[1], p[3])
 
+# ==============================================================================
+# TUPLAS
+# ==============================================================================
 
-# tuplas
 def p_tuple_type(p):
     '''tuple_type : LPAREN tuple_type_elements RPAREN'''
     p[0] = ('tuple_type', p[2])
-    print(f"✓ Tipo tupla con {len(p[2])} elementos")
-
+    print(f"✅ Tipo tupla con {len(p[2])} elementos")
 
 def p_tuple_type_elements(p):
     '''tuple_type_elements : tuple_type_elements COMMA tuple_type_element
@@ -194,7 +349,6 @@ def p_tuple_type_elements(p):
     else:
         p[0] = [p[1]]
 
-
 def p_tuple_type_element(p):
     '''tuple_type_element : IDENTIFIER COLON type_annotation
                           | type_annotation'''
@@ -203,12 +357,10 @@ def p_tuple_type_element(p):
     else:
         p[0] = p[1]
 
-
 def p_expression_tuple(p):
     '''expression : LPAREN tuple_elements RPAREN'''
     p[0] = ('tuple', p[2])
-    print(f"✓ Tupla con {len(p[2])} elementos")
-
+    print(f"✅ Tupla con {len(p[2])} elementos")
 
 def p_tuple_elements(p):
     '''tuple_elements : tuple_elements COMMA tuple_element
@@ -218,30 +370,29 @@ def p_tuple_elements(p):
     else:
         p[0] = [p[1]]
 
-
 def p_tuple_element(p):
     '''tuple_element : IDENTIFIER COLON expression
                      | expression'''
     if len(p) == 4:
         p[0] = ('named_element', p[1], p[3])
-        print(f"✓ Elemento nombrado: {p[1]}")
+        print(f"✅ Elemento nombrado: {p[1]}")
     else:
         p[0] = p[1]
-
 
 def p_expression_tuple_access(p):
     '''expression : expression DOT INT_LITERAL'''
     p[0] = ('tuple_access', p[1], p[3])
-    print(f"✓ Acceso a tupla por índice: .{p[3]}")
-
+    print(f"✅ Acceso a tupla por índice: .{p[3]}")
 
 def p_expression_member_access(p):
     '''expression : expression DOT IDENTIFIER'''
     p[0] = ('member_access', p[1], p[3])
-    print(f"✓ Acceso a miembro: .{p[3]}")
+    print(f"✅ Acceso a miembro: .{p[3]}")
 
+# ==============================================================================
+# ASIGNACIÓN (Regla 1: Identificadores no declarados, Regla 2: Constantes)
+# ==============================================================================
 
-# asignación
 def p_assignment(p):
     '''assignment : lvalue ASSIGN expression
                   | lvalue PLUS_ASSIGN expression
@@ -249,9 +400,37 @@ def p_assignment(p):
                   | lvalue TIMES_ASSIGN expression
                   | lvalue DIV_ASSIGN expression
                   | lvalue MOD_ASSIGN expression'''
+    
+    lval = p[1]
+    linea = p.lineno(2)
+    
+    # Extraer nombre del lvalue
+    if lval[0] == 'identifier':
+        nombre = lval[1]
+        
+        # REGLA 1: Verificar que el identificador esté declarado
+        simbolo = tabla_simbolos.buscar_simbolo(nombre)
+        if not simbolo:
+            agregar_error_semantico(linea, 0,
+                f"El identificador '{nombre}' no ha sido declarado en este ámbito.")
+        else:
+            # REGLA 2: Verificar que no sea una constante
+            if simbolo['es_constante']:
+                agregar_error_semantico(linea, 0,
+                    f"Intento de modificar la constante '{nombre}', la cual no puede ser reasignada.")
+            
+            # REGLA 3: Verificar compatibilidad de tipos en operaciones compuestas
+            if p[2] in ['+=', '-=', '*=', '/=', '%=']:
+                tipo_var = simbolo['tipo']
+                tipo_expr = inferir_tipo(p[3])
+                
+                if tipo_var and tipo_expr:
+                    operador_base = p[2][0]  # Extraer +, -, *, /, %
+                    if not validar_operacion_aritmetica(operador_base, tipo_var, tipo_expr, linea):
+                        pass  # El error ya se agregó en validar_operacion_aritmetica
+    
     p[0] = ('assignment', p[1], p[2], p[3])
-    print(f"✓ Asignación: ... {p[2]} ...")
-
+    print(f"✅ Asignación: ... {p[2]} ...")
 
 def p_lvalue(p):
     '''lvalue : IDENTIFIER
@@ -261,7 +440,10 @@ def p_lvalue(p):
     if len(p) == 2:
         p[0] = ('identifier', p[1])
     elif len(p) == 4 and p[2] == '.':
-        p[0] = ('member_access', p[1], p[3])
+        if isinstance(p[1], str) and p[1] == 'self':
+            p[0] = ('self_access', p[3])
+        else:
+            p[0] = ('member_access', p[1], p[3])
     else:
         p[0] = ('subscript_access', p[1], p[3])
 
