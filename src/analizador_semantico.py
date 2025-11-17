@@ -11,9 +11,9 @@ ANALIZADOR SINTÁCTICO Y SEMÁNTICO GLOBAL - SWIFT
 Proyecto de Lenguajes de Programación
 
 INTEGRANTES:
-1. Alexandre Icaza (aledicaz) - Expresiones aritméticas, Variables, Arrays, for-in, Funciones
-2. Alex Otero (alexoterol) - Control de flujo, Lógica, Diccionarios, while, Guard, Operadores especiales
-3. Jose Chong (Jlchong3) - Entrada/Salida, POO, Tuplas, Switch-case
+1. Alexandre Icaza (aledicaz) - Regla 1 y 2
+2. Alex Otero (alexoterol) - Regla 3 y 4
+3. Jose Chong (Jlchong3) - Regla 5 y 6
 
 ANÁLISIS SINTÁCTICO Y SEMÁNTICO COMPLETO DE SWIFT
 """
