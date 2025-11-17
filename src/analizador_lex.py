@@ -58,6 +58,9 @@ reserved = {
     'Double': 'TYPE_DOUBLE',
     'Bool':   'TYPE_BOOL',
     'String': 'TYPE_STRING',
+
+    'break': 'BREAK',
+    'continue': 'CONTINUE',
 }
 
 # Lista de tokens
