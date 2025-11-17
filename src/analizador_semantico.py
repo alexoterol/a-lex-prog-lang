@@ -190,6 +190,9 @@ def p_expression_statement(p):
     '''expression_statement : expression'''
     p[0] = ('expr_stmt', p[1])
 
+
+# <<< INICIO APORTE Jose Chong
+
 # declaración de variables (regla 6: redeclaración)
 def p_variable_declaration(p):
     '''variable_declaration : LET IDENTIFIER COLON type_annotation ASSIGN expression
@@ -236,6 +239,8 @@ def p_variable_declaration(p):
         tabla_simbolos.agregar_simbolo(nombre, tipo_inferido, es_constante, linea=linea)
         p[0] = ('var_decl', p[1], nombre, tipo_inferido, p[4])
         print(f"✅ Declaración de variable: {p[1]} {nombre} = ... (tipo: {tipo_inferido})")
+
+# <<< FIN APORTE Jose Chong
 
 def p_type_annotation(p):
     '''type_annotation : TYPE_INT
@@ -739,6 +744,8 @@ def p_optional_newlines(p):
                          | empty'''
     pass
 
+# <<< INICIO APORTE Jose Chong
+
 # funciones (regla 5: tipo de retorno)
 # nueva regla intermedia para manejar el inicio de función
 def p_function_declaration(p):
@@ -763,6 +770,7 @@ def p_function_declaration(p):
     else:
         p[0] = ('func_decl', nombre_func, parametros, None, cuerpo)
         print(f"✅ Función: func {nombre_func}({len(parametros)} parámetros)")
+
 
 def p_func_header(p):
     '''func_header : FUNC IDENTIFIER LPAREN parameter_list RPAREN ARROW type_annotation
@@ -882,6 +890,8 @@ def p_return_statement(p):
 
             p[0] = ('return', None)
             print("✅ Return")
+
+# <<< FIN APORTE Jose Chong
 
 # entrada/salida: print y readline
 def p_function_call_statement(p):
