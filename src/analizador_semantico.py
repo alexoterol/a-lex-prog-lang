@@ -1349,7 +1349,7 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
 # ==============================================================================
 
 if __name__ == "__main__":
-    GITHUB_USER = "TODOS"
+    GITHUB_USER = "Alex Otero"
     ARCHIVO_SWIFT = "Examples/pruebaSemanticaGlobal.swift"
 
     analizar_archivo_swift(ARCHIVO_SWIFT, GITHUB_USER)
