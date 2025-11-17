@@ -26,16 +26,16 @@ class TablaSimbolos:
     """Tabla de símbolos con soporte para ámbitos anidados"""
     def __init__(self):
         self.ambitos = [{}]  # Lista de diccionarios (stack de ámbitos)
-        
+
     def entrar_ambito(self):
         """Crear un nuevo ámbito"""
         self.ambitos.append({})
-        
+
     def salir_ambito(self):
         """Salir del ámbito actual"""
         if len(self.ambitos) > 1:
             self.ambitos.pop()
-            
+
     def agregar_simbolo(self, nombre, tipo, es_constante=False, tipo_retorno=None, linea=0):
         """Agregar símbolo al ámbito actual"""
         ambito_actual = self.ambitos[-1]
@@ -45,14 +45,14 @@ class TablaSimbolos:
             'tipo_retorno': tipo_retorno,  # Para funciones
             'linea': linea
         }
-        
+
     def buscar_simbolo(self, nombre):
         """Buscar símbolo en todos los ámbitos (del más interno al más externo)"""
         for ambito in reversed(self.ambitos):
             if nombre in ambito:
                 return ambito[nombre]
         return None
-        
+
     def existe_en_ambito_actual(self, nombre):
         """Verificar si el símbolo existe en el ámbito actual"""
         return nombre in self.ambitos[-1]
@@ -78,11 +78,11 @@ def inferir_tipo(valor):
     """Inferir el tipo de un valor o expresión"""
     if valor is None:
         return None
-    
+
     # Si es una tupla que representa un AST
     if isinstance(valor, tuple):
         tipo_nodo = valor[0]
-        
+
         if tipo_nodo == 'literal':
             lit_val = valor[1]
 
@@ -96,22 +96,22 @@ def inferir_tipo(valor):
                 return 'Double'
             elif isinstance(lit_val, str):
                 return 'String'
-            
+
             elif lit_val == 'nil':
                 return 'Optional'
-                
+
         elif tipo_nodo == 'identifier':
             nombre = valor[1]
             simbolo = tabla_simbolos.buscar_simbolo(nombre)
             if simbolo:
                 return simbolo['tipo']
             return None
-            
+
         elif tipo_nodo == 'binop':
             operador = valor[1]
             tipo_izq = inferir_tipo(valor[2])
             tipo_der = inferir_tipo(valor[3])
-            
+
             # Operaciones aritméticas
             if operador in ['+', '-', '*', '/', '%']:
                 if tipo_izq == tipo_der and tipo_izq in ['Int', 'Double']:
@@ -120,26 +120,26 @@ def inferir_tipo(valor):
                 if operador == '+' and tipo_izq == 'String' and tipo_der == 'String':
                     return 'String'
                 return None  # Tipos incompatibles
-                
+
         elif tipo_nodo == 'comparison':
             return 'Bool'
-            
+
         elif tipo_nodo == 'logical':
             return 'Bool'
-            
+
         elif tipo_nodo == 'array_literal':
             if len(valor[1]) > 0:
                 tipo_primer_elem = inferir_tipo(valor[1][0])
                 return ('array_type', tipo_primer_elem)
             return ('array_type', 'Any')
-            
+
         elif tipo_nodo == 'function_call':
             nombre_func = valor[1]
             simbolo = tabla_simbolos.buscar_simbolo(nombre_func)
             if simbolo and simbolo.get('tipo_retorno'):
                 return simbolo['tipo_retorno']
             return None
-    
+
     return None
 
 # ==============================================================================
@@ -212,37 +212,37 @@ def p_variable_declaration(p):
                            | VAR IDENTIFIER COLON type_annotation
                            | LET IDENTIFIER COLON tuple_type
                            | VAR IDENTIFIER COLON tuple_type'''
-    
+
     nombre = p[2]
     linea = p.lineno(2)
-    
+
     # REGLA 6: Verificar redeclaración en el mismo ámbito
     if tabla_simbolos.existe_en_ambito_actual(nombre):
-        agregar_error_semantico(linea, 0, 
+        agregar_error_semantico(linea, 0,
             f"El identificador '{nombre}' ya ha sido declarado en este ámbito.")
-    
+
     es_constante = (p[1] == 'let')
-    
+
     if len(p) == 7:  # Con tipo y valor
         tipo_declarado = p[4]
         tipo_inferido = inferir_tipo(p[6])
-        
+
         # Validar compatibilidad de tipos
         if tipo_inferido and tipo_declarado != tipo_inferido:
             if not (tipo_declarado == 'Double' and tipo_inferido == 'Int'):
                 agregar_error_semantico(linea, 0,
                     f"Tipo incompatible: se esperaba '{tipo_declarado}' pero se asignó '{tipo_inferido}'.")
-        
+
         tabla_simbolos.agregar_simbolo(nombre, tipo_declarado, es_constante, linea=linea)
         p[0] = ('var_decl', p[1], nombre, tipo_declarado, p[6])
         print(f"✅ Declaración de variable: {p[1]} {nombre}: {tipo_declarado} = ...")
-        
+
     elif len(p) == 5 and p[3] == ':':  # Solo tipo
         tipo = p[4]
         tabla_simbolos.agregar_simbolo(nombre, tipo, es_constante, linea=linea)
         p[0] = ('var_decl', p[1], nombre, tipo, None)
         print(f"✅ Declaración de variable: {p[1]} {nombre}: {tipo}")
-        
+
     else:  # Sin tipo, con valor
         tipo_inferido = inferir_tipo(p[4])
         tabla_simbolos.agregar_simbolo(nombre, tipo_inferido, es_constante, linea=linea)
@@ -400,14 +400,14 @@ def p_assignment(p):
                   | lvalue TIMES_ASSIGN expression
                   | lvalue DIV_ASSIGN expression
                   | lvalue MOD_ASSIGN expression'''
-    
+
     lval = p[1]
     linea = p.lineno(2)
-    
+
     # Extraer nombre del lvalue
     if lval[0] == 'identifier':
         nombre = lval[1]
-        
+
         # REGLA 1: Verificar que el identificador esté declarado
         simbolo = tabla_simbolos.buscar_simbolo(nombre)
         if not simbolo:
@@ -418,17 +418,17 @@ def p_assignment(p):
             if simbolo['es_constante']:
                 agregar_error_semantico(linea, 0,
                     f"Intento de modificar la constante '{nombre}', la cual no puede ser reasignada.")
-            
+
             # REGLA 3: Verificar compatibilidad de tipos en operaciones compuestas
             if p[2] in ['+=', '-=', '*=', '/=', '%=']:
                 tipo_var = simbolo['tipo']
                 tipo_expr = inferir_tipo(p[3])
-                
+
                 if tipo_var and tipo_expr:
                     operador_base = p[2][0]  # Extraer +, -, *, /, %
                     if not validar_operacion_aritmetica(operador_base, tipo_var, tipo_expr, linea):
                         pass  # El error ya se agregó en validar_operacion_aritmetica
-    
+
     p[0] = ('assignment', p[1], p[2], p[3])
     print(f"✅ Asignación: ... {p[2]} ...")
 
@@ -448,37 +448,67 @@ def p_lvalue(p):
         p[0] = ('subscript_access', p[1], p[3])
 
 
-# expresiones aritméticas
+# ==============================================================================
+# EXPRESIONES ARITMÉTICAS (Regla 3: Incompatibilidad de tipos)
+# ==============================================================================
+
+def validar_operacion_aritmetica(operador, tipo1, tipo2, linea):
+    """Validar compatibilidad de tipos en operaciones aritméticas"""
+    tipos_numericos = ['Int', 'Double']
+
+    # Permitir operaciones entre tipos numéricos
+    if tipo1 in tipos_numericos and tipo2 in tipos_numericos:
+        return True
+
+    # Permitir + con String (concatenación)
+    if operador == '+' and (tipo1 == 'String' or tipo2 == 'String'):
+        return True
+
+    # Operaciones no permitidas
+    agregar_error_semantico(linea, 0,
+        f"Operador '{operador}' no aplicable a los tipos '{tipo1}' y '{tipo2}'.")
+    return False
+
 def p_expression_binop(p):
     '''expression : expression PLUS expression
                   | expression MINUS expression
                   | expression TIMES expression
                   | expression DIVIDE expression
                   | expression MODULO expression'''
-    p[0] = ('binop', p[2], p[1], p[3])
-    print(f"✓ Expresión aritmética: ... {p[2]} ...")
 
+    operador = p[2]
+    linea = p.lineno(2)
+
+    # REGLA 3: Verificar compatibilidad de tipos
+    tipo_izq = inferir_tipo(p[1])
+    tipo_der = inferir_tipo(p[3])
+
+    if tipo_izq and tipo_der:
+        validar_operacion_aritmetica(operador, tipo_izq, tipo_der, linea)
+
+    p[0] = ('binop', operador, p[1], p[3])
+    print(f"✅ Expresión aritmética: ... {operador} ...")
 
 def p_expression_unary(p):
     '''expression : MINUS expression %prec UMINUS
                   | PLUS expression %prec UPLUS'''
     p[0] = ('unary', p[1], p[2])
-    print(f"✓ Expresión unaria: {p[1]}...")
+    print(f"✅ Expresión unaria: {p[1]}...")
 
+# ==============================================================================
+# EXPRESIONES LÓGICAS Y BOOLEANAS
+# ==============================================================================
 
-# expresiones lógicas y booleanas
 def p_expression_logical(p):
     '''expression : expression AND expression
                   | expression OR expression'''
     p[0] = ('logical', p[2], p[1], p[3])
-    print(f"✓ Expresión lógica: ... {p[2]} ...")
-
+    print(f"✅ Expresión lógica: ... {p[2]} ...")
 
 def p_expression_not(p):
     '''expression : NOT expression'''
     p[0] = ('not', p[2])
-    print(f"✓ Negación lógica: !...")
-
+    print(f"✅ Negación lógica: !...")
 
 def p_expression_comparison(p):
     '''expression : expression EQ expression
@@ -488,27 +518,29 @@ def p_expression_comparison(p):
                   | expression GE expression
                   | expression LE expression'''
     p[0] = ('comparison', p[2], p[1], p[3])
-    print(f"✓ Expresión de comparación: ... {p[2]} ...")
+    print(f"✅ Expresión de comparación: ... {p[2]} ...")
 
+# ==============================================================================
+# OPERADOR TERNARIO Y NIL-COALESCING
+# ==============================================================================
 
-# operador ternario y nil-coalescing
 def p_expression_ternary(p):
     '''expression : expression QUESTION expression COLON expression'''
     p[0] = ('ternary', p[1], p[3], p[5])
-    print(f"✓ Operador ternario: ... ? ... : ...")
-
+    print(f"✅ Operador ternario: ... ? ... : ...")
 
 def p_expression_nil_coalescing(p):
     '''expression : expression NIL_COALESCE expression'''
     p[0] = ('nil_coalesce', p[1], p[3])
-    print(f"✓ Operador nil-coalescing: ... ?? ...")
+    print(f"✅ Operador nil-coalescing: ... ?? ...")
 
+# ==============================================================================
+# EXPRESIONES BÁSICAS Y LITERALES (Regla 1: Uso de identificadores)
+# ==============================================================================
 
-# expresiones básicas y literales
 def p_expression_group(p):
     '''expression : LPAREN expression RPAREN'''
     p[0] = p[2]
-
 
 def p_expression_literal(p):
     '''expression : INT_LITERAL
@@ -517,25 +549,49 @@ def p_expression_literal(p):
                   | TRUE
                   | FALSE
                   | NIL'''
-    p[0] = ('literal', p[1])
-
+    # CORRECCIÓN: Convertir true/false a booleanos Python
+    if p[1] == 'true':
+        p[0] = ('literal', True)
+    elif p[1] == 'false':
+        p[0] = ('literal', False)
+    else:
+        p[0] = ('literal', p[1])
 
 def p_expression_identifier(p):
     '''expression : IDENTIFIER'''
-    p[0] = ('identifier', p[1])
+    nombre = p[1]
+    linea = p.lineno(1)
 
+    # REGLA 1: Verificar que el identificador esté declarado
+    simbolo = tabla_simbolos.buscar_simbolo(nombre)
+    if not simbolo:
+        agregar_error_semantico(linea, 0,
+            f"El identificador '{nombre}' no ha sido declarado en este ámbito.")
+
+    p[0] = ('identifier', nombre)
 
 def p_expression_self_access(p):
     '''expression : SELF DOT IDENTIFIER'''
     p[0] = ('self_access', p[3])
-    print(f"✓ Acceso a propiedad: self.{p[3]}")
+    print(f"✅ Acceso a propiedad: self.{p[3]}")
 
+# ==============================================================================
+# LLAMADAS A FUNCIÓN COMO EXPRESIÓN
+# ==============================================================================
 
-# llamadas a función como expresión
 def p_expression_function_call(p):
     '''expression : IDENTIFIER LPAREN argument_list RPAREN
                   | IDENTIFIER LPAREN RPAREN'''
     function_name = p[1]
+    linea = p.lineno(1)
+
+    # REGLA 1: Verificar que la función esté declarada
+    simbolo = tabla_simbolos.buscar_simbolo(function_name)
+    if not simbolo:
+        # Permitir funciones built-in como print, readLine
+        if function_name not in ['print', 'readLine']:
+            agregar_error_semantico(linea, 0,
+                f"El identificador '{function_name}' no ha sido declarado en este ámbito.")
 
     if len(p) == 5:
         arguments = p[3]
@@ -543,41 +599,76 @@ def p_expression_function_call(p):
     else:
         p[0] = ('function_call', function_name, [])
 
+# ==============================================================================
+# ESTRUCTURAS DE CONTROL: FOR-IN (Regla 4: Contexto de bucle)
+# ==============================================================================
 
-# estructura de control: for-in
 def p_for_statement(p):
-    '''for_statement : FOR IDENTIFIER IN range_expression LBRACE statement_list RBRACE
-                     | FOR IDENTIFIER IN expression LBRACE statement_list RBRACE'''
-    p[0] = ('for_in', p[2], p[4], p[6])
-    print(f"✓ Bucle for-in: for {p[2]} in ...")
+    '''for_statement : for_header LBRACE statement_list RBRACE'''
 
+    header_info = p[1]
+    nombre_var = header_info['nombre_var']
+    rango = header_info['rango']
+
+    # Salir del bucle
+    contexto['en_bucle'] -= 1
+
+    # Salir del ámbito
+    tabla_simbolos.salir_ambito()
+
+    p[0] = ('for_in', nombre_var, rango, p[3])
+    print(f"✅ Bucle for-in: for {nombre_var} in ...")
+
+def p_for_header(p):
+    '''for_header : FOR IDENTIFIER IN range_expression
+                  | FOR IDENTIFIER IN expression'''
+
+    nombre_var = p[2]
+    linea = p.lineno(2)
+    rango = p[4]
+
+    # CRÍTICO: Entrar en nuevo ámbito ANTES de procesar el cuerpo
+    tabla_simbolos.entrar_ambito()
+
+    # Declarar variable de iteración
+    tabla_simbolos.agregar_simbolo(nombre_var, 'Int', False, linea=linea)
+
+    # Marcar que estamos en un bucle
+    contexto['en_bucle'] += 1
+
+    p[0] = {
+        'nombre_var': nombre_var,
+        'rango': rango
+    }
 
 def p_range_expression(p):
     '''range_expression : expression CLOSED_RANGE expression
                         | expression HALF_OPEN_RANGE expression'''
     p[0] = ('range', p[2], p[1], p[3])
-    print(f"✓ Rango: ... {p[2]} ...")
+    print(f"✅ Rango: ... {p[2]} ...")
 
+# ==============================================================================
+# ESTRUCTURA DE CONTROL: IF-ELSE
+# ==============================================================================
 
-# estructura de control: if-else
 def p_if_statement(p):
     '''if_statement : IF expression LBRACE statement_list RBRACE
                     | IF expression LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
                     | IF expression LBRACE statement_list RBRACE else_if_chain
                     | IF expression LBRACE statement_list RBRACE else_if_chain ELSE LBRACE statement_list RBRACE'''
+
     if len(p) == 6:
         p[0] = ('if', p[2], p[4], None, None)
-        print(f"✓ Condicional if")
+        print(f"✅ Condicional if")
     elif len(p) == 10 and p[6] == 'else':
         p[0] = ('if_else', p[2], p[4], p[8])
-        print(f"✓ Condicional if-else")
+        print(f"✅ Condicional if-else")
     elif len(p) == 7:
         p[0] = ('if_elif', p[2], p[4], p[6], None)
-        print(f"✓ Condicional if-else if")
+        print(f"✅ Condicional if-else if")
     else:
         p[0] = ('if_elif_else', p[2], p[4], p[6], p[9])
-        print(f"✓ Condicional if-else if-else")
-
+        print(f"✅ Condicional if-else if-else")
 
 def p_else_if_chain(p):
     '''else_if_chain : else_if_chain else_if_statement
@@ -587,38 +678,84 @@ def p_else_if_chain(p):
     else:
         p[0] = [p[1]]
 
-
 def p_else_if_statement(p):
     '''else_if_statement : ELSE IF expression LBRACE statement_list RBRACE'''
     p[0] = ('else_if', p[3], p[5])
-    print(f"✓ else if")
+    print(f"✅ else if")
 
+# ==============================================================================
+# ESTRUCTURA DE CONTROL: GUARD
+# ==============================================================================
 
-# estructura de control: guard
 def p_guard_statement(p):
     '''guard_statement : GUARD expression ELSE LBRACE statement_list RBRACE'''
     p[0] = ('guard', p[2], p[5])
-    print(f"✓ Guard statement")
+    print(f"✅ Guard statement")
 
+# ==============================================================================
+# ESTRUCTURA DE CONTROL: WHILE (Regla 4: Contexto de bucle)
+# ==============================================================================
 
-# estructura de control: while
 def p_while_statement(p):
-    '''while_statement : WHILE expression LBRACE statement_list RBRACE'''
-    p[0] = ('while', p[2], p[4])
-    print(f"✓ Bucle while")
+    '''while_statement : while_header LBRACE statement_list RBRACE'''
 
+    condicion = p[1]
 
-# estructura de control: switch-case
+    # Salir del bucle
+    contexto['en_bucle'] -= 1
+
+    p[0] = ('while', condicion, p[3])
+    print(f"✅ Bucle while")
+
+def p_while_header(p):
+    '''while_header : WHILE expression'''
+
+    # CRÍTICO: Marcar que estamos en un bucle ANTES de procesar el cuerpo
+    contexto['en_bucle'] += 1
+
+    p[0] = p[2]
+
+# ==============================================================================
+# BREAK Y CONTINUE (Regla 4: Fuera de bucle)
+# ==============================================================================
+
+def p_break_statement(p):
+    '''break_statement : BREAK'''
+    linea = p.lineno(1)
+
+    # REGLA: Verificar que estemos dentro de un bucle
+    if contexto['en_bucle'] == 0:
+        agregar_error_semantico(linea, 0, "La sentencia 'break' solo puede aparecer dentro de un bucle.")
+
+    p[0] = ('break',)
+    print("✅ Sentencia break")
+
+def p_continue_statement(p):
+    '''continue_statement : CONTINUE'''
+    if p[1] == 'continue':
+        linea = p.lineno(1)
+
+        # REGLA 4: Verificar que estemos dentro de un bucle
+        if contexto['en_bucle'] == 0:
+            agregar_error_semantico(linea, 0,
+                "La sentencia 'continue' solo puede aparecer dentro de un bucle.")
+
+        p[0] = ('continue',)
+        print("✅ Sentencia continue")
+
+# ==============================================================================
+# ESTRUCTURA DE CONTROL: SWITCH-CASE
+# ==============================================================================
+
 def p_switch_statement(p):
     '''switch_statement : SWITCH expression LBRACE optional_newlines case_list optional_newlines RBRACE
                         | SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE'''
     if len(p) == 9:
         p[0] = ('switch', p[2], p[5], p[6])
-        print(f"✓ Switch con {len(p[5])} caso(s) y default")
+        print(f"✅ Switch con {len(p[5])} caso(s) y default")
     else:
         p[0] = ('switch', p[2], p[5], None)
-        print(f"✓ Switch con {len(p[5])} caso(s)")
-
+        print(f"✅ Switch con {len(p[5])} caso(s)")
 
 def p_case_list(p):
     '''case_list : case_list optional_newlines case_clause
@@ -628,17 +765,14 @@ def p_case_list(p):
     else:
         p[0] = [p[2]]
 
-
 def p_case_clause(p):
     '''case_clause : CASE case_patterns COLON optional_newlines case_body'''
     p[0] = ('case', p[2], p[5])
-    print(f"✓ Case con {len(p[2])} patrón(es)")
-
+    print(f"✅ Case con {len(p[2])} patrón(es)")
 
 def p_case_body(p):
     '''case_body : statement_list'''
     p[0] = p[1]
-
 
 def p_case_patterns(p):
     '''case_patterns : case_patterns COMMA expression
@@ -648,38 +782,104 @@ def p_case_patterns(p):
     else:
         p[0] = [p[1]]
 
-
 def p_default_case(p):
     '''default_case : DEFAULT COLON optional_newlines case_body'''
     p[0] = ('default', p[4])
-    print("✓ Default case")
-
+    print("✅ Default case")
 
 def p_optional_newlines(p):
     '''optional_newlines : optional_newlines NEWLINE
                          | empty'''
     pass
 
+# ==============================================================================
+# FUNCIONES (Regla 5: Tipo de retorno)
+# ==============================================================================
 
-# funciones
+# Nueva regla intermedia para manejar el inicio de función
 def p_function_declaration(p):
-    '''function_declaration : FUNC IDENTIFIER LPAREN parameter_list RPAREN ARROW type_annotation LBRACE statement_list RBRACE
-                           | FUNC IDENTIFIER LPAREN RPAREN ARROW type_annotation LBRACE statement_list RBRACE
-                           | FUNC IDENTIFIER LPAREN parameter_list RPAREN LBRACE statement_list RBRACE
-                           | FUNC IDENTIFIER LPAREN RPAREN LBRACE statement_list RBRACE'''
-    if len(p) == 11:
-        p[0] = ('func_decl', p[2], p[4], p[7], p[9])
-        print(f"✓ Función: func {p[2]}({len(p[4])} parámetros) -> {p[7]}")
-    elif len(p) == 10:
-        p[0] = ('func_decl', p[2], [], p[6], p[8])
-        print(f"✓ Función: func {p[2]}() -> {p[6]}")
-    elif len(p) == 9:
-        p[0] = ('func_decl', p[2], p[4], None, p[7])
-        print(f"✓ Función: func {p[2]}({len(p[4])} parámetros)")
-    else:
-        p[0] = ('func_decl', p[2], [], None, p[6])
-        print(f"✓ Función: func {p[2]}()")
+    '''function_declaration : func_header LBRACE statement_list RBRACE'''
 
+    header_info = p[1]
+    nombre_func = header_info['nombre']
+    parametros = header_info['parametros']
+    tipo_retorno = header_info['tipo_retorno']
+    cuerpo = p[3]
+
+    # Restaurar contexto
+    contexto['funcion_actual'] = header_info['contexto_previo']
+    contexto['en_funcion'] = (header_info['contexto_previo'] is not None)
+
+    # Salir del ámbito de la función
+    tabla_simbolos.salir_ambito()
+
+    if tipo_retorno:
+        p[0] = ('func_decl', nombre_func, parametros, tipo_retorno, cuerpo)
+        print(f"✅ Función: func {nombre_func}({len(parametros)} parámetros) -> {tipo_retorno}")
+    else:
+        p[0] = ('func_decl', nombre_func, parametros, None, cuerpo)
+        print(f"✅ Función: func {nombre_func}({len(parametros)} parámetros)")
+
+def p_func_header(p):
+    '''func_header : FUNC IDENTIFIER LPAREN parameter_list RPAREN ARROW type_annotation
+                   | FUNC IDENTIFIER LPAREN RPAREN ARROW type_annotation
+                   | FUNC IDENTIFIER LPAREN parameter_list RPAREN
+                   | FUNC IDENTIFIER LPAREN RPAREN'''
+
+    nombre_func = p[2]
+    linea = p.lineno(2)
+
+    # REGLA 6: Verificar redeclaración
+    if tabla_simbolos.existe_en_ambito_actual(nombre_func):
+        agregar_error_semantico(linea, 0,
+            f"El identificador '{nombre_func}' ya ha sido declarado en este ámbito.")
+
+    # Determinar parámetros y tipo de retorno
+    if len(p) == 8:  # Con parámetros y tipo de retorno
+        parametros = p[4]
+        tipo_retorno = p[7]
+    elif len(p) == 7:  # Sin parámetros, con tipo de retorno
+        parametros = []
+        tipo_retorno = p[6]
+    elif len(p) == 6:  # Con parámetros, sin tipo de retorno
+        parametros = p[4]
+        tipo_retorno = None
+    else:  # Sin parámetros, sin tipo de retorno
+        parametros = []
+        tipo_retorno = None
+
+    # Agregar función a la tabla de símbolos GLOBAL
+    tabla_simbolos.agregar_simbolo(nombre_func, 'Function', False, tipo_retorno, linea)
+
+    # CRÍTICO: Entrar en nuevo ámbito ANTES de procesar el cuerpo
+    tabla_simbolos.entrar_ambito()
+
+    # Guardar contexto de función actual ANTES de procesar el cuerpo
+    contexto_previo = contexto['funcion_actual']
+    contexto['en_funcion'] = True
+    contexto['funcion_actual'] = {
+        'nombre': nombre_func,
+        'tipo_retorno': tipo_retorno
+    }
+
+    # CRÍTICO: Agregar parámetros al ámbito ANTES de procesar el cuerpo
+    for param in parametros:
+        if param[0] == 'param':
+            nombre_param = param[1]
+            tipo_param = param[2]
+            tabla_simbolos.agregar_simbolo(nombre_param, tipo_param, False)
+        elif param[0] == 'param_default':
+            nombre_param = param[1]
+            tipo_param = param[2]
+            tabla_simbolos.agregar_simbolo(nombre_param, tipo_param, False)
+
+    # Retornar información del header para usarla después
+    p[0] = {
+        'nombre': nombre_func,
+        'parametros': parametros,
+        'tipo_retorno': tipo_retorno,
+        'contexto_previo': contexto_previo
+    }
 
 def p_parameter_list(p):
     '''parameter_list : parameter_list COMMA parameter
@@ -689,7 +889,6 @@ def p_parameter_list(p):
     else:
         p[0] = [p[1]]
 
-
 def p_parameter(p):
     '''parameter : IDENTIFIER COLON type_annotation
                  | IDENTIFIER COLON type_annotation ASSIGN expression'''
@@ -697,8 +896,7 @@ def p_parameter(p):
         p[0] = ('param', p[1], p[3], None)
     else:
         p[0] = ('param_default', p[1], p[3], p[5])
-        print(f"✓ Parámetro con valor por defecto: {p[1]}")
-
+        print(f"✅ Parámetro con valor por defecto: {p[1]}")
 
 def p_return_statement(p):
     '''return_statement : RETURN expression
