@@ -1,0 +1,54 @@
+======================================================================
+ANÁLISIS SEMÁNTICO - SWIFT
+======================================================================
+Usuario: Jlchong3
+Fecha y hora: 17112025-15h57
+======================================================================
+
+Total de errores semánticos: 23
+
+1. Error Semántico (Línea 47, Columna 0): El identificador 'x' no ha sido declarado en este ámbito.
+2. Error Semántico (Línea 50, Columna 0): El identificador 'variableNoDeclarada' no ha sido declarado en este ámbito.
+3. Error Semántico (Línea 53, Columna 0): El identificador 'funcionInexistente' no ha sido declarado en este ámbito.
+4. Error Semántico (Línea 63, Columna 0): Intento de modificar la constante 'constante', la cual no puede ser reasignada.
+5. Error Semántico (Línea 66, Columna 0): Intento de modificar la constante 'constante', la cual no puede ser reasignada.
+6. Error Semántico (Línea 71, Columna 0): Intento de modificar la constante 'nombre', la cual no puede ser reasignada.
+7. Error Semántico (Línea 85, Columna 0): Operador '*' no aplicable a los tipos 'Bool' y 'Int'.
+8. Error Semántico (Línea 88, Columna 0): Operador '-' no aplicable a los tipos 'String' y 'Int'.
+9. Error Semántico (Línea 92, Columna 0): Operador '/' no aplicable a los tipos 'Bool' y 'Double'.
+10. Error Semántico (Línea 103, Columna 0): La sentencia 'break' solo puede aparecer dentro de un bucle.
+11. Error Semántico (Línea 106, Columna 0): La sentencia 'continue' solo puede aparecer dentro de un bucle.
+12. Error Semántico (Línea 111, Columna 0): La sentencia 'break' solo puede aparecer dentro de un bucle.
+13. Error Semántico (Línea 118, Columna 0): La sentencia 'continue' solo puede aparecer dentro de un bucle.
+14. Error Semántico (Línea 135, Columna 0): La función 'obtenerNumero' debe retornar un valor de tipo 'Int', pero se está retornando un valor de tipo 'String'.
+15. Error Semántico (Línea 140, Columna 0): La función 'obtenerTexto' debe retornar un valor de tipo 'String', pero se está retornando un valor de tipo 'Int'.
+16. Error Semántico (Línea 153, Columna 0): La función 'imprimirMensaje' no debe retornar ningún valor.
+17. Error Semántico (Línea 158, Columna 0): La función 'esPar' debe retornar un valor de tipo 'Bool', pero se está retornando un valor de tipo 'Int'.
+18. Error Semántico (Línea 174, Columna 0): El identificador 'miVariable' ya ha sido declarado en este ámbito.
+19. Error Semántico (Línea 180, Columna 0): El identificador 'miConstante' ya ha sido declarado en este ámbito.
+20. Error Semántico (Línea 184, Columna 0): El identificador 'otraVariable' ya ha sido declarado en este ámbito.
+21. Error Semántico (Línea 189, Columna 0): El identificador 'parametro' ya ha sido declarado en este ámbito.
+22. Error Semántico (Línea 194, Columna 0): El identificador 'miFuncion' ya ha sido declarado en este ámbito.
+23. Error Semántico (Línea 217, Columna 0): El identificador 'temp' no ha sido declarado en este ámbito.
+
+======================================================================
+REGLAS SEMÁNTICAS IMPLEMENTADAS:
+======================================================================
+1. Uso de Identificadores No Declarados
+   - Verifica que variables y funciones estén declaradas antes de usarse
+
+2. Asignación a una Constante
+   - Impide modificar variables declaradas con 'let'
+
+3. Incompatibilidad de Tipos en Operaciones Aritméticas
+   - Valida compatibilidad de tipos en operaciones (+, -, *, /, %)
+
+4. Sentencia break o continue Fuera de un Bucle
+   - Verifica que break/continue solo aparezcan dentro de bucles
+
+5. Tipo de Retorno de Función Incorrecto
+   - Valida que el tipo retornado coincida con la declaración
+
+6. Redeclaración de Variable en el Mismo Ámbito
+   - Impide declarar dos veces el mismo identificador en un ámbito
+======================================================================
