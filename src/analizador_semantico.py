@@ -18,6 +18,8 @@ INTEGRANTES:
 ANÁLISIS SINTÁCTICO Y SEMÁNTICO COMPLETO DE SWIFT
 """
 
+
+# <<< INICIO APORTE Alexandre Icaza
 # estructuras para análisis semántico
 class TablaSimbolos:
     """Tabla de símbolos con soporte para ámbitos anidados"""
@@ -190,6 +192,8 @@ def p_expression_statement(p):
     '''expression_statement : expression'''
     p[0] = ('expr_stmt', p[1])
 
+
+# <<< FIN APORTE Alexandre Icaza
 
 # <<< INICIO APORTE Jose Chong
 
@@ -373,6 +377,8 @@ def p_expression_member_access(p):
     p[0] = ('member_access', p[1], p[3])
     print(f"✅ Acceso a miembro: .{p[3]}")
 
+# <<< INICIO APORTE Alexandre Icaza
+
 # asignación (regla 1: identificadores no declarados, regla 2: constantes)
 def p_assignment(p):
     '''assignment : lvalue ASSIGN expression
@@ -427,6 +433,11 @@ def p_lvalue(p):
             p[0] = ('member_access', p[1], p[3])
     else:
         p[0] = ('subscript_access', p[1], p[3])
+
+
+# <<< FIN  APORTE Alexandre Icaza
+
+# <<< INICIO APORTE Alex Otero
 
 # expresiones aritméticas (regla 3: incompatibilidad de tipos)
 def validar_operacion_aritmetica(operador, tipo1, tipo2, linea):
@@ -743,6 +754,9 @@ def p_optional_newlines(p):
     '''optional_newlines : optional_newlines NEWLINE
                          | empty'''
     pass
+
+
+# <<< FIN APORTE Alex Otero
 
 # <<< INICIO APORTE Jose Chong
 
