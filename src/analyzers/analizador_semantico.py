@@ -4,7 +4,7 @@ import shutil
 from datetime import datetime
 
 # importar tokens del lexer global
-from analizador_lex import tokens, lexer
+from .analizador_lex import tokens, lexer
 
 """
 ANALIZADOR SINTÁCTICO Y SEMÁNTICO GLOBAL - SWIFT
@@ -159,7 +159,6 @@ precedence = (
 def p_program(p):
     '''program : statement_list'''
     p[0] = ('program', p[1])
-    print("✅ Programa válido")
 
 def p_statement_list(p):
     '''statement_list : statement_list statement
@@ -230,19 +229,16 @@ def p_variable_declaration(p):
 
         tabla_simbolos.agregar_simbolo(nombre, tipo_declarado, es_constante, linea=linea)
         p[0] = ('var_decl', p[1], nombre, tipo_declarado, p[6])
-        print(f"✅ Declaración de variable: {p[1]} {nombre}: {tipo_declarado} = ...")
 
     elif len(p) == 5 and p[3] == ':':  # Solo tipo
         tipo = p[4]
         tabla_simbolos.agregar_simbolo(nombre, tipo, es_constante, linea=linea)
         p[0] = ('var_decl', p[1], nombre, tipo, None)
-        print(f"✅ Declaración de variable: {p[1]} {nombre}: {tipo}")
 
     else:  # Sin tipo, con valor
         tipo_inferido = inferir_tipo(p[4])
         tabla_simbolos.agregar_simbolo(nombre, tipo_inferido, es_constante, linea=linea)
         p[0] = ('var_decl', p[1], nombre, tipo_inferido, p[4])
-        print(f"✅ Declaración de variable: {p[1]} {nombre} = ... (tipo: {tipo_inferido})")
 
 # <<< FIN APORTE Jose Chong
 
@@ -264,23 +260,19 @@ def p_optional_type(p):
                      | TYPE_BOOL QUESTION
                      | TYPE_STRING QUESTION'''
     p[0] = ('optional_type', p[1])
-    print(f"✅ Tipo opcional: {p[1]}?")
 
 # arrays
 def p_array_type(p):
     '''array_type : LBRACKET type_annotation RBRACKET'''
     p[0] = ('array_type', p[2])
-    print(f"✅ Tipo array: [{p[2]}]")
 
 def p_expression_array_literal(p):
     '''expression : LBRACKET array_elements RBRACKET
                   | LBRACKET RBRACKET'''
     if len(p) == 4:
         p[0] = ('array_literal', p[2])
-        print(f"✅ Array literal: [{len(p[2])} elementos]")
     else:
         p[0] = ('array_literal', [])
-        print("✅ Array vacío: []")
 
 def p_array_elements(p):
     '''array_elements : array_elements COMMA expression
@@ -293,23 +285,19 @@ def p_array_elements(p):
 def p_expression_array_access(p):
     '''expression : expression LBRACKET expression RBRACKET'''
     p[0] = ('subscript_access', p[1], p[3])
-    print(f"✅ Acceso con subíndice: ...[...]")
 
 # diccionarios
 def p_dictionary_type(p):
     '''dictionary_type : LBRACKET type_annotation COLON type_annotation RBRACKET'''
     p[0] = ('dict_type', p[2], p[4])
-    print(f"✅ Tipo diccionario: [{p[2]}: {p[4]}]")
 
 def p_expression_dictionary_literal(p):
     '''expression : LBRACKET dictionary_pairs RBRACKET
                   | LBRACKET COLON RBRACKET'''
     if len(p) == 4 and p[2] == ':':
         p[0] = ('dict_literal', [])
-        print("✅ Diccionario vacío: [:]")
     else:
         p[0] = ('dict_literal', p[2])
-        print(f"✅ Diccionario literal: [{len(p[2])} pares]")
 
 def p_dictionary_pairs(p):
     '''dictionary_pairs : dictionary_pairs COMMA dictionary_pair
@@ -327,7 +315,6 @@ def p_dictionary_pair(p):
 def p_tuple_type(p):
     '''tuple_type : LPAREN tuple_type_elements RPAREN'''
     p[0] = ('tuple_type', p[2])
-    print(f"✅ Tipo tupla con {len(p[2])} elementos")
 
 def p_tuple_type_elements(p):
     '''tuple_type_elements : tuple_type_elements COMMA tuple_type_element
@@ -348,7 +335,6 @@ def p_tuple_type_element(p):
 def p_expression_tuple(p):
     '''expression : LPAREN tuple_elements RPAREN'''
     p[0] = ('tuple', p[2])
-    print(f"✅ Tupla con {len(p[2])} elementos")
 
 def p_tuple_elements(p):
     '''tuple_elements : tuple_elements COMMA tuple_element
@@ -363,19 +349,16 @@ def p_tuple_element(p):
                      | expression'''
     if len(p) == 4:
         p[0] = ('named_element', p[1], p[3])
-        print(f"✅ Elemento nombrado: {p[1]}")
     else:
         p[0] = p[1]
 
 def p_expression_tuple_access(p):
     '''expression : expression DOT INT_LITERAL'''
     p[0] = ('tuple_access', p[1], p[3])
-    print(f"✅ Acceso a tupla por índice: .{p[3]}")
 
 def p_expression_member_access(p):
     '''expression : expression DOT IDENTIFIER'''
     p[0] = ('member_access', p[1], p[3])
-    print(f"✅ Acceso a miembro: .{p[3]}")
 
 # <<< INICIO APORTE Alexandre Icaza
 
@@ -417,7 +400,6 @@ def p_assignment(p):
                         pass  # El error ya se agregó en validar_operacion_aritmetica
 
     p[0] = ('assignment', p[1], p[2], p[3])
-    print(f"✅ Asignación: ... {p[2]} ...")
 
 def p_lvalue(p):
     '''lvalue : IDENTIFIER
@@ -475,13 +457,11 @@ def p_expression_binop(p):
         validar_operacion_aritmetica(operador, tipo_izq, tipo_der, linea)
 
     p[0] = ('binop', operador, p[1], p[3])
-    print(f"✅ Expresión aritmética: ... {operador} ...")
 
 def p_expression_unary(p):
     '''expression : MINUS expression %prec UMINUS
                   | PLUS expression %prec UPLUS'''
     p[0] = ('unary', p[1], p[2])
-    print(f"✅ Expresión unaria: {p[1]}...")
 
 # expresiones lógicas y booleanas
 
@@ -489,12 +469,10 @@ def p_expression_logical(p):
     '''expression : expression AND expression
                   | expression OR expression'''
     p[0] = ('logical', p[2], p[1], p[3])
-    print(f"✅ Expresión lógica: ... {p[2]} ...")
 
 def p_expression_not(p):
     '''expression : NOT expression'''
     p[0] = ('not', p[2])
-    print(f"✅ Negación lógica: !...")
 
 def p_expression_comparison(p):
     '''expression : expression EQ expression
@@ -504,18 +482,15 @@ def p_expression_comparison(p):
                   | expression GE expression
                   | expression LE expression'''
     p[0] = ('comparison', p[2], p[1], p[3])
-    print(f"✅ Expresión de comparación: ... {p[2]} ...")
 
 # operador ternario y nil-coalescing
 def p_expression_ternary(p):
     '''expression : expression QUESTION expression COLON expression'''
     p[0] = ('ternary', p[1], p[3], p[5])
-    print(f"✅ Operador ternario: ... ? ... : ...")
 
 def p_expression_nil_coalescing(p):
     '''expression : expression NIL_COALESCE expression'''
     p[0] = ('nil_coalesce', p[1], p[3])
-    print(f"✅ Operador nil-coalescing: ... ?? ...")
 
 # expresiones básicas y literales (regla 1: uso de identificadores)
 
@@ -554,7 +529,6 @@ def p_expression_identifier(p):
 def p_expression_self_access(p):
     '''expression : SELF DOT IDENTIFIER'''
     p[0] = ('self_access', p[3])
-    print(f"✅ Acceso a propiedad: self.{p[3]}")
 
 # llamadas a función como expresión
 def p_expression_function_call(p):
@@ -593,7 +567,6 @@ def p_for_statement(p):
     tabla_simbolos.salir_ambito()
 
     p[0] = ('for_in', nombre_var, rango, p[3])
-    print(f"✅ Bucle for-in: for {nombre_var} in ...")
 
 def p_for_header(p):
     '''for_header : FOR IDENTIFIER IN range_expression
@@ -621,7 +594,6 @@ def p_range_expression(p):
     '''range_expression : expression CLOSED_RANGE expression
                         | expression HALF_OPEN_RANGE expression'''
     p[0] = ('range', p[2], p[1], p[3])
-    print(f"✅ Rango: ... {p[2]} ...")
 
 # estructura de control: if-else
 def p_if_statement(p):
@@ -632,16 +604,12 @@ def p_if_statement(p):
 
     if len(p) == 6:
         p[0] = ('if', p[2], p[4], None, None)
-        print(f"✅ Condicional if")
     elif len(p) == 10 and p[6] == 'else':
         p[0] = ('if_else', p[2], p[4], p[8])
-        print(f"✅ Condicional if-else")
     elif len(p) == 7:
         p[0] = ('if_elif', p[2], p[4], p[6], None)
-        print(f"✅ Condicional if-else if")
     else:
         p[0] = ('if_elif_else', p[2], p[4], p[6], p[9])
-        print(f"✅ Condicional if-else if-else")
 
 def p_else_if_chain(p):
     '''else_if_chain : else_if_chain else_if_statement
@@ -654,13 +622,11 @@ def p_else_if_chain(p):
 def p_else_if_statement(p):
     '''else_if_statement : ELSE IF expression LBRACE statement_list RBRACE'''
     p[0] = ('else_if', p[3], p[5])
-    print(f"✅ else if")
 
 # estructura de control: guard
 def p_guard_statement(p):
     '''guard_statement : GUARD expression ELSE LBRACE statement_list RBRACE'''
     p[0] = ('guard', p[2], p[5])
-    print(f"✅ Guard statement")
 
 # estructura de control: while (regla 4: contexto de bucle)
 def p_while_statement(p):
@@ -672,7 +638,6 @@ def p_while_statement(p):
     contexto['en_bucle'] -= 1
 
     p[0] = ('while', condicion, p[3])
-    print(f"✅ Bucle while")
 
 def p_while_header(p):
     '''while_header : WHILE expression'''
@@ -693,7 +658,6 @@ def p_break_statement(p):
         agregar_error_semantico(linea, 0, "La sentencia 'break' solo puede aparecer dentro de un bucle.")
 
     p[0] = ('break',)
-    print("✅ Sentencia break")
 
 def p_continue_statement(p):
     '''continue_statement : CONTINUE'''
@@ -706,7 +670,6 @@ def p_continue_statement(p):
                 "La sentencia 'continue' solo puede aparecer dentro de un bucle.")
 
         p[0] = ('continue',)
-        print("✅ Sentencia continue")
 
 # estructura de control: switch-case
 
@@ -715,10 +678,8 @@ def p_switch_statement(p):
                         | SWITCH expression LBRACE optional_newlines case_list default_case optional_newlines RBRACE'''
     if len(p) == 9:
         p[0] = ('switch', p[2], p[5], p[6])
-        print(f"✅ Switch con {len(p[5])} caso(s) y default")
     else:
         p[0] = ('switch', p[2], p[5], None)
-        print(f"✅ Switch con {len(p[5])} caso(s)")
 
 def p_case_list(p):
     '''case_list : case_list optional_newlines case_clause
@@ -731,7 +692,6 @@ def p_case_list(p):
 def p_case_clause(p):
     '''case_clause : CASE case_patterns COLON optional_newlines case_body'''
     p[0] = ('case', p[2], p[5])
-    print(f"✅ Case con {len(p[2])} patrón(es)")
 
 def p_case_body(p):
     '''case_body : statement_list'''
@@ -748,7 +708,6 @@ def p_case_patterns(p):
 def p_default_case(p):
     '''default_case : DEFAULT COLON optional_newlines case_body'''
     p[0] = ('default', p[4])
-    print("✅ Default case")
 
 def p_optional_newlines(p):
     '''optional_newlines : optional_newlines NEWLINE
@@ -780,10 +739,8 @@ def p_function_declaration(p):
 
     if tipo_retorno:
         p[0] = ('func_decl', nombre_func, parametros, tipo_retorno, cuerpo)
-        print(f"✅ Función: func {nombre_func}({len(parametros)} parámetros) -> {tipo_retorno}")
     else:
         p[0] = ('func_decl', nombre_func, parametros, None, cuerpo)
-        print(f"✅ Función: func {nombre_func}({len(parametros)} parámetros)")
 
 
 def p_func_header(p):
@@ -862,7 +819,6 @@ def p_parameter(p):
         p[0] = ('param', p[1], p[3], None)
     else:
         p[0] = ('param_default', p[1], p[3], p[5])
-        print(f"✅ Parámetro con valor por defecto: {p[1]}")
 
 # return (regla 5: tipo de retorno de función)
 def p_return_statement(p):
@@ -896,14 +852,12 @@ def p_return_statement(p):
                         f"La función '{nombre_funcion}' debe retornar un valor de tipo '{tipo_retorno_esperado}', pero se está retornando un valor de tipo '{tipo_retornado}'.")
 
             p[0] = ('return', p[2])
-            print(f"✅ Return con valor")
         else:  # return sin valor
             if tipo_retorno_esperado is not None:
                 agregar_error_semantico(linea, 0,
                     f"La función '{nombre_funcion}' debe retornar un valor de tipo '{tipo_retorno_esperado}'.")
 
             p[0] = ('return', None)
-            print("✅ Return")
 
 # <<< FIN APORTE Jose Chong
 
@@ -918,11 +872,9 @@ def p_function_call_statement(p):
         arguments = p[3]
         if function_name == 'print':
             p[0] = ('print', arguments)
-            print(f"✅ Print con {len(arguments)} argumento(s)")
         elif function_name == 'readLine':
             if len(arguments) <= 1:
                 p[0] = ('readline', arguments[0] if arguments else None)
-                print(f"✅ Lectura de entrada: readLine()")
             else:
                 print(f"❌ Error: readLine() solo acepta 0 o 1 argumento(s)")
                 p[0] = ('error', 'readLine con argumentos incorrectos')
@@ -934,14 +886,11 @@ def p_function_call_statement(p):
                     f"El identificador '{function_name}' no ha sido declarado en este ámbito.")
 
             p[0] = ('function_call', function_name, arguments)
-            print(f"✅ Llamada a función: {function_name}()")
     else:
         if function_name == 'print':
             p[0] = ('print', [])
-            print("✅ Print vacío")
         elif function_name == 'readLine':
             p[0] = ('readline', None)
-            print("✅ Lectura de entrada: readLine()")
         else:
             simbolo = tabla_simbolos.buscar_simbolo(function_name)
             if not simbolo:
@@ -949,7 +898,6 @@ def p_function_call_statement(p):
                     f"El identificador '{function_name}' no ha sido declarado en este ámbito.")
 
             p[0] = ('function_call', function_name, [])
-            print(f"✅ Llamada a función: {function_name}()")
 
 def p_argument_list(p):
     '''argument_list : argument_list COMMA expression
@@ -969,7 +917,6 @@ def p_class_declaration(p):
     tabla_simbolos.salir_ambito()
 
     p[0] = ('class_decl', nombre_clase, p[3])
-    print(f"✅ Clase: class {nombre_clase}")
 
 def p_class_header(p):
     '''class_header : CLASS IDENTIFIER'''
@@ -1016,12 +963,10 @@ def p_property_declaration(p):
                            | VAR IDENTIFIER COLON tuple_type
                            | LET IDENTIFIER COLON tuple_type'''
     p[0] = ('property', p[1], p[2], p[4])
-    print(f"✅ Propiedad: {p[1]} {p[2]}: {p[4]}")
 
 def p_computed_property(p):
     '''computed_property : VAR IDENTIFIER COLON type_annotation LBRACE optional_newlines GET LBRACE optional_newlines statement_list optional_newlines RBRACE optional_newlines RBRACE'''
     p[0] = ('computed_property', p[2], p[4], p[10])
-    print(f"✅ Propiedad computada: var {p[2]}: {p[4]}")
 
 def p_init_declaration(p):
     '''init_declaration : init_header LBRACE statement_list RBRACE'''
@@ -1036,7 +981,6 @@ def p_init_declaration(p):
     tabla_simbolos.salir_ambito()
 
     p[0] = ('init', parametros, p[3])
-    print(f"✅ Inicializador: init({len(parametros)} parámetros)")
 
 def p_init_header(p):
     '''init_header : INIT LPAREN parameter_list RPAREN
@@ -1081,10 +1025,8 @@ def p_method_declaration(p):
 
     if tipo_retorno:
         p[0] = ('method', nombre, parametros, tipo_retorno, p[3])
-        print(f"✅ Método: func {nombre}({len(parametros)} parámetros) -> {tipo_retorno}")
     else:
         p[0] = ('method', nombre, parametros, None, p[3])
-        print(f"✅ Método: func {nombre}({len(parametros)} parámetros)")
 
 def p_method_header(p):
     '''method_header : FUNC IDENTIFIER LPAREN parameter_list RPAREN ARROW type_annotation
@@ -1141,7 +1083,8 @@ def p_empty(p):
 # manejo de errores
 def p_error(p):
     if p:
-        error_msg = f"Error de sintaxis en línea {p.lineno}: Token inesperado '{p.value}' (tipo: {p.type})"
+        value = '\\n' if p.value == '\n' else p.value
+        error_msg = f"Error de sintaxis en línea {p.lineno}: Token inesperado '{value}' (tipo: {p.type})"
         print(f"❌ {error_msg}")
     else:
         error_msg = "Error de sintaxis: Final de archivo inesperado"
@@ -1164,9 +1107,7 @@ def generar_log_semantico(github_user):
     log_lines.append("=" * 70)
     log_lines.append("")
 
-    if len(contexto['errores_semanticos']) == 0:
-        log_lines.append("✅ No se encontraron errores semánticos")
-    else:
+    if len(contexto['errores_semanticos']) != 0:
         log_lines.append(f"Total de errores semánticos: {len(contexto['errores_semanticos'])}")
         log_lines.append("")
         for i, error in enumerate(contexto['errores_semanticos'], 1):
@@ -1237,11 +1178,8 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     print("Analizando sintaxis y semántica...\n")
     try:
         result = parser.parse(codigo, lexer=lexer)
-        print("\n✅ Análisis sintáctico completado exitosamente")
 
-        if len(contexto['errores_semanticos']) == 0:
-            print("✅ Análisis semántico completado sin errores")
-        else:
+        if len(contexto['errores_semanticos']) != 0:
             print(f"\n❌ Se encontraron {len(contexto['errores_semanticos'])} errores semánticos")
 
     except Exception as e:
@@ -1265,7 +1203,6 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
         if os.path.exists(ruta):
             try:
                 shutil.copy(ruta, log_sintactico)
-                print(f"\n✅ Log sintáctico guardado en: {log_sintactico}")
                 parser_out_encontrado = True
                 break
             except Exception as e:
@@ -1282,7 +1219,6 @@ def analizar_archivo_swift(ruta_archivo: str, github_user: str):
     try:
         with open(log_semantico, "w", encoding="utf-8") as f:
             f.write(contenido_log)
-        print(f"✅ Log semántico guardado en: {log_semantico}")
     except Exception as e:
         print(f"❌ Error al guardar log semántico: {e}")
 

@@ -283,7 +283,7 @@ def t_NEWLINE(t):
 # =========================
 def t_error(t):
     # reporta y salta el carácter ilegal
-    print(f"Illegal character '{t.value[0]}' on line {t.lineno}")
+    print(f"❌ Error Lexico (Linea {t.lineno}): '{t.value[0]}'")
     t.lexer.skip(1)
 
 

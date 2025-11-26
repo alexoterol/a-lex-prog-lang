@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="container">
+            <section>
+                <header>
+                    ANALIZADOR <b style="color:white">SWIFT</b>
+                </header>
+                <button id="run_button">Run</button>
+            </section>
+            <div id="panels">
+                <div id="code" class="panel">
+                    <div id="line-numbers">1</div>
+                    <textarea id="code_input" spellcheck="false"></textarea>
+                </div>
+                <div class="panel" id="output">
+                    <p class="panel_title">Output:</p>
+                    <p id="output-text"></p>
+                </div>
+            </div>
+        </div>
+        <script type="module" src="scripts/line_numbers.js"></script>
+        <script type="module" src="scripts/run.js"></script>
+    </body>
+</html>
