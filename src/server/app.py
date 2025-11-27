@@ -1,7 +1,7 @@
 import io
 import sys
 from fastapi import FastAPI
-from analyzers.analizador_semantico import parser, tokens, lexer
+from analyzers.analizador_semantico import limpiar_contexto, tabla_simbolos, parser, tokens, lexer
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -32,6 +32,8 @@ async def get_errors(request: CodeRequest):
         return { "result" : "" }
 
     lexer.lineno = 1
+    tabla_simbolos.limpiar()
+    limpiar_contexto()
     buffer = io.StringIO()
     old_stdout = sys.stdout
     sys.stdout = buffer

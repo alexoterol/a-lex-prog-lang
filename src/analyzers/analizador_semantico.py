@@ -56,6 +56,9 @@ class TablaSimbolos:
         """Verificar si el símbolo existe en el ámbito actual"""
         return nombre in self.ambitos[-1]
 
+    def limpiar(self):
+        self.ambitos = [{}]
+
 # inicializar tabla de símbolos global
 tabla_simbolos = TablaSimbolos()
 
@@ -66,6 +69,14 @@ contexto = {
     'funcion_actual': None,  # Información de la función actual
     'errores_semanticos': []  # Lista de errores semánticos
 }
+
+def limpiar_contexto():
+    """Reinicia el contexto global y los errores"""
+    global contexto
+    contexto['en_bucle'] = 0
+    contexto['en_funcion'] = False
+    contexto['funcion_actual'] = None
+    contexto['errores_semanticos'] = []
 
 def agregar_error_semantico(linea, columna, mensaje):
     """Agregar error semántico a la lista"""
